@@ -34,13 +34,17 @@ function draw(root, ctx) {
   if (entry) wire(root, ctx, entry, day);
 }
 
+export function focus(date) { sel = date; editing = false; }
+// Writes (or re-writes) the lesson for one plan day. Any re-teach block on that day goes first, and the new content is trimmed to fit.
+export async function generateLesson(day, why = "Wrote lesson") {
+  const rts = day.blocks.filter((b) => b.type === "reteach"), nw = day.blocks.find((b) => b.type === "new");
+  const mins = 60;
+  const r = await api("/api/write-lesson", { topic: day.topic, atpWeek: day.atpWeek, minutes: mins, reteach: rts.length ? { topic: rts.map((b) => b.label.replace("Re-teach: ", "")).join(" and "), minutes: rts.reduce((s, b) => s + b.minutes, 0) } : null });
+  store(day, proveLesson(r.lesson, { topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, date: day.date, minutes: mins }), why, r.meta);
+}
 async function writeLesson(root, ctx, day) {
-  const rt = day.blocks.find((b) => b.type === "reteach"), nw = day.blocks.find((b) => b.type === "new");
   busy = "Lesson Writer is writing the lesson"; draw(root, ctx);
-  try {
-    const r = await api("/api/write-lesson", { topic: day.topic, atpWeek: day.atpWeek, minutes: 60, reteach: rt ? { topic: rt.label.replace("Re-teach: ", ""), minutes: rt.minutes } : null });
-    store(day, proveLesson(r.lesson, { topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, date: day.date, minutes: 60 }), "Wrote lesson", r.meta);
-  } catch (e) { toast(e.message); }
+  try { await generateLesson(day); } catch (e) { toast(e.message); }
   busy = ""; draw(root, ctx);
 }
 function store(day, L, action, meta) {

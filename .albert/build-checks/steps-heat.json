@@ -1,0 +1,60 @@
+[
+ {
+  "goto": "/app/#settings"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "expect": "Settings"
+ },
+ {
+  "assert": "document.querySelector('#s-struggle').value === '50' && document.querySelector('#s-reteach').value === '40'"
+ },
+ {
+  "type": "#s-struggle",
+  "value": "0"
+ },
+ {
+  "submit": "#set-form"
+ },
+ {
+  "expect": "Enter whole numbers"
+ },
+ {
+  "type": "#s-struggle",
+  "value": "60"
+ },
+ {
+  "type": "#s-reteach",
+  "value": "30"
+ },
+ {
+  "submit": "#set-form"
+ },
+ {
+  "expect": "Saved: struggling below 60%, class re-teach at 30%"
+ },
+ {
+  "click": "#set-default"
+ },
+ {
+  "assert": "document.querySelector('#s-struggle').value === '50'"
+ },
+ {
+  "shot": "settings",
+  "full": true
+ },
+ {
+  "click": "button[data-v='heat']"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "expect": "Class heat map"
+ },
+ {
+  "shot": "heat-empty"
+ }
+]

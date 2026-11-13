@@ -1,0 +1,182 @@
+[
+ {
+  "goto": "/app/#upload"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#btn-official"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "click": "#approve-atp"
+ },
+ {
+  "click": "#go-plan"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "click": "#approve-plan"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "button[data-v='snap']"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "expect": "7 of 32"
+ },
+ {
+  "click": "#go-mark"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#run"
+ },
+ {
+  "wait": 120000
+ },
+ {
+  "expect_not": "error:"
+ },
+ {
+  "click": "#to-check"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "[data-decide$='|1']"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "expect": "0 need"
+ },
+ {
+  "click": "#confirm"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Photos deleted from this phone"
+ },
+ {
+  "click": "#to-heat"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "expect": "The whole class, at a glance"
+ },
+ {
+  "assert": "document.querySelectorAll('#heat tbody tr').length === 7"
+ },
+ {
+  "assert": "document.querySelector('[data-topic=related]').textContent.includes('Class re-teach')"
+ },
+ {
+  "assert": "!document.querySelector('[data-topic=equiv]').textContent.includes('Class re-teach')"
+ },
+ {
+  "assert": "document.querySelectorAll('.hm-cell--red').length >= 3"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ },
+ {
+  "shot": "heat",
+  "full": true
+ },
+ {
+  "click": "[data-replan='related']"
+ },
+ {
+  "wait": 45000
+ },
+ {
+  "expect": "Re-teach: Related denominators"
+ },
+ {
+  "expect": "Class re-teach added by the Analyst"
+ },
+ {
+  "expect": "Mon 16 Nov"
+ },
+ {
+  "shot": "tomorrow",
+  "full": true
+ },
+ {
+  "click": "button[data-v='plan']"
+ },
+ {
+  "wait": 2000
+ },
+ {
+  "expect": "Re-teach: Related denominators, 15 min"
+ },
+ {
+  "expect": "165 minutes"
+ },
+ {
+  "shot": "plan-after",
+  "full": true
+ }
+]
