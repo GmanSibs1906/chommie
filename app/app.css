@@ -41,3 +41,29 @@ body.app { background: var(--ground); }
 .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--ground); padding: 12px 20px; border-radius: 999px; font-size: 15px; z-index: 90; max-width: 92vw; }
 .drop { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 140px; border: 1.5px dashed #b9b4a4; border-radius: var(--r-lg); background: var(--surface); text-align: center; padding: 20px; cursor: pointer; }
 .drop:hover, .drop.is-over { border-color: var(--accent); background: var(--accent-wash); }
+
+/* Term calendar */
+.cal-week { margin-bottom: 18px; }
+.cal-week h4 { font: 600 12px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.cal-days { display: grid; gap: 6px; }
+.cal-day { display: flex; gap: 12px; align-items: baseline; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); min-height: 48px; }
+.cal-day .d { font: 500 13px/1.2 var(--f-mono); color: var(--muted); min-width: 64px; }
+.cal-day .t { font-weight: 500; }
+.cal-day .b { display: block; font-size: 13px; color: var(--muted); }
+.cal-day--revision { background: var(--soft); }
+.cal-day--test, .cal-day--exam { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.cal-day--test .d, .cal-day--exam .d, .cal-day--test .b, .cal-day--exam .b { color: #d9d4c4; }
+.cal-day--buffer, .cal-day--feedback { background: transparent; border-style: dashed; color: var(--muted); }
+.cal-day.is-today { outline: 2px solid var(--accent); }
+.cal-day .rt { color: var(--accent-deep); font-weight: 600; font-size: 13px; display: block; }
+.cal-day--test .rt, .cal-day--exam .rt { color: #9be0b6; }
+@media (min-width: 768px) {
+  .cal-days { grid-template-columns: repeat(5, 1fr); }
+  .cal-day { flex-direction: column; gap: 4px; align-items: flex-start; min-height: 96px; }
+  .cal-day .d { min-width: 0; }
+}
+.checks-list { margin: 0; padding: 0; list-style: none; }
+.checks-list li { padding: 8px 0; border-top: 1px solid var(--line); }
+.checks-list li:first-child { border-top: 0; }
+.field-inline { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.field-inline input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); }

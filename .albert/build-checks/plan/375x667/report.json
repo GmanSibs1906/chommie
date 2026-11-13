@@ -1,0 +1,86 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T22:45:56.212Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Your term, on real school days",
+      "ok": true
+    },
+    {
+      "expect": "Thu 26 Nov",
+      "ok": true
+    },
+    {
+      "expect": "Wed 2 Dec",
+      "ok": true
+    },
+    {
+      "expect": "Every required ATP topic is placed",
+      "ok": true
+    },
+    {
+      "expect": "180 minutes",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('.cal-day--test').length === 1 && document.querySelectorAll('.cal-day--exam').length === 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelectorAll('.cal-day--lesson').length >= 20",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "plan",
+      "full": true,
+      "ok": true,
+      "detail": "01-plan.png"
+    },
+    {
+      "click": "#approve-plan",
+      "ok": true
+    },
+    {
+      "expect": "Plan approved by you",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T22:46:11.569Z",
+  "ok": true
+}
