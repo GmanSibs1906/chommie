@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a 30-minute demo - Chommie</title>
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./fonts/fonts.css" />
+  <link rel="stylesheet" href="./screen.css" />
+  <link rel="stylesheet" href="./site.css" />
+</head>
+<body>
+<div class="page">
+<header class="wrap page-top"><a href="/">Chommie</a></header>
+<main class="wrap page-main">
+  <div>
+    <h1 class="close-title" style="max-width:12ch;font-family:var(--f-display)">See one fractions term, start to finish.</h1>
+    <p class="close-lede" style="margin-top:20px">Thirty minutes. One Grade 6 Maths, Term 4 class of made-up learners: the ATP photo, the term plan, the marks, the Reviewer catching a wrong mark, the heat map and tomorrow's lesson re-planned.</p>
+    <p class="close-lede"><a href="/app/?demo=1">Prefer to try it now? Open the demo run.</a></p>
+  </div>
+  <div>
+    <form id="demo-form" name="book-demo" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="book-demo" />
+      <p class="sr-only"><label>Leave this empty <input name="bot-field" /></label></p>
+      <div class="field"><label for="d-name">Your name</label><input id="d-name" name="name" required autocomplete="name" /></div>
+      <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" required autocomplete="email" /></div>
+      <div class="field"><label for="d-role">You are a</label>
+        <select id="d-role" name="role"><option>Teacher</option><option>Head of Department</option><option>Principal</option><option>Other</option></select></div>
+      <div class="field"><label for="d-when">Preferred time</label><input id="d-when" name="when" placeholder="For example, Tuesday afternoon" /></div>
+      <button class="pill pill--lg" type="submit" id="d-submit">Book a 30-minute demo</button>
+      <p id="d-msg" class="notice" role="status" hidden style="margin-top:20px"></p>
+    </form>
+  </div>
+</main>
+<script>
+document.getElementById("demo-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  var f = e.target, msg = document.getElementById("d-msg");
+  var body = new URLSearchParams(new FormData(f)).toString();
+  try {
+    var r = await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body });
+    if (!r.ok) throw new Error(r.status);
+    msg.textContent = "Thank you. We will email you to fix a time.";
+    f.reset();
+  } catch (err) {
+    msg.textContent = "That did not send. Please try again.";
+  }
+  msg.hidden = false;
+});
+</script>
+</div></body></html>

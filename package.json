@@ -1,0 +1,2 @@
+{ "name": "chommie", "private": true, "type": "module",
+  "scripts": { "dev": "netlify dev", "test": "node --test tests/" } }

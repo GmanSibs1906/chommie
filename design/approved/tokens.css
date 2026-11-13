@@ -1,0 +1,11 @@
+:root {
+  --ground: #FFFDF6;
+  --surface: #FFFFFF;
+  --ink: #1F1B16;
+  --muted: #5E5A52;
+  --accent: #2E9E5B;
+  --accent-ink: #101010;
+  --secondary: #D6402E;
+  --space-unit: [4, 8, 12, 16, 24, 32, 48, 64, 96, 144];
+}
+body { background: var(--ground); color: var(--ink); }

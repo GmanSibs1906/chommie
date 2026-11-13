@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chommie — Get your evenings back</title>
+  <meta name="description" content="Chommie plans your CAPS term from the ATP, marks learners' books from photos, and flags who is falling behind — for South African teachers." />
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./fonts/fonts.css" />
+  <link rel="stylesheet" href="./screen.css" />
+  <link rel="stylesheet" href="./site.css" />
+</head>
+<body data-energy="cinematic">
+
+<!-- Header: no chrome on the fold; slides in after the first scroll -->
+<header class="site-head" data-ds-id="index.html:15:SiteHeader">
+  <div class="wrap head-row">
+    <!-- LOGO SLOT: swap for assets/logo.png when supplied (not in the studio yet) -->
+    <a href="#view-home" class="logo-slot" data-ds-id="index.html:18:LogoSlot" aria-label="Chommie home">Chommie</a>
+    <nav class="head-nav" aria-label="Main" data-ds-id="index.html:19:MainNav">
+      <a href="#how" data-ds-id="index.html:20:NavHow">How it works</a>
+      <a href="#privacy" data-ds-id="index.html:21:NavPrivacy">Privacy and consent</a>
+      <a href="#who" data-ds-id="index.html:22:NavAbout">About</a>
+      <a href="#faq" data-ds-id="index.html:23:NavFaq">FAQ</a>
+      <a href="/demo.html" data-ds-id="index.html:24:NavContact">Contact</a>
+    </nav>
+    <div class="head-actions" data-ds-id="index.html:26:HeadActions">
+      <a href="/app/" class="head-login" data-ds-id="index.html:27:LogIn">Open the app</a>
+      <a href="/demo.html" class="pill pill--sm" data-hover data-ds-id="index.html:28:HeadDemo">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<main data-ds-id="index.html:33:MainDivClassHeroArt1">
+<section id="view-home" data-shell="site" data-ds-id="index.html:34:ViewHome">
+
+  <!-- 1. HERO — full-bleed one-ink classroom -->
+  <section class="hero" data-ds-id="index.html:37:Hero">
+    <div class="hero-art" aria-hidden="true" data-ds-id="index.html:38:HeroArt">
+      <img src="./art-0487c5827d0a.jpg" width="1600" height="1067" alt="" data-ds-id="index.html:39:HeroDrawing" />
+    </div>
+    <div class="hero-halo" data-cursor aria-hidden="true"></div>
+    <div class="wrap hero-copy" data-ds-id="index.html:42:HeroCopy">
+      <p class="eyebrow" data-enter data-ds-id="index.html:43:HeroEyebrow">Chommie · for South African teachers</p>
+      <h1 class="hero-title" data-enter data-split data-ds-id="index.html:44:HeroTitle">Get your evenings back.</h1>
+      <p class="hero-lede" data-enter data-ds-id="index.html:45:HeroLede">Chommie photographs your learners' books, marks them against CAPS, and shows you who is slipping — this week, not next term.</p>
+      <form class="dropbar" id="home-drop" data-enter action="/app/#upload" data-ds-id="index.html:46:DropBar">
+        <label class="dropbar-zone" data-ds-id="index.html:47:DropZone">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4m0 0-4 4m4-4 4 4M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>
+          <span>Drop your ATP here <span class="arrow" aria-hidden="true">→</span></span>
+          <input type="file" class="sr-only" aria-label="Upload your ATP or lesson plan"  data-ds-id="index.html:50:UploadYourAtpOr2"/>
+        </label>
+        <button class="pill" type="submit" data-hover data-ds-id="index.html:52:PlanMyTerm">Plan my term</button>
+      </form>
+      <p class="hero-note" data-enter data-ds-id="index.html:54:HeroNote">ATP or lesson plan, PDF or a photo. <a href="/app/?demo=1" data-ds-id="index.html:54:HeroDemoLink">Rather see it first? Open the demo run.</a> <a href="/demo.html">Book a demo.</a></p>
+    </div>
+  </section>
+
+  <!-- 2. STEP TABS — the product, step by step -->
+  <section class="steps wrap" id="how" data-reveal data-ds-id="index.html:59:Steps">
+    <div class="sec-head" data-ds-id="index.html:60:StepsHead">
+      <h2 data-ds-id="index.html:61:StepsTitle">One term, in the order you teach it.</h2>
+      <p class="sec-lede" data-ds-id="index.html:62:StepsLede">Grade 6 Maths, Term 4, fractions. Eight steps.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="How Chommie works" data-ds-id="index.html:65:StepTabs">
+      <button role="tab" aria-selected="true" aria-controls="p1" id="t1" data-ds-id="index.html:66:TabUpload"><span>01</span>Upload ATP</button>
+      <button role="tab" aria-selected="false" aria-controls="p2" id="t2" data-ds-id="index.html:67:TabPlan"><span>02</span>Plan term</button>
+      <button role="tab" aria-selected="false" aria-controls="p3" id="t3" data-ds-id="index.html:68:TabTeach"><span>03</span>Teach</button>
+      <button role="tab" aria-selected="false" aria-controls="p4" id="t4" data-ds-id="index.html:69:TabSnap"><span>04</span>Snap books</button>
+      <button role="tab" aria-selected="false" aria-controls="p5" id="t5" data-ds-id="index.html:70:TabMark"><span>05</span>Mark</button>
+      <button role="tab" aria-selected="false" aria-controls="p6" id="t6" data-ds-id="index.html:71:TabCheck"><span>06</span>Check</button>
+      <button role="tab" aria-selected="false" aria-controls="p7" id="t7" data-ds-id="index.html:72:TabHeat"><span>07</span>Heat map</button>
+      <button role="tab" aria-selected="false" aria-controls="p8" id="t8" data-ds-id="index.html:73:TabHomework"><span>08</span>Homework</button>
+    </div>
+
+    <div class="stage" data-ds-id="index.html:76:Stage">
+      <!-- 01 Upload -->
+      <div class="panel is-on" role="tabpanel" id="p1" aria-labelledby="t1" data-ds-id="index.html:78:PanelUpload">
+        <div class="panel-copy"><h3 data-ds-id="index.html:79:H3UploadTheAtp3">Upload the ATP</h3><p data-ds-id="index.html:79:PDropInTheAnnual4">The ATP or your lesson plan. Chommie reads topics, weeks and tests.</p></div>
+        <div class="screen" data-ds-id="index.html:80:ScreenUpload">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Grade 6 Maths · Term 4</span></div>
+          <div class="up">
+            <div class="up-file"><svg class="ico" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z M14 3v5h5"/></svg><b>ATP_Gr6_Maths_T4.pdf</b><em>Reading…</em></div>
+            <div class="up-bar"><span></span></div>
+            <ul class="up-list">
+              <li data-ds-id="index.html:86:LiCommonFractionsEquivalentFractions5">Common fractions: equivalent fractions</li>
+              <li data-ds-id="index.html:87:LiAddingAndSubtractingSame6">Adding and subtracting, same denominators</li>
+              <li data-ds-id="index.html:88:LiRelatedDenominators7">Related denominators</li>
+              <li data-ds-id="index.html:89:LiFractionsOfWholeNumbers8">Fractions of whole numbers</li>
+              <li data-ds-id="index.html:90:LiFormalAssessmentTestWeek9">Formal assessment: test, week 8</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 02 Plan -->
+      <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" data-ds-id="index.html:96:PanelPlan">
+        <div class="panel-copy"><h3 data-ds-id="index.html:97:H3PlanTheTerm10">Plan the term</h3><p data-ds-id="index.html:97:PTopicsLandOnReal11">Topics land on real school days, test week marked.</p></div>
+        <div class="screen" data-ds-id="index.html:98:ScreenPlan">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Term plan · October</span></div>
+          <div class="mini-cal">
+            <b>M</b><b>T</b><b>W</b><b>T</b><b>F</b>
+            <span></span><span class="c" style="--i:0">Equiv.</span><span class="c" style="--i:1">Equiv.</span><span class="c" style="--i:2">Equiv.</span><span class="c" style="--i:3">Equiv.</span>
+            <span class="c" style="--i:4">Same den.</span><span class="c" style="--i:5">Same den.</span><span class="c" style="--i:6">Same den.</span><span class="c" style="--i:7">Same den.</span><span class="c" style="--i:8">Same den.</span>
+            <span class="c" style="--i:9">Related</span><span class="c" style="--i:10">Related</span><span class="c" style="--i:11">Related</span><span class="c" style="--i:12">Related</span><span class="c c--test" style="--i:13">Quiz</span>
+          </div>
+        </div>
+      </div>
+      <!-- 03 Teach -->
+      <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" data-ds-id="index.html:109:PanelTeach">
+        <div class="panel-copy"><h3 data-ds-id="index.html:110:H3Teach12">Teach</h3><p data-ds-id="index.html:110:PEachMorningShowsToday13">Today's lesson, from the plan. You teach; Chommie keeps count.</p></div>
+        <div class="screen" data-ds-id="index.html:111:ScreenTeach">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Today · Tue 13 Oct</span></div>
+          <div class="teach">
+            <p class="teach-title" data-ds-id="index.html:114:PEquivalentFractions14">Equivalent fractions</p>
+            <ul class="checks">
+              <li style="--i:0" data-ds-id="index.html:116:LiFractionWallHalvesQuarters15">Fraction wall: halves, quarters, eighths</li>
+              <li style="--i:1" data-ds-id="index.html:117:LiFindTwoFractionsEqual16">Find two fractions equal to ¾</li>
+              <li style="--i:2" data-ds-id="index.html:118:LiClassActivityBookPage17">Class activity, book page 42</li>
+              <li style="--i:3" data-ds-id="index.html:119:LiSnapBooksAfterBreak18">Snap books after break</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 04 Snap -->
+      <div class="panel" role="tabpanel" id="p4" aria-labelledby="t4" data-ds-id="index.html:124:PanelSnap">
+        <div class="panel-copy"><h3 data-ds-id="index.html:126:H3SnapTheBooks19">Snap the books</h3><p data-ds-id="index.html:126:PPhotographThePageOn20">One book after another, on your phone. Consented learners only.</p></div>
+        <div class="screen screen--phone" data-ds-id="index.html:126:ScreenSnap">
+          <div class="phone">
+            <div class="phone-view"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+              <div class="page-lines"><i></i><i></i><i></i><i></i></div>
+              <div class="flash"></div>
+            </div>
+            <p class="phone-count" data-ds-id="index.html:133:PLearner01818Of21">Learner 018 · <b class="mono">18 of 34</b></p>
+          </div>
+        </div>
+      </div>
+      <!-- 05 Mark -->
+      <div class="panel" role="tabpanel" id="p5" aria-labelledby="t5" data-ds-id="index.html:137:PanelMark">
+        <div class="panel-copy"><h3 data-ds-id="index.html:139:H3Mark22">Mark</h3><p data-ds-id="index.html:139:PChommieMarksEverySum23">Every sum, marked against its CAPS topic.</p></div>
+        <div class="screen" data-ds-id="index.html:139:ScreenMark">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Learner 018 · page 42</span></div>
+          <ol class="book">
+            <li style="--i:0" data-ds-id="index.html:143:Li24"><span>½ = ²⁄₄</span><b class="tick">✓</b></li>
+            <li style="--i:1" data-ds-id="index.html:144:Li25"><span>¾ = ⁶⁄₈</span><b class="tick">✓</b></li>
+            <li style="--i:2" data-ds-id="index.html:145:Li26"><span>⅔ = ⁴⁄₉</span><b class="tick tick--x">✗</b></li>
+            <li style="--i:3" data-ds-id="index.html:146:Li27"><span>⅖ = ⁴⁄₁₀</span><b class="tick">✓</b></li>
+          </ol>
+        </div>
+      </div>
+      <!-- 06 Check -->
+      <div class="panel" role="tabpanel" id="p6" aria-labelledby="t6" data-ds-id="index.html:150:PanelCheck">
+        <div class="panel-copy"><h3 data-ds-id="index.html:152:H3Check28">Check</h3><p data-ds-id="index.html:152:PASecondPassThe29">The Reviewer re-marks every page. Disagreements wait for you.</p></div>
+        <div class="screen" data-ds-id="index.html:152:ScreenCheck">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Reviewer</span></div>
+          <div class="review">
+            <p class="review-sum" data-ds-id="index.html:156:ReviewSum30"><span>⅔ + ⅙ = ⁵⁄₆</span></p>
+            <p class="review-row" data-ds-id="index.html:157:PMarker31"><span>Marker</span><s class="bad">✗ wrong</s></p>
+            <p class="review-row review-row--catch" data-ds-id="index.html:158:PReviewer32"><span>Reviewer</span><b>✓ correct — ⁴⁄₆ + ⅙</b></p>
+            <p class="review-flag" data-ds-id="index.html:159:PHeldForYouTo33">Waiting for your call</p>
+          </div>
+        </div>
+      </div>
+      <!-- 07 Heat map -->
+      <div class="panel" role="tabpanel" id="p7" aria-labelledby="t7" data-ds-id="index.html:163:PanelHeat">
+        <div class="panel-copy"><h3 data-ds-id="index.html:165:H3HeatMap34">Heat map</h3><p data-ds-id="index.html:165:PEveryLearnerEveryFraction35">Every learner, every fraction topic, in green, amber and red. Re-teach on Thursday and watch the squares turn.</p></div>
+        <div class="screen" data-ds-id="index.html:165:ScreenHeat">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Class 6B · fractions</span></div>
+          <div class="heat-anim" aria-label="Heat map squares changing from red to green">
+            <i class="h-r w"></i><i class="h-g"></i><i class="h-a w"></i><i class="h-g"></i><i class="h-g"></i><i class="h-r w"></i>
+            <i class="h-g"></i><i class="h-a w"></i><i class="h-g"></i><i class="h-r w"></i><i class="h-g"></i><i class="h-a w"></i>
+            <i class="h-a w"></i><i class="h-g"></i><i class="h-r w"></i><i class="h-g"></i><i class="h-a w"></i><i class="h-g"></i>
+            <i class="h-g"></i><i class="h-r w"></i><i class="h-g"></i><i class="h-a w"></i><i class="h-g"></i><i class="h-r w"></i>
+          </div>
+        </div>
+      </div>
+      <!-- 08 Homework -->
+      <div class="panel" role="tabpanel" id="p8" aria-labelledby="t8" data-ds-id="index.html:176:PanelHomework">
+        <div class="panel-copy"><h3 data-ds-id="index.html:178:H3Homework36">Homework</h3><p data-ds-id="index.html:178:PEachLearnerGetsA37">A sheet for each learner, from the topics they missed.</p></div>
+        <div class="screen" data-ds-id="index.html:178:ScreenHomework">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Homework · Learner 018</span></div>
+          <ol class="hw-build">
+            <li style="--i:0" data-ds-id="index.html:182:LiWriteTwoFractionsEqual38">Write two fractions equal to ⅔.</li>
+            <li style="--i:1" data-ds-id="index.html:183:LiShadeOfTheBar39">Shade ⁴⁄₆ of the bar. Is it the same as ⅔?</li>
+            <li style="--i:2" data-ds-id="index.html:184:Li40">⅔ + ⅙ = ?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SIGNATURE — ATP photo becomes a term plan -->
+  <section class="sig" data-reveal data-ds-id="index.html:191:Signature">
+    <div class="wrap">
+      <div class="sec-head" data-ds-id="index.html:193:SigHead">
+        <h2 data-ds-id="index.html:194:SigTitle">Photograph the ATP. Get the whole term back.</h2>
+        <p class="sec-lede" data-ds-id="index.html:195:SigLede">One picture becomes nine weeks of lessons, test and exam already in your diary.</p>
+      </div>
+      <div class="sig-grid" data-ds-id="index.html:197:SigGrid">
+        <figure class="atp" data-ds-id="index.html:198:AtpPhoto">
+          <div class="atp-paper">
+            <p class="atp-h" data-ds-id="index.html:201:PAnnualTeachingPlanMathematics41">Annual Teaching Plan · Mathematics Gr 6 · Term 4</p>
+            <table data-ds-id="index.html:202:TableWk42">
+              <tr><th>Wk</th><th>Topic</th></tr>
+              <tr><td>1–2</td><td>Common fractions: equivalent fractions</td></tr>
+              <tr><td>3</td><td>Add, subtract: same denominators</td></tr>
+              <tr><td>4</td><td>Add, subtract: related denominators</td></tr>
+              <tr><td>5</td><td>Mixed numbers</td></tr>
+              <tr><td>6</td><td>Fractions of whole numbers</td></tr>
+              <tr><td>7</td><td>Fractions and decimals</td></tr>
+              <tr><td>8</td><td>Revision · Test</td></tr>
+              <tr><td>9</td><td>Exam</td></tr>
+            </table>
+          </div>
+          <figcaption>Photo of the ATP page</figcaption>
+        </figure>
+
+        <div class="sig-arrow" aria-hidden="true"><svg viewBox="0 0 80 24"><path d="M2 12h72m-8-8 8 8-8 8"/></svg></div>
+
+        <figure class="plan" data-ds-id="index.html:218:TermPlan">
+          <div class="plan-head"><span>Term 4 · 2026</span><span class="mono">example term</span></div>
+          <div class="plan-days" aria-hidden="true"><span></span><b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b></div>
+          <div class="plan-row" style="--i:0"><span class="wk">6 Oct</span><i class="off"></i><i class="chip span4">Equivalent fractions</i></div>
+          <div class="plan-row" style="--i:1"><span class="wk">12 Oct</span><i class="chip span5">Equivalent fractions</i></div>
+          <div class="plan-row" style="--i:2"><span class="wk">19 Oct</span><i class="chip span5">Same denominators</i></div>
+          <div class="plan-row" style="--i:3"><span class="wk">26 Oct</span><i class="chip span5">Related denominators</i></div>
+          <div class="plan-row" style="--i:4"><span class="wk">2 Nov</span><i class="chip span5">Mixed numbers</i></div>
+          <div class="plan-row" style="--i:5"><span class="wk">9 Nov</span><i class="chip span5">Fractions of whole numbers</i></div>
+          <div class="plan-row" style="--i:6"><span class="wk">16 Nov</span><i class="chip span5">Fractions and decimals</i></div>
+          <div class="plan-row" style="--i:7"><span class="wk">23 Nov</span><i class="chip span3">Revision</i><i class="test span2">Test · Thu</i></div>
+          <div class="plan-row" style="--i:8"><span class="wk">30 Nov</span><i class="chip span2">Revision</i><i class="test span3">Exam · Wed</i></div>
+          <figcaption>Your term plan, on school days</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. THREE PROOFS -->
+  <section class="proofs wrap" data-reveal data-ds-id="index.html:236:Proofs">
+    <div class="sec-head" data-ds-id="index.html:237:ProofsHead">
+      <h2 data-ds-id="index.html:238:ProofsTitle">What is waiting for you on Monday morning.</h2>
+      <p class="sec-lede" data-ds-id="index.html:239:ProofsLede">Three real Chommie screens, filled with made-up learners from one Grade 6 class.</p>
+    </div>
+    <div class="proof-grid" data-ds-id="index.html:241:ProofGrid">
+
+      <article class="proof" data-hover data-ds-id="index.html:243:ProofHomework">
+        <div class="screen screen--tall">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Personal homework</span></div>
+          <div class="hw">
+            <p class="hw-name" data-ds-id="index.html:249:PThandiMokoenaGr6b43">Thandi Mokoena <span class="mono">Gr 6B · 016</span></p>
+            <p class="hw-miss" data-ds-id="index.html:250:PMissedInHerBook44">Missed in her book this week</p>
+            <ul class="tags"><li data-ds-id="index.html:251:LiEquivalentFractions45">Equivalent fractions</li><li data-ds-id="index.html:251:LiRelatedDenominators46">Related denominators</li></ul>
+            <ol class="hw-q">
+              <li data-ds-id="index.html:253:LiWriteTwoFractionsEqual47">Write two fractions equal to ¾.</li>
+              <li data-ds-id="index.html:254:Li48">½ + ¼ = </li>
+              <li data-ds-id="index.html:255:Li49">⅔ + ⅙ = </li>
+              <li data-ds-id="index.html:256:Li50">⅝ − ¼ = </li>
+            </ol>
+            <p class="hw-foot mono" data-ds-id="index.html:258:P4QuestionsAbout1551">4 questions · about 15 minutes</p>
+          </div>
+        </div>
+        <h3 data-ds-id="index.html:261:H3HomeworkWithHerName52">Homework with her name on it</h3>
+        <p data-ds-id="index.html:262:PBuiltFromThandiS53">Built from Thandi's own book, covering only the fraction topics she missed.</p>
+      </article>
+
+      <article class="proof" data-hover data-ds-id="index.html:263:ProofReview">
+        <div class="screen screen--tall">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Marking review · 3 need you</span></div>
+          <ul class="rv">
+            <li data-ds-id="index.html:269:LiLearner014Q354"><span class="mono">Learner 014 · Q3</span><p data-ds-id="index.html:269:PMarkerReviewer55">Marker ✓, Reviewer ✗</p><em class="flag flag--a">Disagree</em></li>
+            <li data-ds-id="index.html:270:LiLearner022Q556"><span class="mono">Learner 022 · Q5</span><p data-ds-id="index.html:270:PIsItOr57">Is it ³⁄₈ or ⁵⁄₈? <span class="smudge" aria-hidden="true">?⁄₈</span></p><em class="flag flag--r">Unclear writing</em></li>
+            <li data-ds-id="index.html:271:LiLearner031Q258"><span class="mono">Learner 031 · Q2</span><p data-ds-id="index.html:271:PMarkerReviewer59">Marker ✗, Reviewer ✓</p><em class="flag flag--a">Disagree</em></li>
+            <li class="rv-ok" data-ds-id="index.html:272:Li31Books60"><span class="mono">31 books</span><p data-ds-id="index.html:272:PBothAgree61">Both agree</p><em class="flag flag--g">Done</em></li>
+          </ul>
+        </div>
+        <h3 data-ds-id="index.html:275:H3DisagreementsHeldForYou62">Disagreements, held for you</h3>
+        <p data-ds-id="index.html:276:PWhereTheTwoPasses63">Where the two passes differ, or the handwriting is unclear, you decide.</p>
+      </article>
+
+      <article class="proof" data-hover data-ds-id="index.html:277:ProofHeat">
+        <div class="screen screen--tall">
+          <div class="screen-bar"><i></i><i></i><i></i><span>Class 6B heat map</span></div>
+          <div class="hm">
+            <div class="hm-row hm-cols"><span></span><b title="Equivalent">Eq</b><b title="Same denominators">Sd</b><b title="Related denominators">Rd</b><b title="Mixed numbers">Mx</b><b title="Of whole numbers">Wn</b></div>
+            <div class="hm-row"><span>Thandi M.</span><i class="r"></i><i class="g"></i><i class="r"></i><i class="a"></i><i class="g"></i></div>
+            <div class="hm-row"><span>Sipho N.</span><i class="g"></i><i class="g"></i><i class="a"></i><i class="g"></i><i class="g"></i></div>
+            <div class="hm-row"><span>Lerato K.</span><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="a"></i></div>
+            <div class="hm-row"><span>Johan V.</span><i class="a"></i><i class="a"></i><i class="r"></i><i class="r"></i><i class="a"></i></div>
+            <div class="hm-row"><span>Ayesha P.</span><i class="g"></i><i class="g"></i><i class="g"></i><i class="a"></i><i class="g"></i></div>
+            <div class="hm-row"><span>Kagiso D.</span><i class="g"></i><i class="a"></i><i class="r"></i><i class="g"></i><i class="g"></i></div>
+            <div class="hm-row"><span>Naledi S.</span><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i></div>
+            <div class="hm-legend mono"><span><i class="g"></i>got it</span><span><i class="a"></i>shaky</span><span><i class="r"></i>re-teach</span></div>
+          </div>
+        </div>
+        <h3 data-ds-id="index.html:294:H3TheWholeClassAt64">The whole class, at a glance</h3>
+        <p data-ds-id="index.html:295:PRelatedDenominatorsIsRed65">Related denominators is red for three learners. That is Thursday's lesson.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- 4b. WHAT IT HANDLES + WHAT TO UPLOAD -->
+  <section class="band wrap" id="handles" data-reveal>
+    <div class="sec-head">
+      <h2>Marking takes South African teachers 7.1 hours a week. Chommie takes most of it.</h2>
+      <p class="sec-lede">TALIS 2024: SA teachers mark 7.1 hours a week against an OECD average of 4.6. Catch problems early. Fix them fast.</p>
+    </div>
+    <div class="cols">
+      <div><h3>Reads your ATP</h3><p>Weeks, topics and test dates, checked against official CAPS.</p></div>
+      <div><h3>Plans the term</h3><p>Every topic on a real school day, worked back from the test and exam.</p></div>
+      <div><h3>Writes the lesson</h3><p>Outline, examples, class work, homework and memo, tagged to its ATP week.</p></div>
+      <div><h3>Marks the books</h3><p>Two markers from different AI companies. Unclear writing is flagged, never guessed.</p></div>
+      <div><h3>Shows who is struggling</h3><p>A heat map of every learner against every fraction topic.</p></div>
+      <div><h3>Prints personal homework</h3><p>One sheet per learner with their name, built from what they got wrong.</p></div>
+    </div>
+    <div class="sec-head" style="margin-top:56px"><h2>What to upload.</h2>
+      <p class="sec-lede">A photo or PDF of your ATP page and, if you have one, your school's teaching planner. No ATP to hand? Pick the official Grade 6 Maths Term 4 ATP.</p></div>
+  </section>
+
+  <!-- 4c. WHO DECIDES WHAT -->
+  <section class="band wrap" id="who" data-reveal>
+    <div class="sec-head"><h2>Chommie drafts. You decide.</h2>
+      <p class="sec-lede">Nothing reaches a learner, a mark sheet or your HOD until you approve it. Every step is written in an activity log.</p></div>
+    <div class="who">
+      <div class="who-col"><h3>Chommie drafts</h3><ul>
+        <li>The term plan from your ATP</li><li>Each lesson, class work and memo</li><li>Marks from two markers, with the evidence</li>
+        <li>The heat map and the re-teach suggestion</li><li>Each learner's personal homework</li></ul></div>
+      <div class="who-col"><h3>The teacher approves</h3><ul>
+        <li>Every plan and lesson before it is used</li><li>Every disagreement and unclear answer</li><li>The two thresholds: struggling at 50%, class re-teach at 40%</li>
+        <li>Homework before it is printed</li><li>The mark sheet, signed by the HOD before export</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 4d. FAQ -->
+  <section class="band wrap" id="faq" data-reveal>
+    <div class="sec-head"><h2>Plain answers.</h2></div>
+    <div class="faq">
+      <details><summary>Is it run by AI or by people?</summary><p>Both, and the teacher has the last word. AI drafts the plan, lessons and marks. Plain code does every total, percentage and date. You approve before anything is used.</p></details>
+      <details><summary>What if it cannot read a learner's handwriting?</summary><p>It says so. An answer it cannot read with confidence gets no mark and goes to you with a cropped picture of the answer.</p></details>
+      <details><summary>Why two markers?</summary><p>Two AI markers from different companies mark every book. Where they disagree, a Reviewer re-checks, and you make the final call.</p></details>
+      <details><summary>What happens to learners' names and photos?</summary><p>Names are covered on your phone before a photo is sent, and learners are record numbers. Photos are deleted once you confirm the marks. Only learners whose parent or guardian has signed consent are photographed, and consent can be withdrawn at any time.</p></details>
+      <details><summary>Where does the data go?</summary><p>Photos are read by AI services outside South Africa. That is acceptable for the demo, which uses made-up learners only. The pilot needs a decision under POPIA section 72 first.</p></details>
+      <details><summary>Do learners need a phone?</summary><p>No. Learners only receive printed homework with their name on it.</p></details>
+      <details><summary>Does it work to CAPS and the ATP?</summary><p>Yes. Every lesson is tagged to its ATP week and nothing outside your ATP or CAPS is added. The demo covers Grade 6 Maths, Term 4, fractions.</p></details>
+      <details><summary>Does it connect to SA-SAMS?</summary><p>Through a file. Chommie makes an Excel mark sheet for the HOD to sign, and only then lets you export it for SA-SAMS.</p></details>
+    </div>
+  </section>
+
+  <!-- 5. TRUST + CLOSE -->
+  <section class="close" data-reveal data-ds-id="index.html:301:TrustClose">
+    <div class="trust wrap" id="privacy" data-ds-id="index.html:302:Trust">
+      <div class="trust-art" data-ds-id="index.html:303:TrustArt">
+        <img src="./art-f6b5177d4c39.jpg" width="1600" height="1067" loading="lazy" alt="Line drawing of a teacher's phone photographing a learner's open exercise book of fraction sums" data-parallax data-ds-id="index.html:304:TrustDrawing" />
+        <figure class="trust-inset" data-ds-id="index.html:305:TrustInset">
+          <img src="./art-d811d9af91ce.jpg" width="1600" height="1067" loading="lazy" alt="An exercise book with the learner's name area blacked out and a number tag clipped beside it" data-ds-id="index.html:306:RedactedBook" />
+          <figcaption class="mono">Name covered · learner 016</figcaption>
+        </figure>
+      </div>
+      <div class="trust-copy" data-ds-id="index.html:309:TrustCopy">
+        <h2 data-ds-id="index.html:310:TrustTitle">Marking you can put your name to.</h2>
+        <dl class="trust-list">
+          <div data-ds-id="index.html:312:TrustCaps"><dt>Built on CAPS and your ATP</dt><dd>Every mark is tied to a topic in the plan you uploaded.</dd></div>
+          <div data-ds-id="index.html:313:TrustFlags"><dt>It flags. It doesn't guess.</dt><dd>When the two passes disagree, or a digit is hard to read, you have the final say.</dd></div>
+          <div data-ds-id="index.html:314:TrustNames"><dt>Names stay in the classroom</dt><dd>Name areas are blacked out; learners are record numbers. Only books with signed parent consent are photographed.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="wrap close-inner" data-ds-id="index.html:319:CloseInner">
+      <h2 class="close-title" data-ds-id="index.html:320:CloseTitle">See one fractions term, start to finish.</h2>
+      <p class="close-lede" data-ds-id="index.html:321:CloseLede">Join the demo on Saturday 14 November 2026: one Grade 6 term, made-up books, live.</p>
+      <a href="/demo.html" class="pill pill--lg" data-hover data-ds-id="index.html:316:CloseDemo">Book a 30-minute demo</a>
+      <p class="close-note" data-ds-id="index.html:317:CloseNote">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+        Installs from the browser. Android first, no app store.
+      </p>
+    </div>
+  </section>
+
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-cols">
+    <div><a href="#view-home" class="logo-slot">Chommie</a><p class="foot-small" style="margin-top:12px">The teacher's buddy. Made for South African classrooms.</p></div>
+    <nav class="foot-nav" aria-label="Product" style="flex-direction:column"><h4>Product</h4><a href="#how">How it works</a><a href="/app/">Open the app</a><a href="/demo.html">Book a demo</a></nav>
+    <nav class="foot-nav" aria-label="Legal" style="flex-direction:column"><h4>Legal</h4><a href="#privacy">Privacy and consent</a><a href="#faq">FAQ</a><a href="/privacy.html">Terms and privacy policy</a></nav>
+  </div>
+  <div class="wrap"><p class="foot-small">&copy; 2026 Chommie. Made-up learners only in the demo.</p></div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+<script src="./motion.js"></script>
+<script src="./screen.js"></script>
+</body>
+</html>
