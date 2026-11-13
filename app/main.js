@@ -1,4 +1,6 @@
 import { state, onChange } from "./state.js";
+import { nextStep } from "../shared/coordinator.js";
+import { listPhotos } from "./db.js";
 
 const TABS = [
   ["upload", "Upload ATP"], ["plan", "Plan term"], ["teach", "Teach"], ["snap", "Snap books"],
@@ -6,6 +8,14 @@ const TABS = [
   "sep", ["approvals", "Approvals and log"], ["hod", "HOD overview"], ["settings", "Settings"],
 ];
 const view = document.getElementById("view");
+// Coordinator bar: always says what Chommie decides the next step is, and hands the job to the right screen.
+const coord = document.createElement("div"); coord.className = "coord"; coord.id = "coord"; document.querySelector(".app-head").after(coord);
+async function paintCoord() {
+  let queued = 0; try { queued = new Set((await listPhotos()).map((p) => p.code)).size; } catch {}
+  const n = nextStep(state, { queued });
+  coord.innerHTML = `<div class="wrap coord-row"><p id="coord-text"><small>Coordinator, step ${n.index} of ${n.of}</small>${n.label}. <span style="opacity:.8">${n.reason}</span></p><button class="btn" id="coord-go" type="button">Go</button></div>`;
+  coord.querySelector("#coord-go").onclick = () => go(n.view);
+}
 const nav = document.getElementById("app-nav");
 let current = null, active = null;
 
@@ -28,11 +38,12 @@ export async function go(name) {
     view.innerHTML = `<p class="notice notice--bad" role="alert">This screen is not ready yet.</p>`;
   }
   view.focus({ preventScroll: true });
+  paintCoord();
 }
 document.getElementById("btn-demo").onclick = async () => {
   const m = await import("./demo.js"); await m.loadDemoRun(); go("heat");
 };
-onChange(() => { document.getElementById("demo-banner").hidden = !state.demo; });
+onChange(() => { document.getElementById("demo-banner").hidden = !state.demo; paintCoord(); });
 const start = (location.hash || "").slice(1);
 if (new URLSearchParams(location.search).get("demo")) { import("./demo.js").then((m) => m.loadDemoRun()).then(() => go("heat")); }
 else go(TABS.some((t) => t[0] === start) ? start : "upload");

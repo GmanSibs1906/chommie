@@ -95,7 +95,15 @@ body.app { background: var(--ground); }
 .hw-sheet-name { font: 400 34px/1.1 var(--f-display); margin: 4px 0; }
 .hw-sheet ol { padding-left: 22px; } .hw-sheet li { margin: 14px 0; font-size: 18px; } .hw-line { border-bottom: 1px solid #999; height: 30px; }
 @media print {
-  body.printing-hw #view > *:not(#print-sheets), body.printing-hw .app-head, body.printing-hw .toast { display: none !important; }
+  body.printing-hw #view, body.printing-hw .app-head, body.printing-hw .toast { display: none !important; }
   body.printing-hw #print-sheets { display: block !important; }
   body.printing-hw .hw-sheet { break-after: page; page-break-after: always; }
 }
+
+.coord { background: var(--ink); color: var(--ground); }
+.coord-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-block: 10px; }
+.coord-row p { flex: 1; min-width: 200px; font-size: 15px; }
+.coord-row .btn { background: var(--ground); color: var(--ink); border-color: var(--ground); min-height: 44px; }
+.coord small { opacity: .75; display: block; font-size: 13px; }
+.sheet-table { width: 100%; border-collapse: collapse; font-size: 14px; } .sheet-table th, .sheet-table td { border: 1px solid #999; padding: 6px 8px; text-align: left; }
+.sign-line { margin-top: 40px; border-top: 1px solid #000; width: 280px; padding-top: 4px; }

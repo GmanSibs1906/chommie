@@ -1,0 +1,357 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:34:48.280Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "click": "#approve-plan",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='snap']",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "expect": "7 of 32",
+      "ok": true
+    },
+    {
+      "click": "#go-mark",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 120000,
+      "ok": true
+    },
+    {
+      "expect_not": "error:",
+      "ok": true
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "[data-decide$='|1']",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "0 need",
+      "ok": true
+    },
+    {
+      "click": "#confirm",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Photos deleted from this phone",
+      "ok": true
+    },
+    {
+      "click": "#to-heat",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='approvals']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Chommie drafts. You decide.",
+      "ok": true
+    },
+    {
+      "expect": "The weekly loop",
+      "ok": true
+    },
+    {
+      "expect": "Activity log",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#log tbody tr').length >= 10",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('#log tbody td')].some(td => td.textContent.includes('anthropic/claude-sonnet-5.5') && td.textContent.includes('OpenRouter'))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('#log tbody td')].some(td => td.textContent.includes('google/gemini-3.5-flash'))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "shot": "approvals",
+      "full": true,
+      "ok": true,
+      "detail": "01-approvals.png"
+    },
+    {
+      "click": "button[data-v='hod']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "The class in one page, for the HOD",
+      "ok": true
+    },
+    {
+      "expect": "Every AI call, with vendor and routing",
+      "ok": true
+    },
+    {
+      "expect": "No formal task yet",
+      "ok": true
+    },
+    {
+      "assert": "!document.querySelector('#export')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "button[data-v='mark']",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "assert": "(document.querySelector('#task-type-sel').value = 'formal', document.querySelector('#task-type-sel').dispatchEvent(new Event('change')), true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "formal task (recorded)",
+      "ok": true
+    },
+    {
+      "click": "button[data-v='hod']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Formal tasks: Fractions check",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#export').disabled && document.querySelector('#sign').disabled === false",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect": "Export is locked until the HOD signs",
+      "ok": true
+    },
+    {
+      "click": "#absent",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "assert": "(window.__printed = null, window.print = () => { window.__printed = document.getElementById('print-sheets').innerText; }, true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#print-sheet",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "assert": "window.__printed.includes('HOD signature') && window.__printed.includes('Thandi Mokoena') && window.__printed.includes('-1')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "type": "#hod-name",
+      "value": "Mrs Test HOD",
+      "ok": true
+    },
+    {
+      "click": "#sign",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "Signed by Mrs Test HOD",
+      "ok": true
+    },
+    {
+      "assert": "!document.querySelector('#export').disabled",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#export",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "assert": "window.__lastExport && /\\.xls$/.test(window.__lastExport.filename) && window.__lastExport.xml.includes('Mokoena') && !window.__lastExport.xml.includes('></Data>')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "hod",
+      "full": true,
+      "ok": true,
+      "detail": "02-hod.png"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:37:50.882Z",
+  "ok": true
+}

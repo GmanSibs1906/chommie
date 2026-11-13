@@ -1,0 +1,81 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:34:31.908Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='approvals']",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "expect": "Waiting for you (1)",
+      "ok": true
+    },
+    {
+      "expect": "ATP read from your photo",
+      "ok": true
+    },
+    {
+      "expect": "Coordinator, step 2 of 11",
+      "ok": true
+    },
+    {
+      "click": "[data-approve='atp']",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "Waiting for you (0)",
+      "ok": true
+    },
+    {
+      "expect": "Approved (1)",
+      "ok": true
+    },
+    {
+      "expect": "Plan the term",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#loop li').length === 11",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "approvals",
+      "full": true,
+      "ok": true,
+      "detail": "01-approvals.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:34:46.570Z",
+  "ok": true
+}

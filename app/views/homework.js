@@ -6,6 +6,7 @@ import { proveItem } from "../../shared/lesson.js";
 import { pretty } from "../../shared/fractions.js";
 import { TOPICS } from "../../shared/assessment.js";
 import { fmt } from "../../shared/planner.js";
+import { printHtml } from "../print.js";
 
 let sel = null, busy = "";
 const topicName = (id) => TOPICS.find((t) => t.id === id)?.name || id;
@@ -46,8 +47,7 @@ function draw(root, ctx) {
       <table class="tbl" id="hw-list"><tbody>${codes.map((c) => { const s = hw[c]; return `<tr data-hw="${c}" style="cursor:pointer;${c === sel ? "background:var(--soft)" : ""}"><td><button class="btn btn--ghost" data-pick="${c}" type="button" style="min-height:44px;width:100%;justify-content:flex-start;text-align:left;border:0">${c} ${esc(nameOf(c))}</button></td>
         <td class="muted" style="font-size:13px">${s.stretch ? "stretch" : s.topics.length + " topic" + (s.topics.length === 1 ? "" : "s")}</td><td><span class="st ${s.approved ? "st--ok" : "st--warn"}">${s.approved ? "Approved" : "Draft"}</span></td></tr>`; }).join("")}</tbody></table>
       <div class="btn-row"><button class="btn btn--ghost" id="approve-all" type="button">Approve all</button><button class="btn btn--accent" id="print-all" type="button" ${codes.some((c) => hw[c].approved) ? "" : "disabled"}>Print approved sheets</button></div></div>
-    <div id="sheet">${sheetHtml(hw[sel])}</div></div>`}
-    <div id="print-sheets" aria-hidden="true"></div>`;
+    <div id="sheet">${sheetHtml(hw[sel])}</div></div>`}`;
   const $ = (s) => root.querySelector(s);
   const g = $("#gen"); if (g) g.onclick = () => generate(root, ctx);
   if (!hw) return;
@@ -91,14 +91,11 @@ function wireSheet(root, ctx) {
 
 // One A4 page per learner, with the learner's real name restored from this phone only at this moment.
 function printSheets(root, codes) {
-  const host = root.querySelector("#print-sheets");
-  host.innerHTML = codes.map((c) => { const s = state.homework[c];
+  const html = codes.map((c) => { const s = state.homework[c];
     return `<section class="hw-sheet"><header><p class="hw-sheet-class">Grade 6B Mathematics, Term 4. Fractions homework. Set ${fmt(state.today)}</p>
       <h2 class="hw-sheet-name">${esc(nameOf(c))}</h2><p class="mono">${c}</p></header>
       <p>${s.stretch ? "Stretch questions: you are ahead of the class. Show your working." : "Practise these. Show your working."} About ${minutesFor(s)} minutes.</p>
       <ol>${s.items.map((i) => `<li>${esc(pretty(i.q))}<div class="hw-line"></div></li>`).join("")}</ol></section>`; }).join("");
   log("Teacher", "Printed homework", `${codes.length} sheet(s), one per learner with the learner's name`);
-  document.body.classList.add("printing-hw");
-  window.addEventListener("afterprint", () => document.body.classList.remove("printing-hw"), { once: true });
-  window.print();
+  printHtml(html);
 }
