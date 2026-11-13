@@ -8,3 +8,9 @@ Status log, newest at the bottom. Each feature: what was done, how it was tested
 - Key: OPENROUTER_API_KEY is a secret Netlify variable; it is not readable locally, so AI features are tested against the deployed URL.
 - Browser test: build_check on the deployed site at 375, 768, 1024: landing text, FAQ open, no horizontal overflow, demo form filled with fake data and submitted ("Thank you" shown), privacy page. 0 failures. Evidence: `.albert/build-checks/foundation/`.
 - Fixed along the way: Netlify Forms returned 404, replaced by own function; 8px overflow at 375 clipped.
+
+## 2. Upload plan + Curriculum Reader — ✅ passing (R4, R13)
+- Done: `/app/` shell with the step tabs, state store (localStorage), `read-atp` function (Claude Sonnet 5.5 vision via OpenRouter), CAPS check in plain code (`shared/caps.js`: matched / not in CAPS / missing), official-ATP picker, ATP approval gate, activity log entry with vendor and routing.
+- Tested: on the deployed site at 375/768/1024: official ATP loads and shows "All required CAPS fractions topics are present"; the generated sample ATP photo is really read by the model (rows "Common fractions", all "In CAPS", no "Not in CAPS"); approve button works. `node --test` for the CAPS logic passes. Evidence: `.albert/build-checks/upload/`.
+- Observed: first run at 768 failed on a too-short page-load wait in the test, not the app; fixed the test wait and re-ran green.
+- Limit: ATP input is photos only (the model path takes images); PDFs are not read.

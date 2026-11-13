@@ -1,0 +1,11 @@
+[
+ {"goto":"/app/#upload"},{"wait":3000},
+ {"expect":"Drop your ATP here"},
+ {"click":"#btn-official"},{"wait":600},
+ {"expect":"All required CAPS fractions topics are present"},{"expect":"Equivalent"},
+ {"click":"#btn-sample"},{"wait":25000},
+ {"expect":"Common fractions"},{"expect":"In CAPS"},{"expect_not":"Not in CAPS"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"read"},
+ {"click":"#approve-atp"},{"expect":"ATP approved by you"},{"shot":"approved"}
+]

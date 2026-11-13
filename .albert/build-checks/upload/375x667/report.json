@@ -1,0 +1,80 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T22:43:12.446Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "expect": "Drop your ATP here",
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "All required CAPS fractions topics are present",
+      "ok": true
+    },
+    {
+      "expect": "Equivalent",
+      "ok": true
+    },
+    {
+      "click": "#btn-sample",
+      "ok": true
+    },
+    {
+      "wait": 25000,
+      "ok": true
+    },
+    {
+      "expect": "Common fractions",
+      "ok": true
+    },
+    {
+      "expect": "In CAPS",
+      "ok": true
+    },
+    {
+      "expect_not": "Not in CAPS",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "read",
+      "ok": true,
+      "detail": "01-read.png"
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "expect": "ATP approved by you",
+      "ok": true
+    },
+    {
+      "shot": "approved",
+      "ok": true,
+      "detail": "02-approved.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T22:43:50.058Z",
+  "ok": true
+}

@@ -1,0 +1,13 @@
+{
+  "source": "official", "grade": 6, "subject": "Mathematics", "term": 4,
+  "weeks": [
+    { "from": 1, "to": 2, "topic": "Common fractions: equivalent fractions", "kind": "teach" },
+    { "from": 3, "to": 3, "topic": "Add, subtract: same denominators", "kind": "teach" },
+    { "from": 4, "to": 4, "topic": "Add, subtract: related denominators", "kind": "teach" },
+    { "from": 5, "to": 5, "topic": "Mixed numbers", "kind": "teach" },
+    { "from": 6, "to": 6, "topic": "Fractions of whole numbers", "kind": "teach" },
+    { "from": 7, "to": 7, "topic": "Fractions and decimals", "kind": "teach" },
+    { "from": 8, "to": 8, "topic": "Revision, Test", "kind": "test" },
+    { "from": 9, "to": 9, "topic": "Exam", "kind": "exam" }
+  ]
+}
