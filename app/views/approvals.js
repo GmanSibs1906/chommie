@@ -5,7 +5,7 @@ import { getTasks } from "../orchestrator.js";
 import { fmt } from "../../shared/planner.js";
 
 export async function render(root, ctx) {
-  const queued = new Set((await listPhotos()).map((p) => p.code)).size;
+  const queued = new Set((await listPhotos()).filter((p) => p.status === "queued").map((p) => p.code)).size;
   draw(root, ctx, queued);
 }
 function draw(root, ctx, queued) {

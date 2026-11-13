@@ -18,8 +18,10 @@ export function codeBank(seed = "bank") {
     same: () => ({ kind: "calc", expr: `${pick(r, ["7/12", "11/15", "9/11"])} + ${pick(r, ["3/12", "2/15", "1/11"])} - ${pick(r, ["1/12", "1/15", "2/11"])}`.replace(/(\d+)\/\d+ \+ (\d+)\/(\d+) - (\d+)\/\d+/, (m, a, b, d, c) => `${a}/${d} + ${b}/${d} - ${c}/${d}`) }),
     related: () => ({ kind: "calc", expr: pick(r, ["2/3 + 1/6 + 1/2", "3/4 + 1/8 + 1/2", "5/6 - 1/3 + 1/12"]) }),
     mixed: () => ({ kind: "calc", expr: pick(r, ["2 1/2 + 1 3/4", "3 1/3 - 1 1/6", "4 3/4 - 2 1/2"]) }),
-    ofwhole: () => ({ kind: "calc", expr: pick(r, ["5/8 of 24", "7/9 of 45", "3/7 of 56"]) }) };
-  const mk = { equiv, same, related, mixed, ofwhole };
+    ofwhole: () => ({ kind: "calc", expr: pick(r, ["5/8 of 24", "7/9 of 45", "3/7 of 56"]) }),
+    decimals: () => ({ kind: "calc", expr: pick(r, ["0.75 + 1/8", "0.6 + 3/10", "1.5 - 3/4", "2 1/4 + 0.5"]) }) };
+  const decimals = () => ({ kind: "calc", expr: pick(r, ["0.5 + 1/4", "3/4 + 0.25", "0.75 - 1/4", "1/2 + 0.3", "0.2 + 1/5", "1/4 + 0.5", "0.6 - 1/10"]) });
+  const mk = { equiv, same, related, mixed, ofwhole, decimals };
   for (const t of Object.keys(mk)) out[t] = { practice: Array.from({ length: 6 }, mk[t]), stretch: Array.from({ length: 3 }, hard[t]) };
   return out;
 }

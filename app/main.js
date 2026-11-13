@@ -11,7 +11,7 @@ const view = document.getElementById("view");
 // Coordinator bar: always says what Chommie decides the next step is, and hands the job to the right screen.
 const coord = document.createElement("div"); coord.className = "coord"; coord.id = "coord"; document.querySelector(".app-head").after(coord);
 async function paintCoord() {
-  let queued = 0; try { queued = new Set((await listPhotos()).map((p) => p.code)).size; } catch {}
+  let queued = 0; try { queued = new Set((await listPhotos()).filter((p) => p.status === "queued").map((p) => p.code)).size; } catch {}
   const n = nextStep(state, { queued });
   coord.innerHTML = `<div class="wrap coord-row"><p id="coord-text"><small>Coordinator, step ${n.index} of ${n.of}</small>${n.label}. <span style="opacity:.8">${n.reason}</span></p><button class="btn" id="coord-go" type="button">Go</button></div>`;
   coord.querySelector("#coord-go").onclick = () => go(n.view);
@@ -41,9 +41,9 @@ export async function go(name) {
   paintCoord();
 }
 document.getElementById("btn-demo").onclick = async () => {
-  const m = await import("./demo.js"); await m.loadDemoRun(); go("heat");
+  const m = await import("./demo.js"); await m.loadDemoRun(); go("check");
 };
 onChange(() => { document.getElementById("demo-banner").hidden = !state.demo; paintCoord(); });
 const start = (location.hash || "").slice(1);
-if (new URLSearchParams(location.search).get("demo")) { import("./demo.js").then((m) => m.loadDemoRun()).then(() => go("heat")); }
+if (new URLSearchParams(location.search).get("demo")) { import("./demo.js").then((m) => m.loadDemoRun()).then(() => go("check")); }
 else go(TABS.some((t) => t[0] === start) ? start : "upload");

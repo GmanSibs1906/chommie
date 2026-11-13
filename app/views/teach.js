@@ -2,6 +2,7 @@ import { state, save, log, api, toast, esc } from "../state.js";
 import { proveLesson, allItems } from "../../shared/lesson.js";
 import { pretty, fmtFrac, evalExpr } from "../../shared/fractions.js";
 import { fmt } from "../../shared/planner.js";
+import { codeLesson, shortenLesson, PREPARED } from "../../shared/lessonfallback.js";
 import { canRecord, startRecording, blobToWavBase64 } from "../audio.js";
 
 let sel = null, editing = false, rec = null, busy = "";
@@ -39,8 +40,13 @@ export function focus(date) { sel = date; editing = false; }
 export async function generateLesson(day, why = "Wrote lesson") {
   const rts = day.blocks.filter((b) => b.type === "reteach"), nw = day.blocks.find((b) => b.type === "new");
   const mins = 60;
-  const r = await api("/api/write-lesson", { topic: day.topic, atpWeek: day.atpWeek, minutes: mins, reteach: rts.length ? { topic: rts.map((b) => b.label.replace("Re-teach: ", "")).join(" and "), minutes: rts.reduce((s, b) => s + b.minutes, 0) } : null });
-  store(day, proveLesson(r.lesson, { topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, date: day.date, minutes: mins }), why, r.meta);
+  const reteach = rts.length ? { topic: rts.map((b) => b.label.replace("Re-teach: ", "")).join(" and "), minutes: rts.reduce((s, b) => s + b.minutes, 0) } : null;
+  try {
+    const r = await api("/api/write-lesson", { topic: day.topic, atpWeek: day.atpWeek, minutes: mins, reteach });
+    store(day, proveLesson(r.lesson, { topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, date: day.date, minutes: mins }), why, r.meta);
+  } catch (e) {
+    store(day, codeLesson({ topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, date: day.date, minutes: mins, reteach }), why + " (prepared draft: " + e.message.slice(0, 80) + ")", null);
+  }
 }
 async function writeLesson(root, ctx, day) {
   busy = "Lesson Writer is writing the lesson"; draw(root, ctx);
@@ -62,6 +68,7 @@ function lessonHtml(e, day) {
   const rt = day.blocks.find((b) => b.type === "reteach");
   return `<div class="print-area" id="lesson">
     <p class="mono muted" style="font-size:13px" id="atp-tag">ATP week ${e.atpWeek} · ${esc(e.topic)} · CAPS Grade 6 Maths Term 4 · ${fmt(e.date)}</p>
+    ${L.source ? `<p class="notice notice--bad" id="prepared-note">${esc(L.source)}</p>` : ""}
     <p class="st ${e.approved ? "st--ok" : "st--warn"}" id="lesson-status">${e.approved ? "Approved by you" : "Draft, waiting for you"}</p>
     ${rt ? `<p class="notice" style="margin:10px 0">Class re-teach added by the Analyst: ${esc(rt.label)}, ${rt.minutes} minutes.</p>` : ""}
     <div class="panel-box"><h3>Outline <span class="muted" style="font-weight:400">(${L.outline.reduce((s, o) => s + o.minutes, 0)} minutes)</span></h3>
@@ -122,7 +129,10 @@ function wire(root, ctx, e, day) {
       const L = proveLesson(r.lesson, { topic: e.topic, topicId: e.topicId, atpWeek: e.atpWeek, date: e.date, minutes: Math.round(r.lesson.outline?.reduce((s, o) => s + (Number(o.minutes) || 0), 0)) || e.lesson.minutes });
       store(day, L, `Voice edit: "${r.transcript}"`, r.metas?.[r.metas.length - 1]);
       state.lessons[sel].lastVoice = r.transcript; save();
-    } catch (err) { toast(err.message); }
+    } catch (err) {
+      if (payload.text && /short/i.test(payload.text)) { store(day, shortenLesson(e.lesson), `Voice edit: "${payload.text}" (prepared: ${err.message.slice(0, 60)})`, null); state.lessons[sel].lastVoice = payload.text; save(); }
+      else toast(err.message);
+    }
     busy = ""; draw(root, ctx);
   }
   $("#vtext").onsubmit = (ev) => { ev.preventDefault(); const t = $("#vt").value.trim() || "Make it shorter"; send({ text: t }, "Lesson Writer is changing the lesson"); };

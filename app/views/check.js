@@ -59,6 +59,7 @@ function card({ code, it }, key) {
     <p class="st st--${decided ? "ok" : it.status === "unclear" ? "warn" : "bad"}">${decided ? "You decided: " + word(it.decision.correct) : WHY[it.status] || "Needs you"}</p>
     <h3>${code} ${esc(nameOf(code))}, question ${it.n}: <span class="mono">${esc(q.q)}</span></h3>
     <p class="muted">Memo answer: <strong class="mono">${esc(q.answer)}</strong></p>
+    ${rv && it.A && it.B && rv.legible !== false && (rv.correct !== it.A.correct || rv.correct !== it.B.correct) ? `<p class="notice" data-caught="1">The Reviewer caught a wrong mark: Marker ${rv.correct !== it.A.correct ? "A" : "B"} said ${word(rv.correct !== it.A.correct ? it.A.correct : it.B.correct)}, the Reviewer read "${esc(rv.read)}" and says ${word(rv.correct)}.</p>` : ""}
     <div class="grid2"><div data-crop="${code}|${it.n}"></div>
     <div><table class="tbl"><thead><tr><th></th><th>Read</th><th>Mark</th><th>Evidence</th></tr></thead><tbody>
       ${row("Marker A (Anthropic)", it.A)}${row("Marker B (Google)", it.B)}

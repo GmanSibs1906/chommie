@@ -11,7 +11,7 @@ function stopCamera() { stream?.getTracks().forEach((t) => t.stop()); stream = t
 document.addEventListener("visibilitychange", () => { if (document.hidden && stream) { stopCamera(); document.querySelector("#cam-wrap")?.setAttribute("hidden", ""); toast("Camera stopped because you left the page"); } });
 
 // Resize to 1280px, black out the name strip, stamp the learner code. The original image is never stored.
-export async function maskAndStore(blobOrBitmap, code) {
+export async function maskAndStore(blobOrBitmap, code, status = "queued") {
   const bmp = blobOrBitmap instanceof Blob ? await createImageBitmap(blobOrBitmap) : blobOrBitmap;
   const k = Math.min(1, 1280 / Math.max(bmp.width, bmp.height));
   const c = document.createElement("canvas"); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
@@ -21,8 +21,8 @@ export async function maskAndStore(blobOrBitmap, code) {
   const blob = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.82));
   const id = code + "-" + Date.now();
   const page = photos.filter((p) => p.code === code).length + 1;
-  await putPhoto({ id, code, page, blob, status: "queued", at: Date.now() });
-  log("Snap", "Photo masked and queued", `${code} page ${page}. Name strip covered on this phone before storing.`);
+  await putPhoto({ id, code, page, blob, status, at: Date.now() });
+  log("Snap", status === "queued" ? "Photo masked and queued" : "Demo photo kept for review", `${code} page ${page}. Name strip covered on this phone before storing.`);
   return id;
 }
 

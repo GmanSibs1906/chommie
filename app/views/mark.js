@@ -10,7 +10,7 @@ const tick = (it) => { const f = finalCorrect(it); return f === true ? '<b class
 
 export async function render(root, ctx) {
   ensureLearners(); const task = getTasks()[0];
-  const photos = await listPhotos(), codes = [...new Set(photos.map((p) => p.code))].sort();
+  const photos = (await listPhotos()).filter((p) => p.status === "queued"), codes = [...new Set(photos.map((p) => p.code))].sort();
   draw(root, ctx, task, codes);
 }
 function draw(root, ctx, task, codes) {

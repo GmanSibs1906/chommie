@@ -15,3 +15,9 @@ test("memo is proven by code and a wrong model answer is corrected", () => {
   assert.ok(L.classWork[1].error); assert.equal(L.classWork[1].proven, false); assert.equal(L.unproven, 2);
 });
 test("simplify items are proven", () => { const L = proveLesson({ examples: [{ kind: "simplify", from: "18/24" }] }); assert.equal(L.examples[0].answer, "3/4"); assert.ok(L.examples[0].proven); });
+import { codeLesson, shortenLesson } from "../shared/lessonfallback.js";
+test("fallback lesson is fully proven, re-teach goes first and the outline still adds up to 60", () => {
+  const L = codeLesson({ topic: "Fractions and decimals", topicId: "decimals", atpWeek: 7, date: "2026-11-16", reteach: { topic: "Related denominators", minutes: 15 } });
+  assert.equal(L.unproven, 0); assert.match(L.outline[0].step, /Class re-teach/); assert.equal(L.outline.reduce((s, o) => s + o.minutes, 0), 60);
+  const S = shortenLesson(L); assert.ok(S.classWork.length <= 3 && S.outline.reduce((s, o) => s + o.minutes, 0) < 60);
+});

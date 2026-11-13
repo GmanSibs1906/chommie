@@ -32,8 +32,10 @@ TOPIC=[0,0,1,1,2,2,3,3,4,4]   # eq, same, related, mixed, ofwhole
 # which questions each learner gets wrong (design heat map: red=both, amber=one)
 PROFILE={
  1:("Thandi Mokoena",{0,1,4,5,6}), 2:("Sipho Ndlovu",{4,7} ), 3:("Lerato Khumalo",{8}), 4:("Johan van Wyk",{0,4,5,6,7,8}) ,
- 5:("Ayesha Patel",{6}), 6:("Kagiso Dlamini",{2,4,5}), 7:("Naledi Sithole",set())}
-UNCLEAR={4:{1}}          # Johan, Q2 numerator scribbled
+ 5:("Ayesha Patel",{6}), 6:("Kagiso Dlamini",{2,4,5}), 7:("Naledi Sithole",set()),
+ 14:("Tebogo Molefe",{4,8}), 22:("Palesa Tau",{9}), 31:("Jaco Smit",{6})}
+SPECIAL={14:{5:"5/8"}, 31:{1:"6/8"}}   # clear writing that a marker might misread: 014 Q6 is 5/8, 031 Q2 is 6/8
+UNCLEAR={4:{1},22:{4}}          # Johan, Q2 numerator scribbled
 EQUALVALUE={2:{3}}       # Sipho writes 1/3 for 5/9-2/9 (correct, simplified)
 def book(num):
     name,wrong=PROFILE[num]; random.seed(num*7)
@@ -48,14 +50,15 @@ def book(num):
     d.line((90,170,W,170),fill=(120,120,120),width=3)
     for i,(q,r,w) in enumerate(zip(QS,RIGHT,WRONG)):
         y=190+i*100+ (H-1400)//2
-        ans = w if i in wrong else ("1/3" if i in EQUALVALUE.get(num,set()) else r)
+        ans = SPECIAL.get(num,{}).get(i) or (w if i in wrong else ("1/3" if i in EQUALVALUE.get(num,set()) else r))
         txt=f"{i+1})  {q}  =  {ans}" if i>=2 else f"{i+1})  {q}"
         if i<2: txt=f"{i+1})  {q.split('=')[0].strip()} = {ans.split('/')[0]}/{q.split('?/')[1]}"
         if i in UNCLEAR.get(num,set()):
-            d.text((120,y+random.randint(-3,3)),f"{i+1})  3/4 = ",font=f,fill=ink)
-            x=120+d.textlength(f"{i+1})  3/4 = ",font=f)
+            pre=f"{i+1})  {q} = " if i>=2 else f"{i+1})  {q.split('=')[0].strip()} = "
+            d.text((120,y+random.randint(-3,3)),pre,font=f,fill=ink)
+            x=120+d.textlength(pre,font=f)
             for k in range(60): d.line((x+random.randint(0,40),y+random.randint(8,52),x+random.randint(0,40),y+random.randint(8,52)),fill=ink,width=random.randint(2,5))
-            d.text((x+46,y),"/8",font=f,fill=ink)
+            d.text((x+46,y),"/"+r.split("/")[1],font=f,fill=ink)
         else:
             d.text((120,y+random.randint(-3,3)),txt,font=f,fill=ink)
     img=img.rotate(random.uniform(-1.6,1.6),fillcolor=(214,208,196),resample=Image.BICUBIC,expand=False)
