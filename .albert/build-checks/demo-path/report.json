@@ -1,12 +1,24 @@
 {
   "url": "https://chommie-teacher.netlify.app",
-  "started": "2026-11-13T23:42:45.452Z",
-  "finished": "2026-11-13T23:44:40.482Z",
+  "started": "2026-11-13T23:50:47.254Z",
+  "finished": "2026-11-13T23:52:43.012Z",
   "viewports": [
+    {
+      "viewport": "375x667",
+      "ok": true,
+      "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/demo-path/375x667",
+      "failures": []
+    },
     {
       "viewport": "768x1024",
       "ok": true,
       "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/demo-path/768x1024",
+      "failures": []
+    },
+    {
+      "viewport": "1024x768",
+      "ok": true,
+      "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/demo-path/1024x768",
       "failures": []
     }
   ],

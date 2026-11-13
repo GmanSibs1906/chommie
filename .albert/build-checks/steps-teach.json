@@ -1,8 +1,8 @@
 [
  {"goto":"/app/#upload"},{"wait":3000},
  {"click":"#btn-official"},{"wait":500},{"click":"#approve-atp"},{"click":"#go-plan"},{"wait":1000},{"click":"#approve-plan"},{"click":"#go-teach"},{"wait":1500},
- {"expect":"Equivalent fractions"},{"click":"#write"},{"wait":30000},
- {"expect":"ATP week 2"},{"expect":"Draft, waiting for you"},{"expect":"Answers are worked out by code, not by the model"},
+ {"expect":"Fractions of whole numbers"},{"click":"#write"},{"wait":30000},
+ {"expect":"ATP week 6"},{"expect":"Draft, waiting for you"},{"expect":"Answers are worked out by code, not by the model"},
  {"assert":"document.querySelectorAll('#examples li').length >= 1 && document.querySelectorAll('#classwork li').length >= 3 && document.querySelectorAll('#memo li').length >= 6"},
  {"assert":"[...document.querySelectorAll('#memo strong')].every(e => e.textContent.trim() && e.textContent.trim() !== '?')"},
  {"expect_not":"undefined"},{"expect_not":"NaN"},

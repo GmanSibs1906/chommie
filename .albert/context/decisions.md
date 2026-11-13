@@ -7,3 +7,14 @@
 - [yellow] Because gemini-3.5-flash accepts audio, I decided it transcribes voice notes, with a typed fallback.
 - [yellow] Because the real SA-SAMS template can't be reproduced without a school export, I decided the export is a SpreadsheetML .xls following the documented rules (-1 absent, no blanks).
 - [green] Because the brief says so, every example uses Grade 6 Maths, Term 4, fractions with made-up learners.
+- [yellow] Because the brief says the demo is Saturday 14 Nov 2026 and the design shows the heat map for five fractions topics, I decided the demo's "today" is Fri 13 Nov 2026 (week 6), so tomorrow's lesson is Mon 16 Nov (ATP week 7) and the test is still 13 days away.
+- [yellow] Because a Reviewer that reads every page would triple vision cost under a $10 cap, I decided the Reviewer's code check runs on every answer (send-back at most twice) and the GPT-5.5 reading is used only when the two markers disagree.
+- [yellow] Because the brief gives no pass mark for green, I decided green is 75% and over, amber from the struggling threshold to 74%, red under the struggling threshold.
+- [yellow] Because the learner has no unknown-handwriting signal other than the model's own, I decided confidence under 0.8 or an illegible flag means no mark and a place in the teacher's queue.
+- [yellow] Because the HOD overview needs no accounts (the brief builds no login), I decided it is a read-only screen on the teacher's device with counts only and no learner names.
+- [yellow] Because book photos are deleted once the teacher confirms marks (consent rule), I decided the moderation evidence pack holds the memo, the mark list and what the markers read, not photos.
+- [yellow] Because a failed model call must not stop the stage demo, I decided lessons and "make it shorter" fall back to code-made, still proven, drafts clearly labelled "Prepared draft".
+- [red] Because the real SA-SAMS template is not available, I decided the export columns (learner number, surname, first name, one column per formal task, header rows for task, total, date) are a guess at the layout and need a trial import at a school.
+- [red] Because the brief names 'Load demo run' but not its starting point, I decided it starts after marking, at the Check screen, so the Reviewer catch is the first thing shown.
+- [yellow] Because the Mathpix reading step in the brief is only costing guidance and the approved models already read images, I decided not to integrate Mathpix.
+- [green] Because Netlify secrets cannot be read locally, I decided all AI features are verified against the deployed site.

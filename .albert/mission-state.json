@@ -1,1 +1,22 @@
-{"status":"running","current":"10 Demo run + end to end + README","tasks":{"total":10,"done":9,"passing":9,"failing":0,"fixed":2},"commits":2,"pushes":1,"blocked":[],"updated_at":"2026-11-13T22:40:07Z","log":["Foundation deployed, 4 model IDs passed real calls","Landing, demo, privacy pages tested at 3 viewports"]}
+{
+ "status": "done",
+ "current": "all features done",
+ "tasks": {
+  "total": 10,
+  "done": 10,
+  "passing": 10,
+  "failing": 0,
+  "fixed": 9
+ },
+ "commits": 2,
+ "pushes": 1,
+ "blocked": [],
+ "updated_at": "2026-11-13T23:53:21Z",
+ "log": [
+  "Foundation deployed, 4 model IDs passed real calls",
+  "Landing, demo, privacy pages tested at 3 viewports",
+  "Demo path passes at 375/768/1024 on the final deploy",
+  "Model IDs proven by /api/selftest (4 of 4)",
+  "requirements-audit.json written (34 ids)"
+ ]
+}
