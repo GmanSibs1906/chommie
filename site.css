@@ -35,12 +35,13 @@
 
 /* Demo / simple form page */
 .page { min-height: 100vh; }
-.page-top { padding: 28px 0; }
+.page-top { padding-block: 28px; }
 .page-top a { text-decoration: none; font: 400 26px/1 var(--f-display); }
-.page-main { padding: 24px 0 var(--sec); display: grid; gap: 40px; }
+.page-main { padding-block: 24px var(--sec); display: grid; gap: 40px; }
 .field { display: grid; gap: 6px; margin-bottom: 18px; }
 .field label { font-weight: 600; font-size: 15px; }
 .field input, .field select, .field textarea { font: inherit; font-size: 17px; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); color: var(--ink); width: 100%; }
 .field textarea { min-height: 96px; }
 .notice { padding: 16px 18px; border-radius: var(--r-md); background: var(--accent-wash); color: var(--accent-deep); font-weight: 500; }
 @media (min-width: 1024px) { .page-main { grid-template-columns: 1fr 1fr; align-items: start; } }
+html, body { overflow-x: clip; }

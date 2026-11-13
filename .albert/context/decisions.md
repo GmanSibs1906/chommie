@@ -1,0 +1,9 @@
+- [yellow] Because the approved design is plain HTML/CSS/JS and time is short, I decided on vanilla JS plus Netlify Functions, no framework.
+- [yellow] Because the key is a secret Netlify variable (unreadable locally), I decided to test AI features against the deployed site.
+- [yellow] Because the CLI deploy had no Netlify Forms detection, I decided the demo booking form posts to my own function and stores to Netlify Blobs.
+- [yellow] Because publishing the repo root would expose .albert and planning, I decided to publish only a built dist/ folder.
+- [yellow] Because 2026 Term 4 dates are not in the brief, I decided Term 4 runs Tue 6 Oct to Wed 9 Dec, test Thu 26 Nov, exam Wed 2 Dec, following the design's own plan screen.
+- [yellow] Because the brief names gpt-5.5 as Reviewer "only when the markers disagree", I decided code checks run on everything and the LLM Reviewer only on A/B disagreement.
+- [yellow] Because gemini-3.5-flash accepts audio, I decided it transcribes voice notes, with a typed fallback.
+- [yellow] Because the real SA-SAMS template can't be reproduced without a school export, I decided the export is a SpreadsheetML .xls following the documented rules (-1 absent, no blanks).
+- [green] Because the brief says so, every example uses Grade 6 Maths, Term 4, fractions with made-up learners.

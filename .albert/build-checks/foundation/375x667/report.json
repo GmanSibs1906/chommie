@@ -1,0 +1,105 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T22:39:32.490Z",
+  "steps": [
+    {
+      "goto": "/",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Drop your ATP here",
+      "ok": true
+    },
+    {
+      "expect": "Chommie drafts. You decide.",
+      "ok": true
+    },
+    {
+      "expect": "Is it run by AI or by people?",
+      "ok": true
+    },
+    {
+      "expect_not": "undefined",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "home-top",
+      "ok": true,
+      "detail": "01-home-top.png"
+    },
+    {
+      "click": "text=Is it run by AI or by people?",
+      "ok": true
+    },
+    {
+      "expect": "the teacher has the last word",
+      "ok": true
+    },
+    {
+      "shot": "home-full",
+      "full": true,
+      "ok": true,
+      "detail": "02-home-full.png"
+    },
+    {
+      "goto": "/demo.html",
+      "ok": true
+    },
+    {
+      "expect": "Book a 30-minute demo",
+      "ok": true
+    },
+    {
+      "type": "#d-name",
+      "value": "Test Teacher",
+      "ok": true
+    },
+    {
+      "type": "#d-email",
+      "value": "test@example.test",
+      "ok": true
+    },
+    {
+      "submit": "form#demo-form",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Thank you",
+      "ok": true
+    },
+    {
+      "shot": "demo-submitted",
+      "ok": true,
+      "detail": "03-demo-submitted.png"
+    },
+    {
+      "goto": "/privacy.html",
+      "ok": true
+    },
+    {
+      "expect": "Children's information",
+      "ok": true
+    },
+    {
+      "shot": "privacy",
+      "ok": true,
+      "detail": "04-privacy.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T22:39:53.581Z",
+  "ok": true
+}

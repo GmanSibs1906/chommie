@@ -1,2 +1,1 @@
-{ "name": "chommie", "private": true, "type": "module",
-  "scripts": { "dev": "netlify dev", "test": "node --test tests/" } }
+{"name":"chommie","private":true,"type":"module","scripts":{"dev":"netlify dev","test":"node --test tests/"},"dependencies":{"@netlify/blobs":"^11.1.9"}}

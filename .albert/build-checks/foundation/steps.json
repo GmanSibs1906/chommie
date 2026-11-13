@@ -1,0 +1,13 @@
+[
+ {"goto":"/"},{"wait":1500},
+ {"expect":"Drop your ATP here"},{"expect":"Chommie drafts. You decide."},{"expect":"Is it run by AI or by people?"},
+ {"expect_not":"undefined"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"home-top"},
+ {"click":"text=Is it run by AI or by people?"},{"expect":"the teacher has the last word"},
+ {"shot":"home-full","full":true},
+ {"goto":"/demo.html"},{"expect":"Book a 30-minute demo"},
+ {"type":"#d-name","value":"Test Teacher"},{"type":"#d-email","value":"test@example.test"},
+ {"submit":"form#demo-form"},{"wait":1500},{"expect":"Thank you"},{"shot":"demo-submitted"},
+ {"goto":"/privacy.html"},{"expect":"Children's information"},{"shot":"privacy"}
+]
