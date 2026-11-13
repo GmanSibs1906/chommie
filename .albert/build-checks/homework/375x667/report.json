@@ -1,0 +1,351 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:24:38.479Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "click": "#approve-plan",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='snap']",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "expect": "7 of 32",
+      "ok": true
+    },
+    {
+      "click": "#go-mark",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 120000,
+      "ok": true
+    },
+    {
+      "expect_not": "error:",
+      "ok": true
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "[data-decide$='|1']",
+      "ok": false,
+      "detail": "nothing matched"
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "0 need",
+      "ok": false,
+      "detail": "text not found on the page"
+    },
+    {
+      "click": "#confirm",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Photos deleted from this phone",
+      "ok": false,
+      "detail": "text not found on the page"
+    },
+    {
+      "click": "#to-heat",
+      "ok": false,
+      "detail": "nothing matched"
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='homework']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "A sheet for each learner",
+      "ok": true
+    },
+    {
+      "click": "#gen",
+      "ok": true
+    },
+    {
+      "wait": 40000,
+      "ok": true
+    },
+    {
+      "expect": "Thandi Mokoena",
+      "ok": true
+    },
+    {
+      "expect_not": "undefined",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#hw-list tr').length >= 6",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "[data-pick='6B-001']",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "Missed: ",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#hw-items li').length >= 5",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('#hw-memo strong')].every(e => e.textContent.trim())",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "sheet",
+      "full": true,
+      "ok": true,
+      "detail": "01-sheet.png"
+    },
+    {
+      "click": "#hw-edit",
+      "ok": true
+    },
+    {
+      "assert": "(document.querySelector('.hw-edit').value = '1/2 + 1/4', true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#hw-edit",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "Answers re-worked",
+      "ok": true
+    },
+    {
+      "click": "#hw-approve",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "expect": "Print this sheet",
+      "ok": true
+    },
+    {
+      "assert": "(window.__printed = null, window.print = () => { window.__printed = [...document.querySelectorAll('.hw-sheet')].map(e => e.querySelector('.hw-sheet-name').textContent + '|' + document.querySelectorAll('.hw-sheet').length); }, true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#hw-print",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "window.__printed && window.__printed.length === 1 && window.__printed[0].startsWith('Thandi Mokoena')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelector('.hw-sheet-name').textContent === 'Thandi Mokoena' && document.querySelectorAll('.hw-sheet li').length >= 5",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#approve-all",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "#print-all",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "window.__printed.length === 6 || window.__printed.length === 7",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "printed-state",
+      "full": true,
+      "ok": true,
+      "detail": "02-printed-state.png"
+    }
+  ],
+  "failures": [
+    {
+      "step": {
+        "click": "[data-decide$='|1']"
+      },
+      "detail": "nothing matched"
+    },
+    {
+      "step": {
+        "expect": "0 need"
+      },
+      "detail": "text not found on the page"
+    },
+    {
+      "step": {
+        "expect": "Photos deleted from this phone"
+      },
+      "detail": "text not found on the page"
+    },
+    {
+      "step": {
+        "click": "#to-heat"
+      },
+      "detail": "nothing matched"
+    }
+  ],
+  "finished": "2026-11-13T23:28:18.727Z",
+  "ok": false
+}

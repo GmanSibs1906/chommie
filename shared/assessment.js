@@ -13,5 +13,5 @@ const RAW = [
 ];
 export function checkTask() {
   return { id: "check-2026-11-13", name: "Fractions check", date: "2026-11-13", type: "informal", total: RAW.length,
-    questions: RAW.map(([it, topicId], i) => { const p = proveItem(it); return { n: i + 1, topicId, q: p.q.replace(/^Work out: /, "").replace(/ =$/, ""), plain: it.kind === "equiv" ? `${it.from} = ?/${it.toDen}` : it.expr, answer: p.answer }; }) };
+    questions: RAW.map(([it, topicId], i) => { const p = proveItem(it); return { n: i + 1, topicId, q: p.q.replace(/^Work out: /, "").replace(/ =$/, ""), raw: it, plain: it.kind === "equiv" ? `${it.from} = ?/${it.toDen}` : it.expr, answer: p.answer }; }) };
 }

@@ -88,3 +88,14 @@ body.app { background: var(--ground); }
 .hm-cell--pending { background: transparent; border: 1px dashed #b9b4a4; color: var(--muted); }
 .hm-cell--none { color: var(--muted); }
 .hm-legend { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* Per-learner homework print */
+#print-sheets { display: none; }
+.hw-sheet { padding: 0; }
+.hw-sheet-name { font: 400 34px/1.1 var(--f-display); margin: 4px 0; }
+.hw-sheet ol { padding-left: 22px; } .hw-sheet li { margin: 14px 0; font-size: 18px; } .hw-line { border-bottom: 1px solid #999; height: 30px; }
+@media print {
+  body.printing-hw #view > *:not(#print-sheets), body.printing-hw .app-head, body.printing-hw .toast { display: none !important; }
+  body.printing-hw #print-sheets { display: block !important; }
+  body.printing-hw .hw-sheet { break-after: page; page-break-after: always; }
+}
