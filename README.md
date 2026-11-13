@@ -24,7 +24,7 @@ Coordinator, Curriculum Reader, Term Planner, Lesson Writer, Marker, Reviewer an
 
 Plan: done. Design: done (live link below). Build: in progress for the final hand-in.
 
-Live design: https://fabulous-maamoul-cbc13b.netlify.app
+Live design: https://chommie-teacher.netlify.app
 
 ## How to run
 
