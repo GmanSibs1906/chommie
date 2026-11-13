@@ -14,7 +14,7 @@ export async function callModel(role, messages, opts = {}) {
   if (!r) throw new Error("Unknown role " + role);
   const body = { model: r.id, messages, max_tokens: opts.maxTokens || 1500, temperature: opts.temperature ?? 0 };
   if (opts.json) body.response_format = { type: "json_object" };
-  if (r.id.startsWith("openai/")) body.reasoning = { effort: "low" };
+  if (r.id.startsWith("openai/") || r.id.startsWith("google/")) body.reasoning = { effort: "low" };
   const t0 = Date.now();
   const res = await fetch(models.baseUrl + "/chat/completions", {
     method: "POST",
@@ -33,7 +33,13 @@ export async function callModel(role, messages, opts = {}) {
 export function parseJson(text) {
   const m = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   const raw = m ? m[1] : text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
-  return JSON.parse(raw);
+  try { return JSON.parse(raw); } catch {}
+  try { return JSON.parse(raw.replace(/,\s*([}\]])/g, "$1").replace(/[\u0000-\u001f]+/g, " ")); } catch {}
+  // last resort for marker output: rescue each answer object on its own
+  const answers = [];
+  for (const o of raw.match(/\{[^{}]*"n"\s*:\s*\d+[^{}]*\}/g) || []) { try { answers.push(JSON.parse(o.replace(/,\s*}/g, "}"))); } catch {} }
+  if (answers.length) return { answers };
+  throw new Error("The model returned JSON that could not be read");
 }
 
 // Log entry the browser appends to the activity log (no learner data).

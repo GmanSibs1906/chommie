@@ -1,0 +1,156 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:10:00.930Z",
+  "steps": [
+    {
+      "goto": "/app/#snap",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 900,
+      "ok": true
+    },
+    {
+      "expect": "7 of 32",
+      "ok": true
+    },
+    {
+      "click": "#go-mark",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "expect": "Mark 7 books",
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 120000,
+      "ok": true
+    },
+    {
+      "expect_not": "error:",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#mark-table tbody tr').length === 7 && document.querySelectorAll('.book-ticks .tick').length === 70",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "marked",
+      "full": true,
+      "ok": true,
+      "detail": "01-marked.png"
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "expect": "The Reviewer re-checks every mark",
+      "ok": true
+    },
+    {
+      "expect": "Handwriting unclear",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('[data-item]').length >= 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "check",
+      "full": true,
+      "ok": true,
+      "detail": "02-check.png"
+    },
+    {
+      "click": "[data-decide$='|1']",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "expect": "1 decided by you",
+      "ok": true
+    },
+    {
+      "shot": "decided",
+      "ok": true,
+      "detail": "03-decided.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:12:32.557Z",
+  "ok": true
+}

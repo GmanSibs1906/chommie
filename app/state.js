@@ -4,7 +4,7 @@ const DEFAULTS = () => ({
   settings: { struggle: 50, reteach: 40 }, today: "2026-11-13", planApproved: false,
   atp: null, check: null, atpApproved: false,
   plan: null, lessons: {}, learners: null,
-  marks: null, decisions: {}, results: null,
+  tasks: null, marks: {}, marksConfirmed: {}, decisions: {}, results: null,
   homework: null, approvals: [], hod: { signed: false },
   log: [], demo: false,
 });
