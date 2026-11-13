@@ -1,0 +1,164 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T22:50:31.664Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "click": "#approve-plan",
+      "ok": true
+    },
+    {
+      "click": "#go-teach",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Equivalent fractions",
+      "ok": true
+    },
+    {
+      "click": "#write",
+      "ok": true
+    },
+    {
+      "wait": 30000,
+      "ok": true
+    },
+    {
+      "expect": "ATP week 2",
+      "ok": true
+    },
+    {
+      "expect": "Draft, waiting for you",
+      "ok": true
+    },
+    {
+      "expect": "Answers are worked out by code, not by the model",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#examples li').length >= 1 && document.querySelectorAll('#classwork li').length >= 3 && document.querySelectorAll('#memo li').length >= 6",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('#memo strong')].every(e => e.textContent.trim() && e.textContent.trim() !== '?')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect_not": "undefined",
+      "ok": true
+    },
+    {
+      "expect_not": "NaN",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "lesson",
+      "full": true,
+      "ok": true,
+      "detail": "01-lesson.png"
+    },
+    {
+      "assert": "(window.__n = document.querySelectorAll('#classwork li').length, true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "type": "#vt",
+      "value": "Make it shorter",
+      "ok": true
+    },
+    {
+      "click": "#vsend",
+      "ok": true
+    },
+    {
+      "wait": 30000,
+      "ok": true
+    },
+    {
+      "expect": "Heard: \"Make it shorter\"",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#classwork li').length <= window.__n",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "shorter",
+      "full": true,
+      "ok": true,
+      "detail": "02-shorter.png"
+    },
+    {
+      "click": "#edit",
+      "ok": true
+    },
+    {
+      "expect": "Edit lesson",
+      "ok": true
+    },
+    {
+      "shot": "edit",
+      "ok": true,
+      "detail": "03-edit.png"
+    },
+    {
+      "click": "#save-edit",
+      "ok": true
+    },
+    {
+      "expect": "Draft, waiting for you",
+      "ok": true
+    },
+    {
+      "click": "#approve",
+      "ok": true
+    },
+    {
+      "expect": "Approved by you",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T22:51:50.826Z",
+  "ok": true
+}

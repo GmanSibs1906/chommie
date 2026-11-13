@@ -67,3 +67,12 @@ body.app { background: var(--ground); }
 .checks-list li:first-child { border-top: 0; }
 .field-inline { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .field-inline input { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); }
+
+.memo li strong { font-family: var(--f-mono); }
+@media print {
+  .app-head, .no-print, .toast, #day-sel, .field-inline label[for="day-sel"], h1.v-title + p, .btn-row { display: none !important; }
+  body.app { background: #fff; }
+  .app-main { padding: 0; }
+  .panel-box { border: 0; padding: 0 0 12px; break-inside: avoid; }
+  .memo { break-before: page; }
+}
