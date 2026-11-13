@@ -1,7 +1,7 @@
 // All teacher data lives on this device (localStorage here, IndexedDB for photos). Nothing is sent except masked pages.
 const KEY = "chommie.v1";
 const DEFAULTS = () => ({
-  settings: { struggle: 50, reteach: 40 }, today: "2026-10-13", planApproved: false,
+  settings: { struggle: 50, reteach: 40 }, today: "2026-11-13", planApproved: false,
   atp: null, check: null, atpApproved: false,
   plan: null, lessons: {}, learners: null,
   marks: null, decisions: {}, results: null,

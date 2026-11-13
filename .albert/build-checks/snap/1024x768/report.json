@@ -1,0 +1,122 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T22:54:26.412Z",
+  "steps": [
+    {
+      "goto": "/app/#snap",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "expect": "Snap the books",
+      "ok": true
+    },
+    {
+      "expect": "0 of 32 consented learners photographed",
+      "ok": true
+    },
+    {
+      "assert": "[...document.querySelectorAll('#learner-sel option')].filter(o => o.disabled).length === 2",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#cam-start",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#cam-msg').textContent.length > 0 || !document.querySelector('#cam-wrap').hidden",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "camera-state",
+      "ok": true,
+      "detail": "01-camera-state.png"
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "1 of 32 consented learners photographed",
+      "ok": true
+    },
+    {
+      "expect": "6B-001 p1",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#thumbs img').length === 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "expect": "2 of 32",
+      "ok": true
+    },
+    {
+      "click": "#consent-reg summary",
+      "ok": true
+    },
+    {
+      "click": "[data-consent='6B-001']",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "Withdrawn",
+      "ok": true
+    },
+    {
+      "expect": "1 page(s) waiting",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#thumbs img').length === 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('#learner-sel option')].find(o => o.value === '6B-001').disabled",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "snap",
+      "full": true,
+      "ok": true,
+      "detail": "02-snap.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T22:54:45.026Z",
+  "ok": true
+}

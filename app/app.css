@@ -76,3 +76,4 @@ body.app { background: var(--ground); }
   .panel-box { border: 0; padding: 0 0 12px; break-inside: avoid; }
   .memo { break-before: page; }
 }
+[hidden] { display: none !important; }
