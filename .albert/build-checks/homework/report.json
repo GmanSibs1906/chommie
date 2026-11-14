@@ -1,0 +1,45 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:24:36.125Z",
+  "finished": "2026-11-13T23:28:20.317Z",
+  "viewports": [
+    {
+      "viewport": "375x667",
+      "ok": false,
+      "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/homework/375x667",
+      "failures": [
+        {
+          "step": {
+            "click": "[data-decide$='|1']"
+          },
+          "detail": "nothing matched"
+        },
+        {
+          "step": {
+            "expect": "0 need"
+          },
+          "detail": "text not found on the page"
+        },
+        {
+          "step": {
+            "expect": "Photos deleted from this phone"
+          },
+          "detail": "text not found on the page"
+        },
+        {
+          "step": {
+            "click": "#to-heat"
+          },
+          "detail": "nothing matched"
+        }
+      ]
+    },
+    {
+      "viewport": "1024x768",
+      "ok": true,
+      "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/homework/1024x768",
+      "failures": []
+    }
+  ],
+  "ok": false
+}

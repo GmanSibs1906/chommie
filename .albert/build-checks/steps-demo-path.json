@@ -1,0 +1,191 @@
+[
+ {
+  "goto": "/app/"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#btn-demo"
+ },
+ {
+  "wait": 9000
+ },
+ {
+  "expect": "Demo run: made-up learners and books"
+ },
+ {
+  "expect": "The Reviewer re-checks every mark"
+ },
+ {
+  "expect": "3 need you"
+ },
+ {
+  "expect": "The Reviewer caught a wrong mark"
+ },
+ {
+  "expect": "Handwriting unclear"
+ },
+ {
+  "expect": "The two markers disagree"
+ },
+ {
+  "assert": "document.querySelectorAll('[data-item]').length === 3 && document.querySelectorAll('[data-crop] img').length === 3"
+ },
+ {
+  "shot": "reviewer-catch",
+  "full": true
+ },
+ {
+  "click": "[data-item='6B-014|6'] [data-decide$='|0']"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "[data-item='6B-031|2'] [data-decide$='|1']"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "[data-item='6B-022|5'] [data-decide$='|1']"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "expect": "0 need you"
+ },
+ {
+  "expect": "3 decided by you"
+ },
+ {
+  "click": "#confirm"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Photos deleted from this phone"
+ },
+ {
+  "click": "#to-heat"
+ },
+ {
+  "wait": 2000
+ },
+ {
+  "expect": "The whole class, at a glance"
+ },
+ {
+  "assert": "document.querySelectorAll('#heat tbody tr').length === 32"
+ },
+ {
+  "assert": "document.querySelector('[data-topic=related]').textContent.includes('Class re-teach')"
+ },
+ {
+  "assert": "[...document.querySelectorAll('[data-topic]')].filter(r => r.textContent.includes('Class re-teach')).length === 1"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ },
+ {
+  "shot": "heat",
+  "full": true
+ },
+ {
+  "click": "[data-replan='related']"
+ },
+ {
+  "wait": 45000
+ },
+ {
+  "expect": "Re-teach: Related denominators"
+ },
+ {
+  "expect": "Class re-teach added by the Analyst"
+ },
+ {
+  "expect": "Mon 16 Nov"
+ },
+ {
+  "expect": "ATP week 7"
+ },
+ {
+  "shot": "tomorrow",
+  "full": true
+ },
+ {
+  "assert": "(window.__n = document.querySelectorAll('#classwork li').length, window.__m = [...document.querySelectorAll('#outline .mono')].reduce((s,e)=>s+parseInt(e.textContent),0), true)"
+ },
+ {
+  "type": "#vt",
+  "value": "Make it shorter"
+ },
+ {
+  "click": "#vsend"
+ },
+ {
+  "wait": 35000
+ },
+ {
+  "expect": "Heard: \"Make it shorter\""
+ },
+ {
+  "assert": "[...document.querySelectorAll('#outline .mono')].reduce((s,e)=>s+parseInt(e.textContent),0) < window.__m"
+ },
+ {
+  "assert": "document.querySelectorAll('#classwork li').length <= window.__n"
+ },
+ {
+  "shot": "shorter",
+  "full": true
+ },
+ {
+  "click": "button[data-v='plan']"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Re-teach: Related denominators, 15 min"
+ },
+ {
+  "expect": "Thu 26 Nov"
+ },
+ {
+  "expect": "Wed 2 Dec"
+ },
+ {
+  "expect": "Every required ATP topic is placed"
+ },
+ {
+  "expect": "165 minutes"
+ },
+ {
+  "assert": "document.querySelectorAll('.cal-day--test').length === 1 && document.querySelectorAll('.cal-day--exam').length === 1"
+ },
+ {
+  "shot": "plan",
+  "full": true
+ },
+ {
+  "click": "button[data-v='approvals']"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "expect": "Re-planned"
+ },
+ {
+  "expect": "Class re-teach triggered"
+ },
+ {
+  "expect": "Decided Q6 of 6B-014"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ }
+]

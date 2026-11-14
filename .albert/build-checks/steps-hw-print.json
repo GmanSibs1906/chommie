@@ -1,0 +1,72 @@
+[
+{
+"goto": "/app/"
+},
+{
+"wait": 2500
+},
+{
+"click": "#btn-demo"
+},
+{
+"wait": 5000
+},
+{
+"click": "button[data-v='homework']"
+},
+{
+"wait": 1500
+},
+{
+"click": "#gen"
+},
+{
+"wait": 6000
+},
+{
+"expect": "Thandi Mokoena"
+},
+{
+"click": "#approve-all"
+},
+{
+"wait": 500
+},
+{
+"assert": "(window.__p=null,window.print=()=>{window.__p=[...document.querySelectorAll('.hw-sheet')].map(e=>({code:e.querySelector('.hw-code').textContent.trim(),qr:e.querySelector('.hw-qr').dataset.qr,svg:!!e.querySelector('.hw-qr svg'),foot:e.querySelector('.hw-sheet-foot').textContent,strip:e.querySelector('.hw-strip').textContent}))},true)"
+},
+{
+"click": "#print-all"
+},
+{
+"wait": 500
+},
+{
+"assert": "window.__p.length>=6"
+},
+{
+"assert": "window.__p.every(p=>p.svg&&/^CHOMMIE-HW\\|6B-\\d{3}\\|R1-6B-\\d{3}-[0-9A-Z]{4}$/.test(p.qr)&&p.qr.split('|')[1]===p.code&&p.foot.includes(p.qr.split('|')[2]))"
+},
+{
+"assert": "window.__p.every(p=>!/[a-z]{3}/.test(p.qr))"
+},
+{
+"assert": "window.__p.some(p=>p.strip.includes('Thandi Mokoena'))"
+},
+{
+"assert": "JSON.parse(localStorage.getItem('chommie.v1')).hwSheets&&Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).hwSheets).length>=6"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "homework-screen",
+"full": true
+},
+{
+"assert": "(document.getElementById('print-sheets').style.cssText='display:block;position:absolute;top:0;left:0;background:#fff;color:#000;width:700px;z-index:99',window.scrollTo(0,0),true)"
+},
+{
+"shot": "printed-sheet-preview"
+}
+]

@@ -1,0 +1,11 @@
+[
+ {"goto":"/app/#upload"},{"wait":3000},
+ {"click":"#btn-official"},{"wait":600},{"click":"#approve-atp"},{"click":"#go-plan"},{"wait":1500},
+ {"expect":"Your term, on real school days"},{"expect":"Thu 26 Nov"},{"expect":"Wed 2 Dec"},
+ {"expect":"Every required ATP topic is placed"},{"expect":"180 minutes"},
+ {"assert":"document.querySelectorAll('.cal-day--test').length === 1 && document.querySelectorAll('.cal-day--exam').length === 1"},
+ {"assert":"document.querySelectorAll('.cal-day--lesson').length >= 20"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"plan","full":true},
+ {"click":"#approve-plan"},{"expect":"Plan approved by you"}
+]

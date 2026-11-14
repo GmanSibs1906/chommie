@@ -1,0 +1,229 @@
+[
+ {
+  "goto": "/app/#upload"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#btn-official"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "click": "#approve-atp"
+ },
+ {
+  "click": "#go-plan"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "click": "#approve-plan"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "button[data-v='snap']"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "expect": "7 of 32"
+ },
+ {
+  "click": "#go-mark"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#run"
+ },
+ {
+  "wait": 120000
+ },
+ {
+  "expect_not": "error:"
+ },
+ {
+  "click": "#to-check"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "[data-decide$='|1']"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "expect": "0 need"
+ },
+ {
+  "click": "#confirm"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Photos deleted from this phone"
+ },
+ {
+  "click": "#to-heat"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "button[data-v='homework']"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "A sheet for each learner"
+ },
+ {
+  "click": "#gen"
+ },
+ {
+  "wait": 40000
+ },
+ {
+  "expect": "Thandi Mokoena"
+ },
+ {
+  "expect_not": "undefined"
+ },
+ {
+  "assert": "document.querySelectorAll('#hw-list tr').length >= 6"
+ },
+ {
+  "click": "[data-pick='6B-001']"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "expect": "Missed: "
+ },
+ {
+  "assert": "document.querySelectorAll('#hw-items li').length >= 5"
+ },
+ {
+  "assert": "[...document.querySelectorAll('#hw-memo strong')].every(e => e.textContent.trim())"
+ },
+ {
+  "shot": "sheet",
+  "full": true
+ },
+ {
+  "click": "#hw-edit"
+ },
+ {
+  "assert": "(document.querySelector('.hw-edit').value = '1/2 + 1/4', true)"
+ },
+ {
+  "click": "#hw-edit"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "expect": "Answers re-worked"
+ },
+ {
+  "click": "#hw-approve"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "expect": "Print this sheet"
+ },
+ {
+  "assert": "(window.__printed = null, window.print = () => { window.__printed = [...document.querySelectorAll('.hw-sheet')].map(e => e.querySelector('.hw-sheet-name').textContent + '|' + document.querySelectorAll('.hw-sheet').length); }, true)"
+ },
+ {
+  "click": "#hw-print"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "assert": "window.__printed && window.__printed.length === 1 && window.__printed[0].startsWith('Thandi Mokoena')"
+ },
+ {
+  "assert": "document.querySelector('.hw-sheet-name').textContent === 'Thandi Mokoena' && document.querySelectorAll('.hw-sheet li').length >= 5"
+ },
+ {
+  "click": "#approve-all"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "#print-all"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "assert": "window.__printed.length === 6 || window.__printed.length === 7"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ },
+ {
+  "shot": "printed-state",
+  "full": true
+ }
+]

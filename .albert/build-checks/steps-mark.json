@@ -1,0 +1,109 @@
+[
+ {
+  "goto": "/app/#snap"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "expect": "7 of 32"
+ },
+ {
+  "click": "#go-mark"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "expect": "Mark 7 books"
+ },
+ {
+  "click": "#run"
+ },
+ {
+  "wait": 120000
+ },
+ {
+  "expect_not": "error:"
+ },
+ {
+  "assert": "document.querySelectorAll('#mark-table tbody tr').length === 7 && document.querySelectorAll('.book-ticks .tick').length === 70"
+ },
+ {
+  "shot": "marked",
+  "full": true
+ },
+ {
+  "click": "#to-check"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "expect": "The Reviewer re-checks every mark"
+ },
+ {
+  "expect": "Handwriting unclear"
+ },
+ {
+  "assert": "document.querySelectorAll('[data-item]').length >= 1"
+ },
+ {
+  "shot": "check",
+  "full": true
+ },
+ {
+  "click": "[data-decide$='|1']"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "expect": "1 decided by you"
+ },
+ {
+  "shot": "decided"
+ }
+]

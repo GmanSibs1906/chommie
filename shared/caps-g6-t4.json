@@ -1,0 +1,12 @@
+{
+  "_note": "Demo slice: the fractions strand of CAPS Grade 6 Mathematics, Term 4, as laid out in the approved design's ATP page. Not the whole CAPS term.",
+  "grade": 6, "subject": "Mathematics", "term": 4,
+  "topics": [
+    { "id": "equiv",   "name": "Equivalent fractions",                    "aliases": ["equivalent", "common fractions"] },
+    { "id": "same",    "name": "Add and subtract: same denominators",     "aliases": ["same denominator"] },
+    { "id": "related", "name": "Add and subtract: related denominators",  "aliases": ["related denominator"] },
+    { "id": "mixed",   "name": "Mixed numbers",                           "aliases": ["mixed number"] },
+    { "id": "ofwhole", "name": "Fractions of whole numbers",              "aliases": ["of whole number", "fractions of whole"] },
+    { "id": "decimals","name": "Fractions and decimals",                  "aliases": ["decimal"] }
+  ]
+}

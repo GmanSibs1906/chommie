@@ -1,0 +1,150 @@
+[
+{
+"goto": "/app/"
+},
+{
+"wait": 8000
+},
+{
+"click": "#btn-demo"
+},
+{
+"assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(document.body.innerText.includes('re-checks every mark')){clearInterval(i);res(true)}else if(Date.now()-t0>90000){clearInterval(i);res(false)}},500)})"
+},
+{
+"wait": 8000
+},
+{
+"assert": "JSON.parse(localStorage.getItem('chommie.v1')).tasks.length===3 && JSON.parse(localStorage.getItem('chommie.v1')).tasks[2].name==='Homework round 1' && Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).hwSheets).length===3"
+},
+{
+"assert": "(()=>{const b=document.querySelector(\"button[data-v='mark']\");b.scrollIntoView({inline:'center'});b.click();return true})()"
+},
+{
+"wait": 8000
+},
+{
+"click": "[name=markkind][value=homework]"
+},
+{
+"wait": 8000
+},
+{
+"expect": "Homework round 1, sheet R1-6B-001-"
+},
+{
+"expect": "Homework round 1, sheet R1-6B-014-"
+},
+{
+"expect": "Homework round 1, sheet R1-6B-022-"
+},
+{
+"assert": "document.querySelectorAll('#mark-table tbody tr[data-task]').length===3"
+},
+{
+"assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1'));return Object.entries(s.tasks[2].perLearner).every(([c,p])=>p.sheetId===s.marks[s.tasks[2].id][c].sheetId&&p.questions.every((q,i)=>s.hwSheets[p.sheetId].questions[i].answer===q.answer))})()"
+},
+{
+"assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),t=s.tasks[2],a=t.perLearner['6B-001'].questions.map(q=>q.answer).join(), b=t.perLearner['6B-014'].questions.map(q=>q.answer).join();return a!==b})()"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "mark-demo-homework",
+"full": true
+},
+{
+"assert": "(()=>{const b=document.querySelector(\"button[data-v='check']\");b.scrollIntoView({inline:'center'});b.click();return true})()"
+},
+{
+"wait": 8000
+},
+{
+"assert": "!!document.querySelector('#task-pick') && [...document.querySelectorAll('#task-pick option')].some(o=>o.textContent==='Homework round 1')"
+},
+{
+"assert": "(()=>{const e=document.querySelector('#task-pick');e.value='hw-r1';e.dispatchEvent(new Event('change',{bubbles:true}));return true})()"
+},
+{
+"wait": 8000
+},
+{
+"expect": "0 need you"
+},
+{
+"shot": "check-homework-round",
+"full": true
+},
+{
+"assert": "(()=>{const b=document.querySelector(\"button[data-v='heat']\");b.scrollIntoView({inline:'center'});b.click();return true})()"
+},
+{
+"wait": 8000
+},
+{
+"expect": "Counted: Fractions check, Mixed numbers task, Homework round 1"
+},
+{
+"assert": "document.querySelectorAll('#heat tbody tr').length===32"
+},
+{
+"assert": "[...document.querySelectorAll('[data-topic]')].filter(r=>r.textContent.includes('Class re-teach')).length===1"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "heat-with-homework",
+"full": true
+},
+{
+"assert": "(()=>{const b=document.querySelector(\"button[data-v='homework']\");b.scrollIntoView({inline:'center'});b.click();return true})()"
+},
+{
+"wait": 8000
+},
+{
+"expect": "Homework round 1."
+},
+{
+"expect": "Write round 2 homework from the marked round"
+},
+{
+"click": "#gen-next"
+},
+{
+"wait": 60000
+},
+{
+"expect": "Homework round 2."
+},
+{
+"assert": "JSON.parse(localStorage.getItem('chommie.v1')).hwRound===2 && JSON.parse(localStorage.getItem('chommie.v1')).homework['6B-001'].round===2 && !JSON.parse(localStorage.getItem('chommie.v1')).homework['6B-001'].approved"
+},
+{
+"click": "[data-pick='6B-001']"
+},
+{
+"wait": 500
+},
+{
+"click": "#hw-approve"
+},
+{
+"wait": 8000
+},
+{
+"assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1'));return /^R2-6B-001-/.test(s.homework['6B-001'].sheetId)&&Object.keys(s.hwSheets).length===4&&Object.values(s.hwSheets).some(x=>/^R1-6B-001-/.test(x.id))})()"
+},
+{
+"assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),h=s.homework['6B-001'];return h.items.some(i=>i.source==='retry')})()"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "homework-round-2",
+"full": true
+}
+]

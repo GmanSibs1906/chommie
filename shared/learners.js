@@ -1,0 +1,4 @@
+// Made-up learners for the demo class 6B. No real learner data anywhere in Chommie's demo.
+const NAMES = ["Thandi Mokoena","Sipho Ndlovu","Lerato Khumalo","Johan van Wyk","Ayesha Patel","Kagiso Dlamini","Naledi Sithole","Pieter Botha","Zanele Mahlangu","Mpho Mokwena","Fatima Jacobs","Lwazi Zulu","Anele Nkosi","Tebogo Molefe","Chloe Adams","Bongani Cele","Refilwe Mabaso","Imran Cassim","Nomsa Radebe","Dineo Maseko","Ruan Pretorius","Palesa Tau","Siyabonga Mthembu","Aaliyah Moosa","Katlego Sebola","Neo Mahlaba","Yusuf Hendricks","Busisiwe Ngcobo","Thabo Mashinini","Amahle Dube","Jaco Smit","Lindiwe Zwane","Tumelo Ramaphosa","Keabetswe Moloi"];
+export const learners = NAMES.map((name, i) => ({ code: "6B-" + String(i + 1).padStart(3, "0"), name, consent: !["6B-009", "6B-027"].includes("6B-" + String(i + 1).padStart(3, "0")) }));
+export const CLASS_NAME = "Class 6B";

@@ -1,0 +1,54 @@
+[
+ {
+  "goto": "/app/#upload"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#btn-official"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "click": "button[data-v='approvals']"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "expect": "Waiting for you (1)"
+ },
+ {
+  "expect": "ATP read from your photo"
+ },
+ {
+  "expect": "Coordinator, step 2 of 11"
+ },
+ {
+  "click": "[data-approve='atp']"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "expect": "Waiting for you (0)"
+ },
+ {
+  "expect": "Approved (1)"
+ },
+ {
+  "expect": "Plan the term"
+ },
+ {
+  "assert": "document.querySelectorAll('#loop li').length === 11"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ },
+ {
+  "shot": "approvals",
+  "full": true
+ }
+]

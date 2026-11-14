@@ -1,0 +1,31 @@
+- [yellow] Because the approved design is plain HTML/CSS/JS and time is short, I decided on vanilla JS plus Netlify Functions, no framework.
+- [yellow] Because the key is a secret Netlify variable (unreadable locally), I decided to test AI features against the deployed site.
+- [yellow] Because the CLI deploy had no Netlify Forms detection, I decided the demo booking form posts to my own function and stores to Netlify Blobs.
+- [yellow] Because publishing the repo root would expose .albert and planning, I decided to publish only a built dist/ folder.
+- [yellow] Because 2026 Term 4 dates are not in the brief, I decided Term 4 runs Tue 6 Oct to Wed 9 Dec, test Thu 26 Nov, exam Wed 2 Dec, following the design's own plan screen.
+- [yellow] Because the brief names gpt-5.5 as Reviewer "only when the markers disagree", I decided code checks run on everything and the LLM Reviewer only on A/B disagreement.
+- [yellow] Because gemini-3.5-flash accepts audio, I decided it transcribes voice notes, with a typed fallback.
+- [yellow] Because the real SA-SAMS template can't be reproduced without a school export, I decided the export is a SpreadsheetML .xls following the documented rules (-1 absent, no blanks).
+- [green] Because the brief says so, every example uses Grade 6 Maths, Term 4, fractions with made-up learners.
+- [yellow] Because the brief says the demo is Saturday 14 Nov 2026 and the design shows the heat map for five fractions topics, I decided the demo's "today" is Fri 13 Nov 2026 (week 6), so tomorrow's lesson is Mon 16 Nov (ATP week 7) and the test is still 13 days away.
+- [yellow] Because a Reviewer that reads every page would triple vision cost under a $10 cap, I decided the Reviewer's code check runs on every answer (send-back at most twice) and the GPT-5.5 reading is used only when the two markers disagree.
+- [yellow] Because the brief gives no pass mark for green, I decided green is 75% and over, amber from the struggling threshold to 74%, red under the struggling threshold.
+- [yellow] Because the learner has no unknown-handwriting signal other than the model's own, I decided confidence under 0.8 or an illegible flag means no mark and a place in the teacher's queue.
+- [yellow] Because the HOD overview needs no accounts (the brief builds no login), I decided it is a read-only screen on the teacher's device with counts only and no learner names.
+- [yellow] Because book photos are deleted once the teacher confirms marks (consent rule), I decided the moderation evidence pack holds the memo, the mark list and what the markers read, not photos.
+- [yellow] Because a failed model call must not stop the stage demo, I decided lessons and "make it shorter" fall back to code-made, still proven, drafts clearly labelled "Prepared draft".
+- [red] Because the real SA-SAMS template is not available, I decided the export columns (learner number, surname, first name, one column per formal task, header rows for task, total, date) are a guess at the layout and need a trial import at a school.
+- [red] Because the brief names 'Load demo run' but not its starting point, I decided it starts after marking, at the Check screen, so the Reviewer catch is the first thing shown.
+- [yellow] Because the Mathpix reading step in the brief is only costing guidance and the approved models already read images, I decided not to integrate Mathpix.
+- [green] Because Netlify secrets cannot be read locally, I decided all AI features are verified against the deployed site.
+- [green] Because the contract names branch mission/m_20261114_005519 and the brief names mission/chommie (same commit), I decided to work on the first and push every commit to both remote branches, never main.
+- [yellow] Because snap.js blacks out the top 13% of every page and stamps the picked code there, I decided the printed learner code and QR sit below that strip, the QR is read from the original photo before masking, and homework pages are not stamped with the picked code (so Marker A cannot just read back the stamp).
+- [yellow] Because an approved sheet can be edited later, I decided approving freezes a snapshot with an id that carries a hash of the questions and memo; a snapped page is marked against the snapshot its QR names, not the live draft.
+- [yellow] Because the QR/printed id must match a sheet approved on this phone, I decided a QR for an unknown sheet is held for the teacher rather than marked.
+- [yellow] Because homework results belong to one round, I decided each round is its own task (hw-r1, hw-r2...) with a per-learner question list, appended after the class task so getTasks()[0] stays the class task.
+- [green] Because the model key cannot be read locally, I decided local browser checks use scripts/devserver.mjs (code-made bank, other /api routes 503) and every marking check runs on the deployed site.
+- [yellow] Because homework is informal by default and per-learner totals differ, I decided a homework round cannot be switched to formal (no export or HOD record), it feeds the heat map and the next round only.
+- [yellow] Because the teacher may know whose a held page is, I decided a held page can be moved to another learner and marked again; it is checked against the sheet again, so a wrong move is held again.
+- [green] Because slow renders made live checks flaky, I decided the live test polls for the element it needs instead of fixed waits, and clicks tabs by script so off-screen tabs in the scrolling strip are reachable.
+- [yellow] Because Marker A must read the printed code when the QR is torn off, I decided the sheet id in the footer is printed bold and larger.
+- [green] Because the 1024 demo-path run was cut off earlier, I decided to re-run it on the deploy rather than reuse partial evidence.

@@ -1,0 +1,250 @@
+{
+  "plan_id": "73483eef0ab9",
+  "plan_title": "Chommie",
+  "requirements": [
+    {
+      "id": "R1",
+      "kind": "must",
+      "section": "In scope",
+      "text": "Demo slice: Grade 6 Maths, Term 4, fractions.",
+      "source": ""
+    },
+    {
+      "id": "R2",
+      "kind": "must",
+      "section": "In scope",
+      "text": "Demo path: book photos, then marks, then the Reviewer catching a wrong mark live, then the heat map, then tomorrow's lesson re-planned, then the voice note \"make it shorter\".",
+      "source": ""
+    },
+    {
+      "id": "R3",
+      "kind": "must",
+      "section": "In scope",
+      "text": "30-day pilot with one school, one grade and one subject.",
+      "source": ""
+    },
+    {
+      "id": "R4",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Upload plan: photograph the ATP and the school teaching planner, or pick the official ATP.",
+      "source": ""
+    },
+    {
+      "id": "R5",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Term plan: topics placed on real school days, with test and deadline dates marked.",
+      "source": ""
+    },
+    {
+      "id": "R6",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Lesson view: outline, examples, class work, homework and memo, tagged to its ATP week, with print, edit and voice-note actions.",
+      "source": ""
+    },
+    {
+      "id": "R7",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Homework review: each learner's personal homework, which the teacher can check and change before printing.",
+      "source": ""
+    },
+    {
+      "id": "R8",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Snap books: phone camera capture of learners' books.",
+      "source": ""
+    },
+    {
+      "id": "R9",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Marking review: marks from both markers, with disagreements and unclear handwriting flagged for the teacher.",
+      "source": ""
+    },
+    {
+      "id": "R10",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Class heat map: each learner against each topic in green, amber or red.",
+      "source": ""
+    },
+    {
+      "id": "R11",
+      "kind": "must",
+      "section": "Screen",
+      "text": "HOD overview.",
+      "source": ""
+    },
+    {
+      "id": "R12",
+      "kind": "must",
+      "section": "Screen",
+      "text": "Settings: the struggling threshold (50%) and the class re-teach threshold (40%).",
+      "source": ""
+    },
+    {
+      "id": "R13",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Curriculum Reader extracts weeks, topics and test dates from ATP photos and checks them against official CAPS.",
+      "source": ""
+    },
+    {
+      "id": "R14",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Term Planner puts every topic on a real school day and works back from test and assessment deadlines.",
+      "source": ""
+    },
+    {
+      "id": "R15",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Lesson Writer produces lessons, class work, per-learner homework and answer memos.",
+      "source": ""
+    },
+    {
+      "id": "R16",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Personal homework targets exactly what each learner got wrong, with stretch questions for learners who are ahead.",
+      "source": ""
+    },
+    {
+      "id": "R17",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Homework is printed per learner with the learner's name.",
+      "source": ""
+    },
+    {
+      "id": "R18",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Marker reads photos of books and marks them against the memo; unclear handwriting is flagged, never guessed.",
+      "source": ""
+    },
+    {
+      "id": "R19",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Two markers from different AI vendors; any disagreement goes to the teacher.",
+      "source": ""
+    },
+    {
+      "id": "R20",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Reviewer checks everything independently and sends work back; after two failed fixes it goes to the teacher.",
+      "source": ""
+    },
+    {
+      "id": "R21",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Analyst builds the heat map and applies the 40% rule; the teacher can change both thresholds.",
+      "source": ""
+    },
+    {
+      "id": "R22",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Coordinator takes the goal, decides each next step, hands out jobs and re-plans.",
+      "source": ""
+    },
+    {
+      "id": "R23",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Voice-note editing of lessons, for example \"make it shorter\".",
+      "source": ""
+    },
+    {
+      "id": "R24",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Teacher approval gate on drafts, and every step is logged.",
+      "source": ""
+    },
+    {
+      "id": "R25",
+      "kind": "must",
+      "section": "Feature",
+      "text": "A teacher approval gate and per-mark evidence are expected as standard in AI marking, not differentiators. (source: https://marking.ai/)",
+      "source": ""
+    },
+    {
+      "id": "R26",
+      "kind": "must",
+      "section": "Feature",
+      "text": "HOD sign-off must come before export; the teacher may print the Excel sheet for HOD signing (source: https://leboneti.co.za/My-Documents/guidelines/Capturing%20SASAMS%20marks%20on%20excel.pdf)",
+      "source": ""
+    },
+    {
+      "id": "R27",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Separate formal (recorded, moderated) from informal (not formally recorded) tasks (source: https://irp-cdn.multiscreensite.com/c0cc1c10/files/uploaded/Senior%20Phase-CAPS%20Amendments--.pdf)",
+      "source": ""
+    },
+    {
+      "id": "R28",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Mask learner names on-device before upload, auto-delete photos after marking, and keep a per-learner withdraw-consent switch. (source: https://inforegulator.org.za/wp-content/uploads/2020/07/GuidanceNote-Processing-PersonalInformation-Children-20210628-1.pdf)",
+      "source": ""
+    },
+    {
+      "id": "R29",
+      "kind": "must",
+      "section": "Feature",
+      "text": "Marker reads all of a learner's pages in one labelled multi-image request, with images placed before the memo. (source: https://docs.anthropic.com/en/docs/build-with-claude/vision)",
+      "source": ""
+    },
+    {
+      "id": "R30",
+      "kind": "must",
+      "section": "Flow",
+      "text": "Weekly loop: upload the plan, plan the term, teach, send personal homework, snap the books, report, re-plan if needed, and repeat until the term goal is met.",
+      "source": ""
+    },
+    {
+      "id": "R31",
+      "kind": "must",
+      "section": "Flow",
+      "text": "40% rule: a learner under 50% on a topic is struggling; under 40% of the class struggling means personal homework only, and 40% or more adds a short class re-teach to an upcoming lesson.",
+      "source": ""
+    },
+    {
+      "id": "R32",
+      "kind": "must",
+      "section": "Flow",
+      "text": "Re-planning never drops a required ATP topic, finishes before the assessment date and warns early if time is short.",
+      "source": ""
+    },
+    {
+      "id": "R33",
+      "kind": "must",
+      "section": "Flow",
+      "text": "Marking: two vendors mark, the Reviewer re-checks, and disagreements or unclear handwriting go to the teacher.",
+      "source": ""
+    },
+    {
+      "id": "R34",
+      "kind": "must",
+      "section": "Flow",
+      "text": "Demo path that must work end to end: upload ATP photo, term plan with test and exam dates, snap books, two markers mark, Reviewer catches a disagreement, teacher decides, heat map, plan adjusted without missing a deadline.",
+      "source": ""
+    }
+  ],
+  "later": [
+    "Pricing and billing, since no pricing is given.",
+    "Assumption: Any learner-facing app or login, since learners have no devices.",
+    "Topics that are not in the uploaded ATP or CAPS.",
+    "Real learner names, books or marks in the demo."
+  ]
+}

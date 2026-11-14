@@ -1,0 +1,19 @@
+[
+ {"goto":"/app/#snap"},{"wait":3000},
+ {"expect":"Snap the books"},{"expect":"0 of 32 consented learners photographed"},
+ {"assert":"[...document.querySelectorAll('#learner-sel option')].filter(o => o.disabled).length === 2"},
+ {"click":"#cam-start"},{"wait":1500},
+ {"assert":"document.querySelector('#cam-msg').textContent.length > 0 || !document.querySelector('#cam-wrap').hidden"},
+ {"shot":"camera-state"},
+ {"click":"#snap-sample"},{"wait":1500},
+ {"expect":"1 of 32 consented learners photographed"},{"expect":"6B-001 p1"},
+ {"assert":"document.querySelectorAll('#thumbs img').length === 1"},
+ {"click":"#snap-sample"},{"wait":1200},{"expect":"2 of 32"},
+ {"click":"#consent-reg summary"},
+ {"click":"[data-consent='6B-001']"},{"wait":800},
+ {"expect":"Withdrawn"},{"expect":"1 page(s) waiting"},
+ {"assert":"document.querySelectorAll('#thumbs img').length === 1"},
+ {"assert":"[...document.querySelectorAll('#learner-sel option')].find(o => o.value === '6B-001').disabled"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"snap","full":true}
+]

@@ -1,0 +1,256 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:19:07.059Z",
+  "steps": [
+    {
+      "goto": "/app/#upload",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-official",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "click": "#approve-plan",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='snap']",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "click": "#snap-sample",
+      "ok": true
+    },
+    {
+      "wait": 1800,
+      "ok": true
+    },
+    {
+      "expect": "7 of 32",
+      "ok": true
+    },
+    {
+      "click": "#go-mark",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 120000,
+      "ok": true
+    },
+    {
+      "expect_not": "error:",
+      "ok": true
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "[data-decide$='|1']",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "0 need",
+      "ok": true
+    },
+    {
+      "click": "#confirm",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Photos deleted from this phone",
+      "ok": true
+    },
+    {
+      "click": "#to-heat",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "expect": "The whole class, at a glance",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#heat tbody tr').length === 7",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelector('[data-topic=related]').textContent.includes('Class re-teach')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "!document.querySelector('[data-topic=equiv]').textContent.includes('Class re-teach')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelectorAll('.hm-cell--red').length >= 3",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "heat",
+      "full": true,
+      "ok": true,
+      "detail": "01-heat.png"
+    },
+    {
+      "click": "[data-replan='related']",
+      "ok": true
+    },
+    {
+      "wait": 45000,
+      "ok": true
+    },
+    {
+      "expect": "Re-teach: Related denominators",
+      "ok": true
+    },
+    {
+      "expect": "Class re-teach added by the Analyst",
+      "ok": true
+    },
+    {
+      "expect": "Mon 16 Nov",
+      "ok": true
+    },
+    {
+      "shot": "tomorrow",
+      "full": true,
+      "ok": true,
+      "detail": "02-tomorrow.png"
+    },
+    {
+      "click": "button[data-v='plan']",
+      "ok": true
+    },
+    {
+      "wait": 2000,
+      "ok": true
+    },
+    {
+      "expect": "Re-teach: Related denominators, 15 min",
+      "ok": true
+    },
+    {
+      "expect": "165 minutes",
+      "ok": true
+    },
+    {
+      "shot": "plan-after",
+      "full": true,
+      "ok": true,
+      "detail": "03-plan-after.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:22:44.179Z",
+  "ok": true
+}

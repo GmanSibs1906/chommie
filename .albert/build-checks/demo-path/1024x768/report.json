@@ -1,0 +1,274 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:50:49.136Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-demo",
+      "ok": true
+    },
+    {
+      "wait": 9000,
+      "ok": true
+    },
+    {
+      "expect": "Demo run: made-up learners and books",
+      "ok": true
+    },
+    {
+      "expect": "The Reviewer re-checks every mark",
+      "ok": true
+    },
+    {
+      "expect": "3 need you",
+      "ok": true
+    },
+    {
+      "expect": "The Reviewer caught a wrong mark",
+      "ok": true
+    },
+    {
+      "expect": "Handwriting unclear",
+      "ok": true
+    },
+    {
+      "expect": "The two markers disagree",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('[data-item]').length === 3 && document.querySelectorAll('[data-crop] img').length === 3",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "reviewer-catch",
+      "full": true,
+      "ok": true,
+      "detail": "01-reviewer-catch.png"
+    },
+    {
+      "click": "[data-item='6B-014|6'] [data-decide$='|0']",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "[data-item='6B-031|2'] [data-decide$='|1']",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "[data-item='6B-022|5'] [data-decide$='|1']",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "expect": "0 need you",
+      "ok": true
+    },
+    {
+      "expect": "3 decided by you",
+      "ok": true
+    },
+    {
+      "click": "#confirm",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Photos deleted from this phone",
+      "ok": true
+    },
+    {
+      "click": "#to-heat",
+      "ok": true
+    },
+    {
+      "wait": 2000,
+      "ok": true
+    },
+    {
+      "expect": "The whole class, at a glance",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#heat tbody tr').length === 32",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelector('[data-topic=related]').textContent.includes('Class re-teach')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('[data-topic]')].filter(r => r.textContent.includes('Class re-teach')).length === 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "heat",
+      "full": true,
+      "ok": true,
+      "detail": "02-heat.png"
+    },
+    {
+      "click": "[data-replan='related']",
+      "ok": true
+    },
+    {
+      "wait": 45000,
+      "ok": true
+    },
+    {
+      "expect": "Re-teach: Related denominators",
+      "ok": true
+    },
+    {
+      "expect": "Class re-teach added by the Analyst",
+      "ok": true
+    },
+    {
+      "expect": "Mon 16 Nov",
+      "ok": true
+    },
+    {
+      "expect": "ATP week 7",
+      "ok": true
+    },
+    {
+      "shot": "tomorrow",
+      "full": true,
+      "ok": true,
+      "detail": "03-tomorrow.png"
+    },
+    {
+      "assert": "(window.__n = document.querySelectorAll('#classwork li').length, window.__m = [...document.querySelectorAll('#outline .mono')].reduce((s,e)=>s+parseInt(e.textContent),0), true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "type": "#vt",
+      "value": "Make it shorter",
+      "ok": true
+    },
+    {
+      "click": "#vsend",
+      "ok": true
+    },
+    {
+      "wait": 35000,
+      "ok": true
+    },
+    {
+      "expect": "Heard: \"Make it shorter\"",
+      "ok": true
+    },
+    {
+      "assert": "[...document.querySelectorAll('#outline .mono')].reduce((s,e)=>s+parseInt(e.textContent),0) < window.__m",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelectorAll('#classwork li').length <= window.__n",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "shorter",
+      "full": true,
+      "ok": true,
+      "detail": "04-shorter.png"
+    },
+    {
+      "click": "button[data-v='plan']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Re-teach: Related denominators, 15 min",
+      "ok": true
+    },
+    {
+      "expect": "Thu 26 Nov",
+      "ok": true
+    },
+    {
+      "expect": "Wed 2 Dec",
+      "ok": true
+    },
+    {
+      "expect": "Every required ATP topic is placed",
+      "ok": true
+    },
+    {
+      "expect": "165 minutes",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('.cal-day--test').length === 1 && document.querySelectorAll('.cal-day--exam').length === 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "plan",
+      "full": true,
+      "ok": true,
+      "detail": "05-plan.png"
+    },
+    {
+      "click": "button[data-v='approvals']",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "expect": "Re-planned",
+      "ok": true
+    },
+    {
+      "expect": "Class re-teach triggered",
+      "ok": true
+    },
+    {
+      "expect": "Decided Q6 of 6B-014",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:52:42.602Z",
+  "ok": true
+}

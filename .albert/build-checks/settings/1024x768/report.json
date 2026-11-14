@@ -1,0 +1,89 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-13T23:50:10.166Z",
+  "steps": [
+    {
+      "goto": "/app/#settings",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "expect": "Settings",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#s-struggle').value === '50' && document.querySelector('#s-reteach').value === '40'",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "type": "#s-struggle",
+      "value": "0",
+      "ok": true
+    },
+    {
+      "submit": "#set-form",
+      "ok": true
+    },
+    {
+      "expect": "Enter whole numbers",
+      "ok": true
+    },
+    {
+      "type": "#s-struggle",
+      "value": "60",
+      "ok": true
+    },
+    {
+      "type": "#s-reteach",
+      "value": "30",
+      "ok": true
+    },
+    {
+      "submit": "#set-form",
+      "ok": true
+    },
+    {
+      "expect": "Saved: struggling below 60%, class re-teach at 30%",
+      "ok": true
+    },
+    {
+      "click": "#set-default",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#s-struggle').value === '50'",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "settings",
+      "full": true,
+      "ok": true,
+      "detail": "01-settings.png"
+    },
+    {
+      "click": "button[data-v='heat']",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "expect": "Class heat map",
+      "ok": true
+    },
+    {
+      "shot": "heat-empty",
+      "ok": true,
+      "detail": "02-heat-empty.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-13T23:50:26.479Z",
+  "ok": true
+}

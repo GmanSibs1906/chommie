@@ -1,0 +1,206 @@
+[
+ {
+  "id": "R1",
+  "status": "built",
+  "where": "All screens use Grade 6 Maths, Term 4, fractions only; shared/caps-g6-t4.json",
+  "tested": "Every browser check; demo run (demo-path)"
+ },
+ {
+  "id": "R2",
+  "status": "built",
+  "where": "app/demo.js + demo/demo-run.json, /app/?demo=1, button 'Load demo run'",
+  "tested": "demo-path at 375/768/1024: Reviewer catch, decisions, heat map, re-plan, tomorrow's lesson, 'make it shorter' (live model calls)"
+ },
+ {
+  "id": "R3",
+  "status": "built",
+  "where": "Scope built for one school/grade/subject: consent register (app/views/snap.js), delete-everything report (app/views/settings.js), privacy.html. The 30-day pilot itself is not run.",
+  "tested": "consent register tested at 3 viewports (snap); the purge button uses a browser confirm() dialog and was NOT exercised in a browser"
+ },
+ {
+  "id": "R4",
+  "status": "built",
+  "where": "app/views/upload.js",
+  "tested": "upload at 3 viewports: official ATP and the sample ATP photo read by the model; photos only, PDFs not read"
+ },
+ {
+  "id": "R5",
+  "status": "built",
+  "where": "app/views/plan.js, shared/planner.js",
+  "tested": "plan at 3 viewports + node tests: Thu 26 Nov test and Wed 2 Dec exam marked"
+ },
+ {
+  "id": "R6",
+  "status": "built",
+  "where": "app/views/teach.js",
+  "tested": "teach at 3 viewports: outline, examples, class work, homework, memo, ATP week tag, edit, approve; print via print CSS (window.print not exercised on paper)"
+ },
+ {
+  "id": "R7",
+  "status": "built",
+  "where": "app/views/homework.js, shared/homework.js",
+  "tested": "homework live test at 1024: 7 sheets, edit, approve, print DOM per learner; node tests | Homework marked against each learner own sheet and memo: app/views/mark.js, shared/homework.js. Tested: node --test (50 pass) and live E2E hw-mark-live at 3 viewports"
+ },
+ {
+  "id": "R8",
+  "status": "built",
+  "where": "app/views/snap.js, app/db.js",
+  "tested": "snap at 3 viewports; real camera stream not tested (headless has no camera)"
+ },
+ {
+  "id": "R9",
+  "status": "built",
+  "where": "app/views/check.js, app/views/mark.js",
+  "tested": "live marking with real vision models + demo path: both markers' reads, disagreements, unclear flagged with crop | Personal homework uses same two markers, Reviewer, unclear rule: tested live (hw-mark-live)"
+ },
+ {
+  "id": "R10",
+  "status": "built",
+  "where": "app/views/heat.js, shared/analyst.js",
+  "tested": "live loop + demo path at 3 viewports; node tests | Homework round results feed heat map and next round: tested hw-demo-final at 3 viewports"
+ },
+ {
+  "id": "R11",
+  "status": "built",
+  "where": "app/views/hod.js",
+  "tested": "hod live test at 1024 and 375 (counts, AI call table, sign-off, export)"
+ },
+ {
+  "id": "R12",
+  "status": "built",
+  "where": "app/views/settings.js",
+  "tested": "settings at 3 viewports: validation, save, reset; node tests for changed thresholds"
+ },
+ {
+  "id": "R13",
+  "status": "built",
+  "where": "netlify/functions/read-atp.mjs, shared/caps.js",
+  "tested": "real model read of the sample ATP photo, CAPS check; node tests"
+ },
+ {
+  "id": "R14",
+  "status": "built",
+  "where": "shared/planner.js",
+  "tested": "node tests (7) + plan screen at 3 viewports"
+ },
+ {
+  "id": "R15",
+  "status": "built",
+  "where": "netlify/functions/write-lesson.mjs, write-bank.mjs, shared/lesson.js, shared/homework.js",
+  "tested": "real lesson and bank generation on the deploy; memo proven by code; node tests"
+ },
+ {
+  "id": "R16",
+  "status": "built",
+  "where": "shared/homework.js",
+  "tested": "homework live test: retry questions + practice for missed topics, stretch for learners who are ahead; node tests"
+ },
+ {
+  "id": "R17",
+  "status": "built",
+  "where": "app/views/homework.js printSheets, app/print.js",
+  "tested": "print DOM at 1024: one sheet per learner headed with the learner's name; paper print not tested"
+ },
+ {
+  "id": "R18",
+  "status": "built",
+  "where": "netlify/functions/mark.mjs, shared/marking.js",
+  "tested": "real marking of 7 made-up books at 3 viewports; unclear digit flagged by both markers in the main run (in one 375 run neither marker flagged it: the rule depends on the models)"
+ },
+ {
+  "id": "R19",
+  "status": "built",
+  "where": "netlify/functions/mark.mjs (A=Anthropic, B=Google), shared/marking.js",
+  "tested": "live runs show both vendors in the log; disagreement path in demo run and node tests (no live disagreement occurred on clear pages)"
+ },
+ {
+  "id": "R20",
+  "status": "built",
+  "where": "netlify/functions/review.mjs, app/orchestrator.js",
+  "tested": "Reviewer catching a wrong mark shown in the demo run at 3 viewports; two-send-back rule covered by logic and node tests; the live Reviewer call was not triggered because the vendors agreed on clear pages (review function exercised only via the deployed selftest model ID)"
+ },
+ {
+  "id": "R21",
+  "status": "built",
+  "where": "shared/analyst.js, app/views/heat.js",
+  "tested": "node tests (27+) and heat map at 3 viewports"
+ },
+ {
+  "id": "R22",
+  "status": "built",
+  "where": "shared/coordinator.js, app/main.js (bar on every screen), app/orchestrator.js, heat.js re-plan",
+  "tested": "approvals test: 'Coordinator, step 2 of 11' and the 11-step loop; node tests"
+ },
+ {
+  "id": "R23",
+  "status": "built",
+  "where": "app/views/teach.js, app/audio.js, netlify/functions/voice-edit.mjs",
+  "tested": "typed 'Make it shorter' at 3 viewports with real models; a spoken WAV sent to /api/voice-edit was transcribed and shortened; live microphone not tested"
+ },
+ {
+  "id": "R24",
+  "status": "built",
+  "where": "app/views/approvals.js, app/state.js log()",
+  "tested": "approvals at 3 viewports; log shows model, vendor and routing"
+ },
+ {
+  "id": "R25",
+  "status": "built",
+  "where": "app/views/check.js (per-mark evidence), approvals gate",
+  "tested": "demo path: evidence column and approve gate; stated as table stakes in the landing copy"
+ },
+ {
+  "id": "R26",
+  "status": "built",
+  "where": "app/views/hod.js, shared/export.js",
+  "tested": "hod live test: export disabled until the HOD signs, mark sheet print DOM with HOD signature line; node tests"
+ },
+ {
+  "id": "R27",
+  "status": "built",
+  "where": "app/views/mark.js task toggle, shared/export.js",
+  "tested": "hod live test: no formal task = no export; formal toggle; informal excluded (node test)"
+ },
+ {
+  "id": "R28",
+  "status": "built",
+  "where": "app/views/snap.js maskAndStore, app/views/check.js confirm, consent switch",
+  "tested": "snap and demo path: masked thumbnails, withdraw consent deletes queued pages, confirm deletes photos"
+ },
+ {
+  "id": "R29",
+  "status": "built",
+  "where": "netlify/functions/mark.mjs",
+  "tested": "Images labelled 'Image N:' placed before the memo text in one request per learner; proven by running 7 learners with multi-image requests"
+ },
+ {
+  "id": "R30",
+  "status": "built",
+  "where": "shared/coordinator.js loop + approvals 'The weekly loop' + term goal",
+  "tested": "approvals test at 3 viewports; the full loop was walked live in the demo path"
+ },
+ {
+  "id": "R31",
+  "status": "built",
+  "where": "shared/analyst.js, app/views/heat.js",
+  "tested": "node tests (43% = class re-teach, under 40% = homework only) and the live heat map"
+ },
+ {
+  "id": "R32",
+  "status": "built",
+  "where": "shared/planner.js addReteach/verifyPlan, heat.js replan",
+  "tested": "node tests (never drops a topic, warns under 120 min, refuses under 60) and the demo path: 165 minutes left, test and exam still marked"
+ },
+ {
+  "id": "R33",
+  "status": "built",
+  "where": "app/orchestrator.js, check.js",
+  "tested": "live marking and demo path"
+ },
+ {
+  "id": "R34",
+  "status": "built",
+  "where": "Whole app",
+  "tested": "demo-path steps: Load demo run -> Reviewer catches -> teacher decides -> heat map -> re-plan with test/exam dates intact -> voice 'shorter'; the live version of the same path was run in steps-heat-live and steps-hw-live (real photos, real models). The ATP photo is read live in the upload test."
+ }
+]

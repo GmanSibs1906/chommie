@@ -1,0 +1,304 @@
+{
+  "url": "http://localhost:8899",
+  "started": "2026-11-14T01:19:48.978Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#btn-demo",
+      "ok": true
+    },
+    {
+      "wait": 5000,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='homework']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "click": "#gen",
+      "ok": true
+    },
+    {
+      "wait": 6000,
+      "ok": true
+    },
+    {
+      "click": "[data-pick='6B-001']",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "#hw-approve",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "[data-pick='6B-002']",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "#hw-approve",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "[data-pick='6B-003']",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "#hw-approve",
+      "ok": true
+    },
+    {
+      "wait": 400,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='mark']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "What are you marking?",
+      "ok": true
+    },
+    {
+      "expect": "Class task",
+      "ok": true
+    },
+    {
+      "expect": "Personal homework",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('[name=markkind][value=class]').checked && !!document.querySelector('#task-type-sel')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.querySelector('#mark-kind input').offsetHeight>=20 && document.querySelector('.kind-opt').offsetHeight>=44",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "mark-class-default",
+      "full": true,
+      "ok": true,
+      "detail": "01-mark-class-default.png"
+    },
+    {
+      "click": "[name=markkind][value=homework]",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Each learner is marked against their own sheet",
+      "ok": true
+    },
+    {
+      "expect": "No homework pages queued",
+      "ok": true
+    },
+    {
+      "shot": "mark-homework-empty",
+      "full": true,
+      "ok": true,
+      "detail": "02-mark-homework-empty.png"
+    },
+    {
+      "click": "button[data-v='snap']",
+      "ok": true
+    },
+    {
+      "wait": 2000,
+      "ok": true
+    },
+    {
+      "expect": "Snapping for",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('[name=snapkind][value=homework]').checked",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const e=document.querySelector('#learner-sel');e.value='6B-003';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='6B-003'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const e=document.querySelector('#fake-scn');e.value='wrongcode';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='wrongcode'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const e=document.querySelector('#learner-sel');e.value='6B-010';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='6B-010'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const e=document.querySelector('#fake-scn');e.value='wrongcode';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='wrongcode'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "assert": "new Promise(r=>{const q=indexedDB.open('chommie',1);q.onsuccess=()=>{const g=q.result.transaction('photos').objectStore('photos').getAll();g.onsuccess=()=>{const rows=g.result;r(rows.filter(p=>p.kind==='homework'&&p.status==='queued'&&p.qr&&p.qr.code==='6B-001'&&/^R1-6B-001-/.test(p.qr.id)).length===2)}}})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "new Promise(r=>{const q=indexedDB.open('chommie',1);q.onsuccess=()=>{const g=q.result.transaction('photos').objectStore('photos').getAll();g.onsuccess=()=>{const rows=g.result;r(rows.every(p=>p.blob.size>5000))}}})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "snap-homework",
+      "full": true,
+      "ok": true,
+      "detail": "03-snap-homework.png"
+    },
+    {
+      "click": "button[data-v='mark']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Mark 2 homework books",
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "expect": "Held in Check",
+      "ok": true
+    },
+    {
+      "expect": "does not match",
+      "ok": true
+    },
+    {
+      "expect": "has no approved homework sheet",
+      "ok": true
+    },
+    {
+      "assert": "JSON.parse(localStorage.getItem('chommie.v1')).tasks.filter(t=>t.kind==='homework').every(t=>Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).marks[t.id]||{}).length===0)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "mark-held",
+      "full": true,
+      "ok": true,
+      "detail": "04-mark-held.png"
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Homework pages held for you (2)",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('[data-held-page] img').length===2",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "check-held",
+      "full": true,
+      "ok": true,
+      "detail": "05-check-held.png"
+    },
+    {
+      "click": "[data-drop]",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "Homework pages held for you (1)",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T01:20:41.418Z",
+  "ok": true
+}

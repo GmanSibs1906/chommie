@@ -1,0 +1,254 @@
+[
+ {
+  "goto": "/app/#upload"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "click": "#btn-official"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "click": "#approve-atp"
+ },
+ {
+  "click": "#go-plan"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "click": "#approve-plan"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "click": "button[data-v='snap']"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "click": "#snap-sample"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "expect": "7 of 32"
+ },
+ {
+  "click": "#go-mark"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "#run"
+ },
+ {
+  "wait": 120000
+ },
+ {
+  "expect_not": "error:"
+ },
+ {
+  "click": "#to-check"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "[data-decide$='|1']"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "expect": "0 need"
+ },
+ {
+  "click": "#confirm"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Photos deleted from this phone"
+ },
+ {
+  "click": "#to-heat"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "click": "button[data-v='approvals']"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Chommie drafts. You decide."
+ },
+ {
+  "expect": "The weekly loop"
+ },
+ {
+  "expect": "Activity log"
+ },
+ {
+  "assert": "document.querySelectorAll('#log tbody tr').length >= 10"
+ },
+ {
+  "assert": "[...document.querySelectorAll('#log tbody td')].some(td => td.textContent.includes('anthropic/claude-sonnet-5.5') && td.textContent.includes('OpenRouter'))"
+ },
+ {
+  "assert": "[...document.querySelectorAll('#log tbody td')].some(td => td.textContent.includes('google/gemini-3.5-flash'))"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "approvals",
+  "full": true
+ },
+ {
+  "click": "button[data-v='hod']"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "The class in one page, for the HOD"
+ },
+ {
+  "expect": "Every AI call, with vendor and routing"
+ },
+ {
+  "expect": "No formal task yet"
+ },
+ {
+  "assert": "!document.querySelector('#export')"
+ },
+ {
+  "click": "button[data-v='mark']"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "assert": "(document.querySelector('#task-type-sel').value = 'formal', document.querySelector('#task-type-sel').dispatchEvent(new Event('change')), true)"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "expect": "formal task (recorded)"
+ },
+ {
+  "click": "button[data-v='hod']"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "expect": "Formal tasks: Fractions check"
+ },
+ {
+  "assert": "document.querySelector('#export').disabled && document.querySelector('#sign').disabled === false"
+ },
+ {
+  "expect": "Export is locked until the HOD signs"
+ },
+ {
+  "click": "#absent"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "assert": "(window.__printed = null, window.print = () => { window.__printed = document.getElementById('print-sheets').innerText; }, true)"
+ },
+ {
+  "click": "#print-sheet"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "assert": "window.__printed.includes('HOD signature') && window.__printed.includes('Thandi Mokoena') && window.__printed.includes('-1')"
+ },
+ {
+  "type": "#hod-name",
+  "value": "Mrs Test HOD"
+ },
+ {
+  "click": "#sign"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "expect": "Signed by Mrs Test HOD"
+ },
+ {
+  "assert": "!document.querySelector('#export').disabled"
+ },
+ {
+  "click": "#export"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "assert": "window.__lastExport && /\\.xls$/.test(window.__lastExport.filename) && window.__lastExport.xml.includes('Mokoena') && !window.__lastExport.xml.includes('></Data>')"
+ },
+ {
+  "shot": "hod",
+  "full": true
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ }
+]
