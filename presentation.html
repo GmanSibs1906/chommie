@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Presentation - Chommie</title>
+  <link rel="stylesheet" href="./tokens.css" />
+  <link rel="stylesheet" href="./fonts/fonts.css" />
+  <link rel="stylesheet" href="./screen.css" />
+  <link rel="stylesheet" href="./site.css" />
+  <style>
+    .p-main { max-width: 820px; padding-block: 16px var(--sec); }
+    .p-main h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(44px, 8vw, 72px); line-height: 1.02; margin: 0 0 14px; }
+    .p-lede { color: var(--muted); font-size: 18px; max-width: 56ch; }
+    .p-time { display: flex; flex-wrap: wrap; gap: 6px; margin: 24px 0 8px; padding: 0; list-style: none; }
+    .p-time li { font: 500 13px/1 var(--f-mono); padding: 8px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+    .p-time a { text-decoration: none; color: inherit; }
+    .p-part { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); scroll-margin-top: 16px; }
+    .p-kick { font: 500 13px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); margin: 0 0 10px; }
+    .p-part h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 5vw, 42px); line-height: 1.08; margin: 0 0 16px; }
+    .say { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: var(--r-md, 14px); padding: 18px 20px; margin: 14px 0; }
+    .say p { font-size: 20px; line-height: 1.5; margin: 0 0 10px; color: var(--ink); }
+    .say p:last-child { margin-bottom: 0; }
+    .say::before { content: "SAY"; display: block; font: 600 12px/1 var(--f-mono); letter-spacing: .08em; color: var(--accent-deep); margin-bottom: 10px; }
+    .do { border: 1px dashed var(--line); border-radius: var(--r-md, 14px); padding: 14px 18px; margin: 14px 0; color: var(--muted); font-size: 16px; }
+    .do::before { content: "DO ON SCREEN"; display: block; font: 600 12px/1 var(--f-mono); letter-spacing: .08em; color: var(--ink); margin-bottom: 8px; }
+    .do ol, .do ul { margin: 0; padding-left: 20px; }
+    .do li { margin: 4px 0; }
+    .tip { font-size: 15px; color: var(--muted); margin: 10px 0; }
+    .tip b { color: var(--ink); }
+    .check { list-style: none; padding: 0; margin: 12px 0; }
+    .check li { padding: 10px 0 10px 34px; border-top: 1px solid var(--line); position: relative; font-size: 17px; }
+    .check li::before { content: ""; position: absolute; left: 4px; top: 13px; width: 16px; height: 16px; border: 2px solid var(--accent); border-radius: 4px; }
+    .qa details { border-top: 1px solid var(--line); }
+    .qa details:last-child { border-bottom: 1px solid var(--line); }
+    .qa summary { cursor: pointer; min-height: 52px; display: flex; align-items: center; font-weight: 600; font-size: 18px; list-style: none; }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa details p { margin: 0 0 16px; font-size: 18px; color: var(--ink); }
+    .agents-t { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 16px; }
+    .agents-t td { padding: 9px 8px 9px 0; border-top: 1px solid var(--line); vertical-align: top; }
+    .agents-t td:first-child { font-weight: 600; white-space: nowrap; padding-right: 14px; }
+    .agents-t td:last-child { color: var(--muted); }
+    .p-end { margin-top: 48px; font-family: var(--f-display); font-size: 28px; }
+    @media print { .p-time, .page-top { display: none; } .p-part { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+<div class="page">
+<header class="wrap page-top"><a href="/">Chommie</a></header>
+<main class="wrap p-main">
+  <p class="p-kick">Presenter script · Team Albert AI · Colleague Zero</p>
+  <h1>Presentation</h1>
+  <p class="p-lede">Your script for the Chommie pitch: what to say, what to show, in order. About 5 minutes in total. Read the green boxes out loud. The dashed boxes tell you what to tap.</p>
+  <ul class="p-time" aria-label="Parts and timing">
+    <li><a href="#before">Before you start</a></li>
+    <li><a href="#p1">1 · Problem · 0:30</a></li>
+    <li><a href="#p2">2 · Chommie · 0:40</a></li>
+    <li><a href="#p3">3 · Live demo · 2:15</a></li>
+    <li><a href="#p4">4 · Seven agents · 0:45</a></li>
+    <li><a href="#p5">5 · Why it works · 0:35</a></li>
+    <li><a href="#p6">6 · Close · 0:15</a></li>
+    <li><a href="#qa">Judges' questions</a></li>
+  </ul>
+
+  <section class="p-part" id="before">
+    <p class="p-kick">10 minutes before</p>
+    <h2>Before you start</h2>
+    <ul class="check">
+      <li>Open <b>chommie-teacher.netlify.app/app</b> on the laptop you will share, and log in.</li>
+      <li>The four photos are ready as <b>JPG</b> in Desktop › chommie: Names.jpg, Thabo.jpg, Lerato.jpg, Sipho.jpg. Not the HEIC ones: Chrome cannot open those.</li>
+      <li>Delete any old test class, so the class list is empty or has only the demo class.</li>
+      <li>Open the landing page in a second tab at <b>#agents</b> (the seven-agent loop).</li>
+      <li>Keep the demo video (Desktop › Chommie-demo-video › Chommie-demo.mp4) ready to play if the Wi-Fi fails.</li>
+      <li>Phone on silent. Water nearby. Breathe.</li>
+    </ul>
+    <p class="tip"><b>The one idea to remember:</b> Chommie makes a plan that changes as the marks come in, but never misses a date on the ATP, and every learner gets their own homework. The teacher does not do more work. The teacher does less.</p>
+  </section>
+
+  <section class="p-part" id="p1">
+    <p class="p-kick">Part 1 · 30 seconds</p>
+    <h2>The problem</h2>
+    <div class="say">
+      <p>Tonight, a teacher in South Africa will take home a pile of exercise books. Forty, sixty, sometimes ninety of them. She will mark them by hand, at the kitchen table.</p>
+      <p>South African teachers spend about seven hours a week marking. That is more than the international average of about four and a half hours. And seven in ten teachers say admin is their biggest stress.</p>
+      <p>And here is the worst part. By the time she knows who is struggling, the test has already come. The term plan does not wait. Some learners fall behind and never catch up.</p>
+    </div>
+    <p class="tip"><b>Sources if asked:</b> 7.1 hours a week marking against an OECD average of 4.6 (TALIS 2024). 70% name admin as the top stressor (Stellenbosch University survey, 2025).</p>
+  </section>
+
+  <section class="p-part" id="p2">
+    <p class="p-kick">Part 2 · 40 seconds</p>
+    <h2>Meet Chommie</h2>
+    <div class="say">
+      <p>Meet Chommie: a digital colleague for teachers. Chommie means friend.</p>
+      <p>Here is what makes it different. Chommie builds the whole term plan from the official ATP. It knows every topic and every test date. Then, as the marks come in, the plan changes. If the class is struggling with a topic, Chommie adds a short re-teach. But it stays on record: it never drops a required topic, and it never misses a test date.</p>
+      <p>At the same time, every learner gets their own homework, made from exactly what they got wrong. In a class of thirty-four, twenty learners can get twenty different homework sheets.</p>
+      <p>And none of this adds work for the teacher. She takes photos with her phone. Chommie does the rest. Better for the teacher, better for the learners. A win-win.</p>
+    </div>
+  </section>
+
+  <section class="p-part" id="p3">
+    <p class="p-kick">Part 3 · about 2 minutes 15</p>
+    <h2>Live demo</h2>
+    <p class="tip">Talk while you tap. If something is slow, keep talking: "Two AIs are reading the page right now."</p>
+
+    <h3>a · Set up a class (20 seconds)</h3>
+    <div class="do"><ol>
+      <li>Tap <b>Create class</b>. Name: <b>6B</b>. Grade <b>6</b>. Subject <b>Mathematics</b>. Save.</li>
+    </ol></div>
+    <div class="say"><p>Setting up takes a minute. I make my class: 6B, Grade 6, Maths. A teacher can have many classes, and each class keeps its own plan, learners, marks and homework.</p></div>
+
+    <h3>b · Load the ATP (25 seconds)</h3>
+    <div class="do"><ol>
+      <li>Open <b>ATP</b>. Pick Grade 6, Mathematics, <b>Term 2</b>. Tap <b>Load this ATP</b>.</li>
+      <li>When the topics show (<b>Common fractions</b>), scroll a little, then tap <b>Approve this ATP</b>.</li>
+    </ol></div>
+    <div class="say"><p>Now the plan. I don't type anything. Chommie has the official DBE teaching plans for every grade, from Grade 1 to 12. A school can also upload its own PDF or a photo. Chommie reads the weeks, the topics and the test dates, and puts every topic on a real school day.</p></div>
+
+    <h3>c · Add learners from a photo (25 seconds)</h3>
+    <div class="do"><ol>
+      <li>Go back to the class and open <b>Learners</b>. Under <b>Photo of a class list</b>, tap <b>Take or choose a photo</b> and pick <b>Names.jpg</b>.</li>
+      <li>Show the names it read. Tap <b>Add these 4 learners</b>.</li>
+    </ol></div>
+    <div class="say"><p>No typing here either. This is my class list, written by hand. I take a photo, and Chommie reads the names, even the long surnames like "van der Merwe" and "du Plessis". The teacher checks them and taps confirm.</p></div>
+
+    <h3>d · Mark the books (45 seconds)</h3>
+    <div class="do"><ol>
+      <li>Go back to the class and open <b>Mark</b>. For each learner, tap <b>Take photo</b> and pick their page: Thabo.jpg, Lerato.jpg, Sipho.jpg. The next learner comes up by itself.</li>
+      <li>Tap <b>Mark 3 books</b>. While it works, hold up the real paper and say the lines below.</li>
+    </ol></div>
+    <div class="say">
+      <p>Now the part teachers hate most: marking. This is a real page from a learner's book. Handwritten fractions.</p>
+      <p>I pick the learner, take a photo, and the next learner is ready. Before the photo leaves the phone, the learner's name is blacked out. The AI never sees a child's name.</p>
+      <p>Two AI markers, from two different companies, Anthropic and Google, mark every answer on their own. If they agree, good. If they don't, a third AI from OpenAI re-reads that answer.</p>
+    </div>
+
+    <h3>e · Caught &amp; fixed: Chommie checks itself (25 seconds)</h3>
+    <div class="do"><ol>
+      <li>Tap the green badge at the top: <b>✓ Caught &amp; fixed</b>.</li>
+      <li>Tap a photo under <b>Waiting for you</b>. Then tap <b>Whole page</b>. Close.</li>
+    </ol></div>
+    <div class="say">
+      <p>This is my favourite part. Chommie shows where it caught itself. Here the markers did not agree, or the handwriting was not clear. So Chommie did not guess. It cut out the answer and is waiting for me, the teacher, to decide.</p>
+      <p>AI that says "I'm not sure" is AI a teacher can trust.</p>
+    </div>
+
+    <h3>f · Heat map and homework (20 seconds)</h3>
+    <div class="do"><ol>
+      <li>Open <b>Heat map</b>. Then open <b>Homework</b>.</li>
+    </ol></div>
+    <div class="say">
+      <p>Every learner, every topic, at a glance. Green: got it. Amber: shaky. Red: struggling.</p>
+      <p>Here is the rule. If forty percent or more of the class is struggling with a topic, Chommie re-plans and adds a short re-teach, still before the test. If it's only a few learners, personal homework fixes it. Each learner gets a printed sheet on exactly what they got wrong. And when the homework comes back, I photograph it, and it is marked against that learner's own answers.</p>
+      <p>Then the loop runs again, every week, until every square is green before the exam.</p>
+    </div>
+    <p class="tip"><b>If the Wi-Fi or an AI fails:</b> say "Let me show you the run we recorded this morning" and play the demo video, or tap <b>Load demo run</b> on the Classes page. Don't apologise twice. Move on.</p>
+  </section>
+
+  <section class="p-part" id="p4">
+    <p class="p-kick">Part 4 · 45 seconds</p>
+    <h2>One loop. Seven agents.</h2>
+    <div class="do"><ul><li>Switch to the landing page tab at <b>#agents</b>. Let the loop light up.</li></ul></div>
+    <div class="say">
+      <p>Behind this are seven agents. Each one has one job.</p>
+      <p>The <b>Coordinator</b> runs the weekly loop and decides the next step. The <b>Curriculum Reader</b> reads the ATP and the class list. The <b>Term Planner</b> puts every topic on a real school day. The <b>Lesson Writer</b> writes the lessons and each learner's homework. Two <b>Markers</b> mark every book. The <b>Reviewer</b> checks the markers. And the <b>Analyst</b> builds the heat map. Then the loop starts again.</p>
+      <p>And how do we stop the AI from making things up? Four ways. One: the planner, the dates and the totals are plain code, not AI. Two: every memo answer is proven by calculation. Three: two AIs from different companies mark, and a third checks them. Four: if Chommie is not sure, it asks the teacher. It never guesses. The teacher approves everything.</p>
+    </div>
+    <table class="agents-t" aria-label="Agents at a glance">
+      <tr><td>Coordinator</td><td>Runs the weekly loop, hands out jobs, re-plans</td></tr>
+      <tr><td>Curriculum Reader</td><td>Claude (Anthropic): reads the ATP and the class list</td></tr>
+      <tr><td>Term Planner</td><td>Plain code: school days, works back from test dates</td></tr>
+      <tr><td>Lesson Writer</td><td>Claude: lessons, personal homework, memo checked by calculation</td></tr>
+      <tr><td>Markers A + B</td><td>Anthropic + Google: mark every book on their own</td></tr>
+      <tr><td>Reviewer</td><td>OpenAI: re-reads disagreements; the teacher decides</td></tr>
+      <tr><td>Analyst</td><td>Plain code: heat map and the 40% rule</td></tr>
+    </table>
+  </section>
+
+  <section class="p-part" id="p5">
+    <p class="p-kick">Part 5 · 35 seconds</p>
+    <h2>Why it works in real life</h2>
+    <div class="say">
+      <p>We kept it simple on purpose. One workflow: the weekly teaching loop. One owner: the teacher. The Head of Department sees the overview. And one number that matters: how many learners move from red to green, with the ATP finished on time.</p>
+      <p>It works on the phone a teacher already has. Learners don't need devices: their homework is on paper. Names are hidden before anything is sent, and photos are deleted once the marks are confirmed.</p>
+      <p>Our next step is a thirty-day pilot: one school, one grade, one subject.</p>
+    </div>
+  </section>
+
+  <section class="p-part" id="p6">
+    <p class="p-kick">Part 6 · 15 seconds</p>
+    <h2>Close</h2>
+    <div class="say">
+      <p>Chommie gives teachers their evenings back, and gives every learner a fair chance to catch up before the exam.</p>
+      <p>And one more thing: this whole app was planned, designed and built by our AI team, Albert. We are Team Albert AI. Thank you.</p>
+    </div>
+    <p class="tip"><b>Last screen:</b> leave "Built by Albert AI" or the Chommie landing page on screen while you take questions.</p>
+  </section>
+
+  <section class="p-part" id="qa">
+    <p class="p-kick">Keep these short</p>
+    <h2>Judges' questions</h2>
+    <div class="qa">
+      <details><summary>What if the AI marks something wrong?</summary><p>Two AIs from different companies mark every answer. If they disagree, a third re-reads it. If it is still not clear, the teacher decides. Nothing goes out until the teacher approves. You saw it on the Caught &amp; fixed page.</p></details>
+      <details><summary>What about messy handwriting?</summary><p>Chommie flags it and shows the teacher a picture of that answer. It never guesses. Other tools say "even messy handwriting works". We think a teacher should decide.</p></details>
+      <details><summary>Is learner data safe? What about POPIA?</summary><p>The name strip is blacked out on the phone before any photo is sent. Photos are deleted after the marks are confirmed. A real pilot needs parent consent first, and today's demo uses only made-up learners.</p></details>
+      <details><summary>Other apps already mark homework. What is new?</summary><p>Marking is only one step. Chommie plans the whole term from the ATP, re-plans when the class struggles without missing a test date, gives every learner their own printed homework, and marks that homework against their own answers. It is a full loop, not just a marking tool.</p></details>
+      <details><summary>What about learners without phones or laptops?</summary><p>They don't need one. Only the teacher uses a phone. Learners get paper.</p></details>
+      <details><summary>Does the teacher lose control?</summary><p>No. Chommie drafts, the teacher decides. The teacher can change any lesson, any homework sheet and both numbers in the 40% rule.</p></details>
+      <details><summary>Which grades and subjects work?</summary><p>The library has the official DBE ATPs for Grades 1 to 12. Our demo is Grade 6 Maths, where answers can be checked by calculation. The pilot starts with one grade and one subject.</p></details>
+      <details><summary>How did you build it so fast?</summary><p>With Albert, our AI team. It researched, planned, designed and built Chommie, and I approved each step. That is what Albert does.</p></details>
+    </div>
+  </section>
+
+  <p class="p-end">You've got this. Built by Albert AI.</p>
+</main>
+</div>
+</body>
+</html>
