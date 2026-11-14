@@ -15,11 +15,22 @@ export function collectFixes(state, nameOf = (c) => c) {
         const memo = q?.answer ?? "";
         const decided = it.decision ? `You decided: ${it.decision.correct ? "correct" : "wrong"}` : "";
         if (it.status === "disagree" || it.reviewer) {
-          const r = it.reviewer;
-          out.push({ kind: "fixed", place: "Marking", where, by: "Reviewer (OpenAI)",
-            was: `Marker A read ${fmt(it.A)}, Marker B read ${fmt(it.B)}`,
-            now: r ? `Reviewer re-read the page: "${r.read ?? ""}"${memo ? ` against the memo ${memo}` : ""}, so ${r.correct === true ? "correct" : r.correct === false ? "wrong" : "unclear"}` : "Sent to you to decide",
-            note: decided });
+          // A Reviewer reading is a suggestion until the teacher decides (Gman's real test, 2026-11-14: the Reviewer
+          // read a heavy "8" as "6" and called a wrong answer correct; the teacher is the final check).
+          const r = it.reviewer, rv = r ? (r.correct === true ? "correct" : r.correct === false ? "wrong" : "unclear") : null;
+          const agrees = r && it.A && it.B && [it.A, it.B].some((m) => !(m.unclear || m.legible === false) && String(m.read) === String(r.read) && m.correct === r.correct);
+          const said = r ? `Reviewer re-read the page: "${r.read ?? ""}"${memo ? ` (memo ${memo})`
+            : ""}, so ${rv}` : "Sent to you to decide";
+          if (it.decision) {
+            const same = r && it.decision.correct === r.correct;
+            out.push({ kind: "fixed", place: "Marking", where, by: same ? "Reviewer (OpenAI), confirmed by you" : "You, the teacher",
+              was: `Marker A read ${fmt(it.A)}, Marker B read ${fmt(it.B)}`,
+              now: `${said}. ${decided}${r && !same ? " (you overruled the Reviewer)" : ""}`, note: "" });
+          } else {
+            out.push({ kind: "held", place: "Marking", where, by: "Reviewer (OpenAI)",
+              was: `Marker A read ${fmt(it.A)}, Marker B read ${fmt(it.B)}`,
+              now: r ? `${agrees ? "Reviewer agrees" : "Reviewer suggests"}: "${r.read ?? ""}", so ${rv}. Waiting for your decision` : "Waiting for your decision", note: "" });
+          }
         } else if (it.attempts > 0) {
           out.push({ kind: "fixed", place: "Marking", where, by: "Reviewer (OpenAI)",
             was: "A marker's mark did not match its own reading", now: it.status === "teacher" ? "Still wrong after two fixes, so it went to you" : `Sent back ${it.attempts}× and fixed by the marker`, note: decided });

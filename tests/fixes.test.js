@@ -4,16 +4,24 @@ import { collectFixes, fixCounts } from "../shared/fixes.js";
 
 const task = { id: "t1", name: "Fractions check", questions: [{ n: 6, plain: "2/3 + 1/6", answer: "5/6" }, { n: 10, plain: "1/5 of 20", answer: "4" }, { n: 2, plain: "3/4 = ?/8", answer: "6/8" }] };
 
-test("a marker disagreement settled by the Reviewer is listed as fixed, with both readings", () => {
-  const st = { tasks: [task], marks: { t1: { "6B-002": { items: [
-    { n: 6, status: "disagree", A: { read: "5/6", correct: true }, B: { read: "5/8", correct: false }, reviewer: { read: "5/8", correct: false } },
-  ] } } } };
-  const f = collectFixes(st, () => "Lerato");
-  assert.equal(f.length, 1);
-  assert.equal(f[0].kind, "fixed"); assert.equal(f[0].place, "Marking");
+test("a Reviewer reading is a suggestion held for the teacher until the teacher decides", () => {
+  const item = { n: 6, status: "disagree", A: { read: "5/6", correct: true }, B: { read: "5/8", correct: false }, reviewer: { read: "5/8", correct: false } };
+  const st = { tasks: [task], marks: { t1: { "6B-002": { items: [item] } } } };
+  let f = collectFixes(st, () => "Lerato");
+  assert.equal(f.length, 1); assert.equal(f[0].kind, "held");
   assert.match(f[0].was, /Marker A read "5\/6" \(correct\), Marker B read "5\/8" \(wrong\)/);
-  assert.match(f[0].now, /Reviewer re-read the page: "5\/8" against the memo 5\/6, so wrong/);
+  assert.match(f[0].now, /Reviewer agrees: "5\/8", so wrong\. Waiting for your decision/);
   assert.match(f[0].where, /Lerato · Q6/);
+  item.decision = { correct: false };
+  f = collectFixes(st, () => "Lerato");
+  assert.equal(f[0].kind, "fixed"); assert.match(f[0].by, /confirmed by you/);
+});
+
+test("the teacher overruling a wrong Reviewer reading is recorded as the teacher's fix", () => {
+  const item = { n: 6, status: "unclear", who: ["A"], A: { read: "5/8", unclear: true }, B: { read: "5/8", correct: false }, reviewer: { read: "5/6", correct: true }, decision: { correct: false } };
+  const f = collectFixes({ tasks: [task], marks: { t1: { "6B-002": { items: [item] } } } });
+  assert.equal(f[0].kind, "fixed"); assert.equal(f[0].by, "You, the teacher"); assert.match(f[0].now, /overruled the Reviewer/);
+  assert.match(f[0].was, /Marker A read "5\/8" but was unsure/);
 });
 
 test("unclear handwriting is held, not guessed; a send-back that was fixed is listed as fixed", () => {
