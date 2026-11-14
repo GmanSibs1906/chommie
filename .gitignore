@@ -1,3 +1,6 @@
 # Local Netlify folder
 .netlify
 dist
+
+# Installed libraries (run npm install)
+node_modules/
