@@ -2,7 +2,7 @@
 // Gman, 2026-11-14: self-correction is the heart of Colleague Zero, so it must be visible in one place.
 //   fixed : an agent's mistake was caught by another check and corrected
 //   held  : a doubt was caught and NOT guessed; it waits for the teacher (or the teacher already decided)
-const fmt = (a) => (a ? `"${a.read ?? ""}" (${a.correct ? "correct" : "wrong"})` : "nothing");
+const fmt = (a) => (!a ? "nothing" : a.unclear || a.legible === false || Number(a.confidence) < 0.8 ? `"${a.read ?? ""}" but was unsure` : `"${a.read ?? ""}" (${a.correct ? "correct" : "wrong"})`);
 
 export function collectFixes(state, nameOf = (c) => c) {
   const out = [];

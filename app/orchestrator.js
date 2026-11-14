@@ -55,12 +55,14 @@ export async function markLearner(task, code, onStep = () => {}, opts = {}) {
     }
     if (it.status === "sendback") { it.status = "teacher"; it.reason = "Still wrong after two fixes"; log("Reviewer", `Q${it.n} of ${code} goes to the teacher`, "Failed two fixes"); }
   }
-  const dis = items.filter((i) => i.status === "disagree");
+  // The Reviewer re-reads every disagreement AND every answer where only one marker was unsure (Gman's test,
+  // 2026-11-14: a heavy "8" went straight to the teacher with no third reading). The teacher still decides.
+  const dis = items.filter((i) => i.status === "disagree" || (i.status === "unclear" && (i.who || []).length === 1));
   await Promise.all(dis.map(async (it) => {
     onStep(`Reviewer is re-reading Q${it.n}`);
     try {
       const r = await retry(() => api("/api/review", { code, images, question: q(it.n), A: it.A, B: it.B }));
-      it.reviewer = r.review; log("Reviewer", `Re-read Q${it.n} of ${code}`, `Markers disagreed. Reviewer read "${r.review.read}"`, r.meta);
+      it.reviewer = r.review; log("Reviewer", `Re-read Q${it.n} of ${code}`, `${it.status === "disagree" ? "Markers disagreed" : "One marker was unsure"}. Reviewer read "${r.review.read}"`, r.meta);
     } catch (e) { it.reviewer = null; log("Reviewer", `Could not re-read Q${it.n} of ${code}`, e.message); }
   }));
   (state.marks[task0.id] ||= {})[code] = { code, pages: images.length, at: new Date().toISOString(), items, ...(opts.sheetId ? { sheetId: opts.sheetId } : {}) };
