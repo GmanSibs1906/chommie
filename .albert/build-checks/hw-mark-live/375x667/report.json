@@ -1,0 +1,345 @@
+{
+  "url": "https://chommie-teacher.netlify.app",
+  "started": "2026-11-14T02:47:33.207Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "click": "#btn-demo",
+      "ok": true
+    },
+    {
+      "assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(!document.getElementById('demo-banner').hidden){clearInterval(i);res(true)}else if(Date.now()-t0>60000){clearInterval(i);res(false)}},500)})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(document.body.innerText.includes('re-checks every mark')){clearInterval(i);res(true)}else if(Date.now()-t0>90000){clearInterval(i);res(false)}},500)})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 3000,
+      "ok": true
+    },
+    {
+      "shot": "demo-loaded",
+      "ok": true,
+      "detail": "01-demo-loaded.png"
+    },
+    {
+      "assert": "(()=>{const b=document.querySelector(\"button[data-v='homework']\");b.scrollIntoView({inline:'center'});b.click();return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Write round 2 homework from the marked round",
+      "ok": true
+    },
+    {
+      "click": "#gen-next",
+      "ok": true
+    },
+    {
+      "wait": 60000,
+      "ok": true
+    },
+    {
+      "expect": "Homework round 2.",
+      "ok": true
+    },
+    {
+      "expect_not": "undefined",
+      "ok": true
+    },
+    {
+      "click": "#approve-all",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "assert": "(window.__p=null,window.print=()=>{window.__p=[...document.querySelectorAll('.hw-sheet')].map(e=>({code:e.querySelector('.hw-code').textContent.trim(),qr:e.querySelector('.hw-qr').dataset.qr,svg:!!e.querySelector('.hw-qr svg'),foot:e.querySelector('.hw-sheet-foot').textContent}))},true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#print-all",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "assert": "window.__p.length>=30 && window.__p.every(p=>p.svg&&/^CHOMMIE-HW\\|6B-\\d{3}\\|R2-6B-\\d{3}-[0-9A-Z]{4}$/.test(p.qr)&&p.qr.split('|')[1]===p.code&&p.foot.includes(p.qr.split('|')[2]))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "round2-approved",
+      "full": true,
+      "ok": true,
+      "detail": "02-round2-approved.png"
+    },
+    {
+      "assert": "(()=>{const b=document.querySelector(\"button[data-v='snap']\");b.scrollIntoView({inline:'center'});b.click();return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 2000,
+      "ok": true
+    },
+    {
+      "click": "[name=snapkind][value=homework]",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const a=document.querySelector('#learner-sel');a.value='6B-002';a.dispatchEvent(new Event('change',{bubbles:true}));const b=document.querySelector('#fake-scn');b.value='right';b.dispatchEvent(new Event('change',{bubbles:true}));return a.value==='6B-002'&&b.value==='right'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 3500,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const a=document.querySelector('#learner-sel');a.value='6B-003';a.dispatchEvent(new Event('change',{bubbles:true}));const b=document.querySelector('#fake-scn');b.value='onewrong';b.dispatchEvent(new Event('change',{bubbles:true}));return a.value==='6B-003'&&b.value==='onewrong'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 3500,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const a=document.querySelector('#learner-sel');a.value='6B-004';a.dispatchEvent(new Event('change',{bubbles:true}));const b=document.querySelector('#fake-scn');b.value='wrongcode';b.dispatchEvent(new Event('change',{bubbles:true}));return a.value==='6B-004'&&b.value==='wrongcode'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 3500,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const a=document.querySelector('#learner-sel');a.value='6B-005';a.dispatchEvent(new Event('change',{bubbles:true}));const b=document.querySelector('#fake-scn');b.value='noqr';b.dispatchEvent(new Event('change',{bubbles:true}));return a.value==='6B-005'&&b.value==='noqr'})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#snap-fake",
+      "ok": true
+    },
+    {
+      "wait": 3500,
+      "ok": true
+    },
+    {
+      "shot": "snapped",
+      "full": true,
+      "ok": true,
+      "detail": "03-snapped.png"
+    },
+    {
+      "assert": "(()=>{const b=document.querySelector(\"button[data-v='mark']\");b.scrollIntoView({inline:'center'});b.click();return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(document.querySelector('#run')&&document.body.innerText.includes('Mark 4 homework books')){clearInterval(i);res(true)}else if(Date.now()-t0>60000){clearInterval(i);res(false)}},500)})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect": "Mark 4 homework books",
+      "ok": true
+    },
+    {
+      "click": "#run",
+      "ok": true
+    },
+    {
+      "wait": 4000,
+      "ok": true
+    },
+    {
+      "assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(document.body.innerText.includes('No homework pages queued')||Date.now()-t0>280000){clearInterval(i);res(true)}},2000)})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect_not": "error:",
+      "ok": true
+    },
+    {
+      "shot": "marked",
+      "full": true,
+      "ok": true,
+      "detail": "04-marked.png"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),t=s.tasks.find(x=>x.id==='hw-r2');return !!t&&t.name==='Homework round 2'&&t.type==='informal'&&['6B-002','6B-003','6B-005'].every(c=>{const p=t.perLearner[c],m=s.marks['hw-r2'][c];return p&&m&&p.sheetId===m.sheetId&&s.hwSheets[p.sheetId].code===c&&s.hwSheets[p.sheetId].round===2&&m.items.length===p.questions.length&&p.questions.every((q,i)=>q.answer===s.hwSheets[p.sheetId].questions[i].answer)})&&!s.marks['hw-r2']['6B-004']&&!t.perLearner['6B-004']})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),t=s.tasks.find(x=>x.id==='hw-r2'),a=t.perLearner['6B-002'].questions.map(q=>q.answer).join('|'),b=t.perLearner['6B-003'].questions.map(q=>q.answer).join('|');return a!==b})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),t=s.tasks.find(x=>x.id==='hw-r2'),m=s.marks['hw-r2']['6B-003'],q=t.perLearner['6B-003'].questions;const it=m.items.find(i=>i.n===2);return it.status==='agree'?it.correct===false:true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),m=s.marks['hw-r2']['6B-002'];const good=m.items.filter(i=>i.status==='agree'&&i.correct===true).length;return good>=Math.ceil(m.items.length*0.7)})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),L=s.log.map(e=>e.action+' '+e.detail).join('\\n');return /Matched 6B-002 to sheet R2-6B-002-/.test(L)&&/Matched 6B-003 to sheet R2-6B-003-/.test(L)&&/Matched 6B-005 to sheet R2-6B-005-/.test(L)&&/printed code read by Marker A/.test(L)&&/Held 1 page\\(s\\) picked as 6B-004/.test(L)&&/does not match/.test(L)})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "new Promise(r=>{const q=indexedDB.open('chommie',1);q.onsuccess=()=>{const g=q.result.transaction('photos').objectStore('photos').getAll();g.onsuccess=()=>{const rows=g.result.filter(p=>p.kind==='homework'&&p.code==='6B-004');r(rows.length===1&&rows[0].status==='held'&&/does not match/.test(rows[0].holdReason))}}})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect": "Held in Check",
+      "ok": true
+    },
+    {
+      "click": "#to-check",
+      "ok": true
+    },
+    {
+      "wait": 2000,
+      "ok": true
+    },
+    {
+      "expect": "Homework pages held for you (1)",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('[data-held-page] img').length===1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "check-held",
+      "full": true,
+      "ok": true,
+      "detail": "05-check-held.png"
+    },
+    {
+      "assert": "(()=>{const b=document.querySelector(\"button[data-v='heat']\");b.scrollIntoView({inline:'center'});b.click();return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "new Promise(res=>{const t0=Date.now();const i=setInterval(()=>{if(!!document.querySelector('#heat tbody tr')||Date.now()-t0>60000){clearInterval(i);res(true)}},500)})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect": "Homework round 2",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#heat tbody tr').length===32&&document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "heat",
+      "full": true,
+      "ok": true,
+      "detail": "06-heat.png"
+    },
+    {
+      "assert": "(()=>{const b=document.querySelector(\"button[data-v='approvals']\");b.scrollIntoView({inline:'center'});b.click();return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Matched 6B-002 to sheet R2-6B-002-",
+      "ok": true
+    },
+    {
+      "expect": "Marker A",
+      "ok": true
+    },
+    {
+      "expect": "Marker B",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "log",
+      "full": true,
+      "ok": true,
+      "detail": "07-log.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T02:54:17.918Z",
+  "ok": true
+}

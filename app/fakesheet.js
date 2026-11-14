@@ -37,7 +37,7 @@ export async function drawSheet({ sheetCode, wrong = [], qr = true, tilt = 0.012
     g.fillRect(60, y + 10, W - 120, 1);
     g.fillStyle = "#16225c"; g.font = "bold 36px 'Bradley Hand','Segoe Print','Comic Sans MS',cursive"; g.fillText(w ? wrongOf(q.answer) : q.answer, 470, y - 2);
   });
-  g.fillStyle = "#333"; g.font = "13px monospace"; g.fillText(`Sheet ${sheet.id} | ${sheetCode}`, 50, H - 40);
+  g.fillStyle = "#333"; g.font = "bold 22px monospace"; g.fillText(`Sheet ${sheet.id} | ${sheetCode}`, 50, H - 40);
   return new Promise((r) => c.toBlob(r, "image/jpeg", 0.9));
 }
 // Scenarios the Snap button offers.

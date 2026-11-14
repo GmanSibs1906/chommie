@@ -12,11 +12,13 @@ Demo slice: **Grade 6 Maths, Term 4, fractions**, with made-up learners and book
 | `site.css`, `demo.html`, `privacy.html` | Extra landing sections, "Book a 30-minute demo", terms and privacy |
 | `app/` | The teacher web app (plain HTML, CSS and ES modules, no build step) |
 | `shared/` | Plain-code logic shared by the app and the tests: planner, fractions, marking, analyst, homework, export, coordinator |
-| `netlify/functions/` | Server code (Netlify Functions): `read-atp`, `write-lesson`, `write-bank`, `voice-edit`, `mark`, `review`, `selftest`, `book-demo` |
+| `netlify/functions/` | Server code (Netlify Functions): `read-atp`, `write-lesson`, `write-bank`, `voice-edit`, `mark`, `identify`, `review`, `selftest`, `book-demo` |
 | `shared/models.json` | **Every model ID, in one file** |
 | `demo/` | Made-up exercise-book photos, the sample ATP photo and `demo-run.json` |
 | `scripts/` | `build.mjs` (publishes only the public folders to `dist/`), `make_demo_images.py`, `make_demo_run.mjs` |
 | `tests/` | `node --test` unit tests |
+
+The QR libraries (jsQR and qrcode-generator, both MIT) are copied into `shared/vendor/` by `scripts/vendor.mjs`. `scripts/devserver.mjs` is a local test server only (code-made homework bank, no AI routes).
 
 Plain code, not the model, does every total, percentage and date, and every memo answer is proven by calculation.
 
@@ -74,6 +76,19 @@ It makes one real call (with an image for the vision models) to each distinct ID
 3. **Heat map**: Related denominators is struggling for 40% or more of the class, so the Coordinator proposes a 15 minute class re-teach.
 4. **Re-plan and rewrite that lesson**: tomorrow's lesson (Mon 16 Nov) gains the re-teach, and the Plan screen still meets the test on Thu 26 Nov and the exam on Wed 2 Dec.
 5. **Teach**: type or record "make it shorter".
+
+## Mark personal homework
+
+The Homework tab gives every learner a different sheet. A snapped homework sheet is marked against that learner's own sheet and memo, not the class memo.
+
+1. **Homework**: write and approve the sheets. Approving freezes a sheet and gives it an id like `R1-6B-014-K3F2`. **Print**: each page has the learner's name in the top strip, the learner code in large print, a small QR (code and sheet id, no name) and the sheet id in the footer.
+2. **Snap books**: under "Snapping for" choose **Personal homework**. Pick the learner, then photograph the filled-in sheet (several pages of one sheet are fine). The QR is read on the phone from the original photo, then the name strip is covered as always. A page that carries a homework QR switches to homework by itself.
+3. **Mark**: under "What are you marking?" choose **Personal homework** (Class task stays the default and is unchanged). Chommie matches every page to the learner you picked **and** to the code and QR on the page. If there is no readable QR, Marker A reads the printed code and sheet id instead.
+4. If the two disagree, the sheet is not an approved sheet on this phone, or that learner has no approved sheet, the page is **not marked**. It waits in **Check** under "Homework pages held for you", where you can move it to the right learner and mark again, or delete it.
+5. Matched pages are marked by the same two markers, with the same Reviewer, "unclear is never guessed" rule and teacher decisions in Check, and stored as an informal task, "Homework round 1". Pick it in Check with the "Marks for" list.
+6. The results feed the **Heat map** (per topic) and the **next round**: after a round is marked, Homework offers "Write round 2 homework", and a topic marked again in homework replaces the older wrong answers on that topic.
+
+No camera? On Snap books in homework mode, **Add made-up filled-in sheet (demo)** draws a filled-in sheet (right sheet, one wrong answer, another learner's sheet, or QR torn off). **Load demo run** also includes round 1 homework for three made-up learners.
 
 ## Privacy
 
