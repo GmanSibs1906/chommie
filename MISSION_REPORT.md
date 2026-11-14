@@ -101,3 +101,8 @@ Status log, newest at the bottom. Each feature: what was done, how it was tested
 - Observed: Reviewer catch banner, the two disagreement items and the unclear item in Check, Homework round 1 in the "Marks for" list and on the heat map, re-plan and the Thu 26 Nov test and Wed 2 Dec exam still marked.
 - Housekeeping: three empty stray evidence folders removed. Evidence: `.albert/build-checks/hw-demo-final/` and `demo-path-final/`.
 - Limits unchanged from 11.7: made-up sheet images, not paper photos; no real camera or printer; Marker A's reading of a real printed code is model-dependent.
+
+## 12. Chommie v2 (multi-class, mobile-first) — in progress
+Work log, newest last. Each item says how it was tested and what was seen.
+
+- **F1 Login, classes, mobile shell, agent card — ✅ passing.** Any email and password log in (password never stored); classes list, Create class (name, grade, subject from the DBE catalog), class overview with one big "next step" button and tiles; agent card above every screen. Tested: build_check on the local server at 375, 768 and 1024 (36 steps: empty-login error, log in, create 6B Grade 6 Mathematics, overview, agent card present, no horizontal overflow, no console errors); screenshots read in `.albert/build-checks/v2-f1/`.

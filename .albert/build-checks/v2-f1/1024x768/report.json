@@ -1,0 +1,166 @@
+{
+  "url": "http://localhost:8899/app/",
+  "started": "2026-11-14T04:30:15.706Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Welcome to Chommie",
+      "ok": true
+    },
+    {
+      "assert": "!!document.querySelector('.agent-card')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#login-go",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "expect": "Type an email and a password",
+      "ok": true
+    },
+    {
+      "type": "#email",
+      "value": "teacher@school.test",
+      "ok": true
+    },
+    {
+      "type": "#password",
+      "value": "anything",
+      "ok": true
+    },
+    {
+      "submit": "#login-form",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "Your classes",
+      "ok": true
+    },
+    {
+      "expect": "Create class",
+      "ok": true
+    },
+    {
+      "assert": "!!document.querySelector('.agent-card')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "classes",
+      "ok": true,
+      "detail": "01-classes.png"
+    },
+    {
+      "click": "#new-class",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "Create a class",
+      "ok": true
+    },
+    {
+      "type": "#c-name",
+      "value": "6B",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#c-subject').value === 'Mathematics'",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "submit": "#class-form",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "Your next step",
+      "ok": true
+    },
+    {
+      "expect": "Grade 6, Mathematics",
+      "ok": true
+    },
+    {
+      "expect": "Learners",
+      "ok": true
+    },
+    {
+      "assert": "!!document.querySelector('.agent-card')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "overview",
+      "full": true,
+      "ok": true,
+      "detail": "02-overview.png"
+    },
+    {
+      "click": "[data-v=more]",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "expect": "Check marks",
+      "ok": true
+    },
+    {
+      "shot": "more",
+      "ok": true,
+      "detail": "03-more.png"
+    },
+    {
+      "goto": "/app/#classes",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "6B",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T04:30:33.736Z",
+  "ok": true
+}

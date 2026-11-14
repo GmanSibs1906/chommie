@@ -1,49 +1,62 @@
-import { state, onChange } from "./state.js";
+import { state, onChange, user, activeClass, useClass, classes, logout } from "./state.js";
 import { nextStep } from "../shared/coordinator.js";
 import { listPhotos } from "./db.js";
+import { agentCard } from "./agents.js";
 
-const TABS = [
-  ["upload", "Upload ATP"], ["plan", "Plan term"], ["teach", "Teach"], ["snap", "Snap books"],
-  ["mark", "Mark"], ["check", "Check"], ["heat", "Heat map"], ["homework", "Homework"],
-  "sep", ["approvals", "Approvals and log"], ["hod", "HOD overview"], ["settings", "Settings"],
-];
-const view = document.getElementById("view");
-// Coordinator bar: always says what Chommie decides the next step is, and hands the job to the right screen.
-const coord = document.createElement("div"); coord.className = "coord"; coord.id = "coord"; document.querySelector(".app-head").after(coord);
+// Hash router: #login, #classes, #new, #c/<id>, #c/<id>/<view>
+const FILES = { overview: "overview", more: "more", atp: "atp", plan: "plan", teach: "teach", learners: "learners", markflow: "markflow",
+  marktable: "mark", snap: "snap", check: "check", heat: "heat", homework: "hwlearner", hwwrite: "homework", approvals: "approvals", hod: "hod", settings: "settings" };
+const ALIAS = { upload: "atp", snap: "markflow", mark: "markflow" };
+const view = document.getElementById("view"), slot = document.getElementById("agent-slot");
+const backBtn = document.getElementById("btn-back"), outBtn = document.getElementById("btn-logout"), label = document.getElementById("class-label");
+let active = null, token = 0;
+
+export function go(name) {
+  name = ALIAS[name] || name;
+  const cls = activeClass();
+  if (["login", "classes", "new"].includes(name) || !cls) location.hash = "#" + (["login", "classes", "new"].includes(name) ? name : "classes");
+  else location.hash = name === "overview" ? "#c/" + cls.id : `#c/${cls.id}/${name}`;
+}
+const coord = document.createElement("div"); coord.className = "coord"; coord.id = "coord"; coord.hidden = true; document.querySelector(".app-head").after(coord);
 async function paintCoord() {
+  if (!activeClass() || coord.hidden) return;
   let queued = 0; try { queued = new Set((await listPhotos()).filter((p) => p.status === "queued").map((p) => p.code)).size; } catch {}
   const n = nextStep(state, { queued });
-  coord.innerHTML = `<div class="wrap coord-row"><p id="coord-text"><small>Coordinator, step ${n.index} of ${n.of}</small>${n.label}. <span style="opacity:.8">${n.reason}</span></p><button class="btn" id="coord-go" type="button">Go</button></div>`;
-  coord.querySelector("#coord-go").onclick = () => go(n.view);
+  coord.innerHTML = `<div class="wrap coord-row"><p id="coord-text"><small>Next step ${n.index} of ${n.of}</small>${n.label}. <span style="opacity:.8">${n.reason}</span></p><button class="btn" id="coord-go" type="button">Go</button></div>`;
+  coord.querySelector("#coord-go").onclick = () => go(n.view === "homework" ? "hwwrite" : n.view);
 }
-const nav = document.getElementById("app-nav");
-let current = null, active = null;
 
-nav.innerHTML = TABS.map((t, i) => t === "sep" ? '<i class="sep"></i>' :
-  `<button type="button" role="tab" data-v="${t[0]}" aria-selected="false">${i < 8 ? `<span>${String(i + 1).padStart(2, "0")}</span>` : ""}${t[1]}</button>`).join("");
-nav.addEventListener("click", (e) => { const b = e.target.closest("button[data-v]"); if (b) go(b.dataset.v); });
-
-export async function go(name) {
-  if (active && active.leave) active.leave();       // e.g. stop the camera before changing screen
-  current = name;
-  nav.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.v === name)));
-  document.getElementById("demo-banner").hidden = !state.demo;
+async function route() {
+  const my = ++token;
+  if (active && active.leave) { try { active.leave(); } catch {} }
+  const parts = (location.hash || "").slice(1).split("/");
+  let name = parts[0] || "classes", id = null, sub = null;
+  if (!user() && name !== "login") { location.hash = "#login"; return; }
+  if (user() && name === "login") { location.hash = "#classes"; return; }
+  if (name === "c") { id = parts[1]; sub = parts[2] || "overview"; if (!useClass(id)) { location.hash = "#classes"; return; } name = sub; }
+  else if (name !== "login") useClass(null);
+  const cls = activeClass();
+  const file = id ? FILES[name] : (name === "new" ? "newclass" : name);
+  if (!file) { location.hash = "#c/" + id; return; }
+  document.getElementById("demo-banner").hidden = !(cls && state.demo);
+  label.textContent = cls ? `${cls.name}, Grade ${cls.grade} ${cls.subject}` : (user() ? user().email : "");
+  outBtn.hidden = !user() || !!cls; backBtn.hidden = !user() || name === "classes" || name === "login";
+  backBtn.onclick = () => { if (!id) go("classes"); else if (name === "overview") go("classes"); else go("overview"); };
+  coord.hidden = !(cls && name !== "overview" ? true : false);
+  slot.innerHTML = agentCard(name);
   view.innerHTML = '<p class="loading">Loading</p>';
   try {
-    active = await import(`./views/${name}.js`);
+    active = await import(`./views/${file}.js`);
+    if (my !== token) return;
     view.innerHTML = "";
-    await active.render(view, { go });
+    await active.render(view, { go, cls, name });
   } catch (e) {
     console.error(e);
     view.innerHTML = `<p class="notice notice--bad" role="alert">This screen is not ready yet.</p>`;
   }
-  view.focus({ preventScroll: true });
-  paintCoord();
+  if (my === token) { view.focus({ preventScroll: true }); window.scrollTo(0, 0); paintCoord(); }
 }
-document.getElementById("btn-demo").onclick = async () => {
-  const m = await import("./demo.js"); await m.loadDemoRun(); go("check");
-};
-onChange(() => { document.getElementById("demo-banner").hidden = !state.demo; paintCoord(); });
-const start = (location.hash || "").slice(1);
-if (new URLSearchParams(location.search).get("demo")) { import("./demo.js").then((m) => m.loadDemoRun()).then(() => go("check")); }
-else go(TABS.some((t) => t[0] === start) ? start : "upload");
+outBtn.onclick = () => { logout(); location.hash = "#login"; };
+onChange(() => { document.getElementById("demo-banner").hidden = !(activeClass() && state.demo); paintCoord(); });
+window.addEventListener("hashchange", route);
+route();

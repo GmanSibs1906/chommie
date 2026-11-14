@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chommie - Grade 6 Maths, Term 4</title>
+  <title>Chommie - your classes</title>
   <link rel="stylesheet" href="../tokens.css" />
   <link rel="stylesheet" href="../fonts/fonts.css" />
   <link rel="stylesheet" href="../screen.css" />
@@ -14,12 +14,13 @@
 <header class="app-head">
   <div class="wrap app-head-row">
     <a href="/" class="app-logo">Chommie</a>
-    <span class="app-class mono" id="class-label">Grade 6 Maths, Term 4, fractions</span>
-    <button class="btn btn--ghost" id="btn-demo" type="button">Load demo run</button>
+    <span class="app-class mono" id="class-label"></span>
+    <button class="btn btn--ghost" id="btn-back" type="button" hidden>Back</button>
+    <button class="btn btn--ghost" id="btn-logout" type="button" hidden>Log out</button>
   </div>
   <p class="demo-banner" id="demo-banner" hidden>Demo run: made-up learners and books. No real learner data.</p>
-  <nav class="wrap app-nav" id="app-nav" aria-label="Chommie steps" role="tablist"></nav>
 </header>
+<div id="agent-slot"></div>
 <main class="wrap app-main" id="view" tabindex="-1"></main>
 <div id="print-sheets" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>

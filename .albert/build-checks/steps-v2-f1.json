@@ -1,0 +1,19 @@
+[
+ {"goto":"/app/"},{"wait":1500},
+ {"expect":"Welcome to Chommie"},{"assert":"!!document.querySelector('.agent-card')"},
+ {"click":"#login-go"},{"wait":300},{"expect":"Type an email and a password"},
+ {"type":"#email","value":"teacher@school.test"},{"type":"#password","value":"anything"},
+ {"submit":"#login-form"},{"wait":800},
+ {"expect":"Your classes"},{"expect":"Create class"},{"assert":"!!document.querySelector('.agent-card')"},{"shot":"classes"},
+ {"click":"#new-class"},{"wait":800},{"expect":"Create a class"},
+ {"type":"#c-name","value":"6B"},
+ {"assert":"document.querySelector('#c-subject').value === 'Mathematics'"},
+ {"submit":"#class-form"},{"wait":1000},
+ {"expect":"Your next step"},{"expect":"Grade 6, Mathematics"},{"expect":"Learners"},
+ {"assert":"!!document.querySelector('.agent-card')"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"overview","full":true},
+ {"click":"[data-v=more]"},{"wait":600},{"expect":"Check marks"},{"shot":"more"},
+ {"goto":"/app/#classes"},{"wait":800},{"expect":"6B"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"}
+]

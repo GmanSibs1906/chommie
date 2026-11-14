@@ -29,3 +29,12 @@
 - [green] Because slow renders made live checks flaky, I decided the live test polls for the element it needs instead of fixed waits, and clicks tabs by script so off-screen tabs in the scrolling strip are reachable.
 - [yellow] Because Marker A must read the printed code when the QR is torn off, I decided the sheet id in the footer is printed bold and larger.
 - [green] Because the 1024 demo-path run was cut off earlier, I decided to re-run it on the deploy rather than reuse partial evidence.
+
+## Chommie v2 (mission m_20261114_042207)
+- [green] Because the brief says demo only, I decided login accepts any email and any password; only the email is stored locally, never the password.
+- [green] Because views share one live `state` binding, I decided each class is its own data record and `useClass()` swaps it; photos carry a class id so classes never mix.
+- [green] Because a real ATP is the official source, I decided every teaching row read from a DBE or uploaded ATP is accepted; the fractions-only CAPS check is used only by the demo run.
+- [yellow] Because catalog entries with grade "multi" do not say which grades they cover, I decided to leave them out of the grade/subject picker.
+- [yellow] Because marking tasks and memos are the existing Grade 6 fractions task, I decided marking and homework keep that made-up task for every class; the ATP and plan are real, the marked task is the demo task. Said plainly in the report.
+- [yellow] Because the 2026 term dates are published by the DBE, I decided the planner uses T1 14 Jan-27 Mar, T2 8 Apr-26 Jun, T3 21 Jul-2 Oct, T4 6 Oct-9 Dec, and the teacher can edit test and exam dates.
+- [green] Because no other listed agent reads documents, I decided the class-list photo is read by the Curriculum Reader (vision).

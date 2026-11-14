@@ -8,8 +8,10 @@ function open() {
   }));
 }
 const tx = async (mode, fn) => { const db = await open(); return new Promise((res, rej) => { const t = db.transaction("photos", mode), s = t.objectStore("photos"), out = fn(s); t.oncomplete = () => res(out?.result); t.onerror = () => rej(t.error); }); };
-export const putPhoto = (p) => tx("readwrite", (s) => s.put(p));
-export const listPhotos = () => tx("readonly", (s) => s.getAll());
+import { activeId } from "./state.js";
+// Every photo carries the class it was taken in, so two classes never see each other's books.
+export const putPhoto = (p) => tx("readwrite", (s) => s.put({ ...p, cls: p.cls || activeId() }));
+export const listPhotos = async () => (await tx("readonly", (s) => s.getAll())).filter((p) => (p.cls || null) === activeId() || (!p.cls && !activeId()));
 export const deletePhoto = (id) => tx("readwrite", (s) => s.delete(id));
 export async function deleteByCode(code) { for (const p of await listPhotos()) if (p.code === code) await deletePhoto(p.id); }
 export async function deleteAll() { for (const p of await listPhotos()) await deletePhoto(p.id); }
