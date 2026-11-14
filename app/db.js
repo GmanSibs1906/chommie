@@ -14,3 +14,5 @@ export const deletePhoto = (id) => tx("readwrite", (s) => s.delete(id));
 export async function deleteByCode(code) { for (const p of await listPhotos()) if (p.code === code) await deletePhoto(p.id); }
 export async function deleteAll() { for (const p of await listPhotos()) await deletePhoto(p.id); }
 export const blobToDataUrl = (b) => new Promise((res) => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(b); });
+export const kindOf = (p) => p.kind || "class"; // photos saved before personal homework existed are class photos
+export async function deleteWhere(fn) { for (const p of await listPhotos()) if (fn(p)) await deletePhoto(p.id); }

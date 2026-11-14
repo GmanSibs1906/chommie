@@ -24,3 +24,5 @@
 - [yellow] Because the QR/printed id must match a sheet approved on this phone, I decided a QR for an unknown sheet is held for the teacher rather than marked.
 - [yellow] Because homework results belong to one round, I decided each round is its own task (hw-r1, hw-r2...) with a per-learner question list, appended after the class task so getTasks()[0] stays the class task.
 - [green] Because the model key cannot be read locally, I decided local browser checks use scripts/devserver.mjs (code-made bank, other /api routes 503) and every marking check runs on the deployed site.
+- [yellow] Because homework is informal by default and per-learner totals differ, I decided a homework round cannot be switched to formal (no export or HOD record), it feeds the heat map and the next round only.
+- [yellow] Because the teacher may know whose a held page is, I decided a held page can be moved to another learner and marked again; it is checked against the sheet again, so a wrong move is held again.

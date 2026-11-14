@@ -7,7 +7,7 @@ export default async (req) => {
   const b = await req.json().catch(() => ({}));
   const role = b.role === "B" ? "markerB" : "markerA";
   const { code, images, questions } = b;
-  if (!/^[\w-]{3,20}$/.test(code || "") || !Array.isArray(images) || !images.length || images.length > 6 || !Array.isArray(questions) || !questions.length)
+  if (!/^[\w-]{3,20}$/.test(code || "") || !Array.isArray(images) || !images.length || images.length > 6 || !Array.isArray(questions) || !questions.length || questions.length > 40)
     return jsonResponse({ error: "Send code, 1 to 6 images and the questions" }, 400);
   if (!images.every((i) => typeof i === "string" && i.startsWith("data:image/"))) return jsonResponse({ error: "Images must be data URLs" }, 400);
   const content = [];

@@ -1,0 +1,211 @@
+[
+{
+"goto": "/app/"
+},
+{
+"wait": 2500
+},
+{
+"click": "#btn-demo"
+},
+{
+"wait": 5000
+},
+{
+"click": "button[data-v='homework']"
+},
+{
+"wait": 1500
+},
+{
+"click": "#gen"
+},
+{
+"wait": 6000
+},
+{
+"click": "[data-pick='6B-001']"
+},
+{
+"wait": 400
+},
+{
+"click": "#hw-approve"
+},
+{
+"wait": 400
+},
+{
+"click": "[data-pick='6B-002']"
+},
+{
+"wait": 400
+},
+{
+"click": "#hw-approve"
+},
+{
+"wait": 400
+},
+{
+"click": "[data-pick='6B-003']"
+},
+{
+"wait": 400
+},
+{
+"click": "#hw-approve"
+},
+{
+"wait": 400
+},
+{
+"click": "button[data-v='mark']"
+},
+{
+"wait": 1500
+},
+{
+"expect": "What are you marking?"
+},
+{
+"expect": "Class task"
+},
+{
+"expect": "Personal homework"
+},
+{
+"assert": "document.querySelector('[name=markkind][value=class]').checked && !!document.querySelector('#task-type-sel')"
+},
+{
+"assert": "document.querySelector('#mark-kind input').offsetHeight>=20 && document.querySelector('.kind-opt').offsetHeight>=44"
+},
+{
+"shot": "mark-class-default",
+"full": true
+},
+{
+"click": "[name=markkind][value=homework]"
+},
+{
+"wait": 1500
+},
+{
+"expect": "Each learner is marked against their own sheet"
+},
+{
+"expect": "No homework pages queued"
+},
+{
+"shot": "mark-homework-empty",
+"full": true
+},
+{
+"click": "button[data-v='snap']"
+},
+{
+"wait": 2000
+},
+{
+"expect": "Snapping for"
+},
+{
+"assert": "document.querySelector('[name=snapkind][value=homework]').checked"
+},
+{
+"assert": "(()=>{const e=document.querySelector('#learner-sel');e.value='6B-003';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='6B-003'})()"
+},
+{
+"assert": "(()=>{const e=document.querySelector('#fake-scn');e.value='wrongcode';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='wrongcode'})()"
+},
+{
+"click": "#snap-fake"
+},
+{
+"wait": 2500
+},
+{
+"assert": "(()=>{const e=document.querySelector('#learner-sel');e.value='6B-010';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='6B-010'})()"
+},
+{
+"assert": "(()=>{const e=document.querySelector('#fake-scn');e.value='wrongcode';e.dispatchEvent(new Event('change',{bubbles:true}));return e.value==='wrongcode'})()"
+},
+{
+"click": "#snap-fake"
+},
+{
+"wait": 2500
+},
+{
+"assert": "new Promise(r=>{const q=indexedDB.open('chommie',1);q.onsuccess=()=>{const g=q.result.transaction('photos').objectStore('photos').getAll();g.onsuccess=()=>{const rows=g.result;r(rows.filter(p=>p.kind==='homework'&&p.status==='queued'&&p.qr&&p.qr.code==='6B-001'&&/^R1-6B-001-/.test(p.qr.id)).length===2)}}})"
+},
+{
+"assert": "new Promise(r=>{const q=indexedDB.open('chommie',1);q.onsuccess=()=>{const g=q.result.transaction('photos').objectStore('photos').getAll();g.onsuccess=()=>{const rows=g.result;r(rows.every(p=>p.blob.size>5000))}}})"
+},
+{
+"shot": "snap-homework",
+"full": true
+},
+{
+"click": "button[data-v='mark']"
+},
+{
+"wait": 1500
+},
+{
+"expect": "Mark 2 homework books"
+},
+{
+"click": "#run"
+},
+{
+"wait": 3000
+},
+{
+"expect": "Held in Check"
+},
+{
+"expect": "does not match"
+},
+{
+"expect": "has no approved homework sheet"
+},
+{
+"assert": "JSON.parse(localStorage.getItem('chommie.v1')).tasks.filter(t=>t.kind==='homework').every(t=>Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).marks[t.id]||{}).length===0)"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "mark-held",
+"full": true
+},
+{
+"click": "#to-check"
+},
+{
+"wait": 1500
+},
+{
+"expect": "Homework pages held for you (2)"
+},
+{
+"assert": "document.querySelectorAll('[data-held-page] img').length===2"
+},
+{
+"assert": "document.documentElement.scrollWidth<=innerWidth+1"
+},
+{
+"shot": "check-held",
+"full": true
+},
+{
+"click": "[data-drop]"
+},
+{
+"wait": 1000
+},
+{
+"expect": "Homework pages held for you (1)"
+}
+]

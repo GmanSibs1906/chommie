@@ -112,3 +112,10 @@ body.app { background: var(--ground); }
 .coord small { opacity: .75; display: block; font-size: 13px; }
 .sheet-table { width: 100%; border-collapse: collapse; font-size: 14px; } .sheet-table th, .sheet-table td { border: 1px solid #999; padding: 6px 8px; text-align: left; }
 .sign-line { margin-top: 40px; border-top: 1px solid #000; width: 280px; padding-top: 4px; }
+
+/* Class task or personal homework */
+.kind-pick { border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px 12px; margin: 0 0 14px; background: var(--surface); }
+.kind-pick legend { font-weight: 600; padding: 0 6px; }
+.kind-opt { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.kind-opt input { width: 22px; height: 22px; flex: none; }
+.hold-card { border: 1px solid #c9a24a; }

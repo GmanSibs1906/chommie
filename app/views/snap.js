@@ -1,6 +1,8 @@
 import { state, save, log, toast, esc } from "../state.js";
 import { learners as DEFAULT_LEARNERS } from "../../shared/learners.js";
-import { putPhoto, listPhotos, deletePhoto, deleteByCode } from "../db.js";
+import { putPhoto, listPhotos, deletePhoto, deleteByCode, kindOf } from "../db.js";
+import { readQr } from "../qr.js";
+import { fakeFor, SCENARIOS } from "../fakesheet.js";
 
 let stream = null, track = null, capture = null, sel = null, photos = [];
 const MASK = 0.13; // top 13% of every page (the name strip) is blacked out on this phone before anything is stored or sent
@@ -11,38 +13,51 @@ function stopCamera() { stream?.getTracks().forEach((t) => t.stop()); stream = t
 document.addEventListener("visibilitychange", () => { if (document.hidden && stream) { stopCamera(); document.querySelector("#cam-wrap")?.setAttribute("hidden", ""); toast("Camera stopped because you left the page"); } });
 
 // Resize to 1280px, black out the name strip, stamp the learner code. The original image is never stored.
-export async function maskAndStore(blobOrBitmap, code, status = "queued") {
+export async function maskAndStore(blobOrBitmap, code, status = "queued", opts = {}) {
   const bmp = blobOrBitmap instanceof Blob ? await createImageBitmap(blobOrBitmap) : blobOrBitmap;
+  // Personal homework: the QR is read here, from the original photo, because the strip below is covered before anything is stored.
+  const qr = opts.kind === "class" ? null : await readQr(bmp);
+  const kind = opts.kind || (qr ? "homework" : state.markKind === "homework" ? "homework" : "class");
   const k = Math.min(1, 1280 / Math.max(bmp.width, bmp.height));
   const c = document.createElement("canvas"); c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
   const g = c.getContext("2d"); g.drawImage(bmp, 0, 0, c.width, c.height);
   const h = Math.round(c.height * MASK); g.fillStyle = "#000"; g.fillRect(0, 0, c.width, h);
-  g.fillStyle = "#fff"; g.font = `600 ${Math.round(h * 0.5)}px monospace`; g.textBaseline = "middle"; g.fillText(code, 16, h / 2);
+  g.fillStyle = "#fff"; g.font = `600 ${Math.round(h * 0.5)}px monospace`; g.textBaseline = "middle";
+  // A homework page is not stamped with the picked learner: the printed code lower on the page must stand on its own.
+  g.fillText(kind === "homework" ? "HOMEWORK (name covered)" : code, 16, h / 2, c.width - 32);
   const blob = await new Promise((r) => c.toBlob(r, "image/jpeg", 0.82));
-  const id = code + "-" + Date.now();
-  const page = photos.filter((p) => p.code === code).length + 1;
-  await putPhoto({ id, code, page, blob, status, at: Date.now() });
-  log("Snap", status === "queued" ? "Photo masked and queued" : "Demo photo kept for review", `${code} page ${page}. Name strip covered on this phone before storing.`);
+  const id = code + "-" + Date.now() + "-" + Math.floor(Math.random() * 1e4);
+  const page = photos.filter((p) => p.code === code && kindOf(p) === kind).length + 1;
+  await putPhoto({ id, code, page, blob, status, at: Date.now(), kind, qr });
+  photos = await listPhotos();
+  log("Snap", status === "queued" ? "Photo masked and queued" : "Demo photo kept for review", `${code} page ${page}${kind === "homework" ? " (personal homework" + (qr ? ", QR read in the browser" : ", no QR read") + ")" : ""}. Name strip covered on this phone before storing.`);
+  if (kind === "homework" && state.markKind !== "homework") { state.markKind = "homework"; save(); }
   return id;
 }
 
 export async function render(root, ctx) {
   const L = ensureLearners();
   photos = await listPhotos();
-  const next = L.find((l) => l.consent && !photos.some((p) => p.code === l.code));
+  const next = L.find((l) => l.consent && !photos.some((p) => p.code === l.code && kindOf(p) === state.markKind));
   if (!sel || !L.some((l) => l.code === sel)) sel = (next || L.find((l) => l.consent)).code;
   draw(root, ctx);
 }
 
 function draw(root, ctx) {
   const L = state.learners, cur = L.find((l) => l.code === sel), consented = L.filter((l) => l.consent);
-  const done = new Set(photos.map((p) => p.code)).size;
+  const done = new Set(photos.filter((p) => kindOf(p) === state.markKind).map((p) => p.code)).size;
+  const fakeHtml = state.markKind !== "homework" ? "" : `<p class="muted" style="font-size:14px">Personal homework: each page is matched to the learner picked here and to the code and QR printed on the sheet. If they disagree the page waits for you in Check.</p>
+    <div class="field"><label for="fake-scn">Made-up sheet</label><select id="fake-scn" style="font:inherit;min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);width:100%">${Object.entries(SCENARIOS).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select></div>
+    <div class="btn-row"><button class="btn btn--ghost" id="snap-fake" type="button">Add made-up filled-in sheet (demo)</button></div>`;
   root.innerHTML = `
     <h1 class="v-title">Snap the books.</h1>
     <p class="v-lede">One book after another. Only learners with signed consent can be photographed. The name strip is covered on this phone before the photo is stored, and each learner becomes a record number.</p>
     <div class="grid2">
       <div>
         <div class="panel-box">
+          <fieldset class="kind-pick" id="snap-kind"><legend>Snapping for</legend>
+            <label class="kind-opt"><input type="radio" name="snapkind" value="class" ${state.markKind !== "homework" ? "checked" : ""}> <span>Class task</span></label>
+            <label class="kind-opt"><input type="radio" name="snapkind" value="homework" ${state.markKind === "homework" ? "checked" : ""}> <span>Personal homework</span></label></fieldset>
           <div class="field"><label for="learner-sel">Learner</label>
             <select id="learner-sel" style="font:inherit;min-height:48px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);width:100%">
               ${L.map((l) => `<option value="${l.code}" ${l.code === sel ? "selected" : ""} ${l.consent ? "" : "disabled"}>${l.code} ${esc(l.name)}${l.consent ? "" : " (no consent)"}</option>`).join("")}
@@ -61,6 +76,7 @@ function draw(root, ctx) {
             <button class="btn btn--ghost" id="snap-sample" type="button">Add sample book page (demo)</button>
           </div>
           <p class="muted" style="font-size:13px">The sample is a made-up exercise book for demo learners 6B-001 to 6B-007.</p>
+          ${fakeHtml}
         </div>
         <div class="panel-box"><h3>Upload queue</h3>
           <p id="queue-sum" class="muted">${photos.length} page(s) waiting on this phone. Photos stay here until marking, then are deleted.</p>
@@ -81,6 +97,7 @@ function draw(root, ctx) {
   const th = $("#thumbs");
   photos.forEach((p) => { const f = document.createElement("figure"); f.style.margin = 0;
     f.innerHTML = `<img class="thumb" alt="Masked page ${p.page} for ${p.code}" width="96" height="128" style="width:100%;height:128px;object-fit:cover" src="${URL.createObjectURL(p.blob)}"><figcaption class="mono" style="font-size:11px">${p.code} p${p.page}</figcaption>`; th.appendChild(f); });
+  root.querySelectorAll("[name=snapkind]").forEach((r) => r.onchange = () => { state.markKind = r.value; save(); draw(root, ctx); });
   $("#learner-sel").onchange = (e) => { sel = e.target.value; };
   $("#hold-wifi").onchange = (e) => { state.settings.holdWifi = e.target.checked; save(); };
   $("#go-mark").onclick = () => ctx.go("mark");
@@ -95,7 +112,7 @@ function draw(root, ctx) {
   const guard = () => { const l = state.learners.find((x) => x.code === sel); if (!l?.consent) { toast("No signed consent for " + sel + ". Not photographed."); return null; } return l; };
   async function added(code) {
     photos = await listPhotos();
-    const nx = state.learners.find((l) => l.consent && !photos.some((p) => p.code === l.code));
+    const nx = state.learners.find((l) => l.consent && !photos.some((p) => p.code === l.code && kindOf(p) === state.markKind));
     if (nx) sel = nx.code;
     const wasOpen = !!stream; draw(root, ctx);
     if (wasOpen) restoreCamera(root);
@@ -107,6 +124,11 @@ function draw(root, ctx) {
     const n = Number(l.code.slice(-3)); const code = n >= 1 && n <= 7 ? l.code : "6B-001";
     if (code !== l.code) toast("Sample book pages exist for 6B-001 to 6B-007, using 6B-001's pages");
     const blob = await (await fetch(`../demo/books/${code}.jpg`)).blob(); await maskAndStore(blob, l.code); added(l.code);
+  };
+  const fk = $("#snap-fake"); if (fk) fk.onclick = async () => {
+    const l = guard(); if (!l) return;
+    try { const blob = await fakeFor(l.code, $("#fake-scn").value); await maskAndStore(blob, l.code); added(l.code); }
+    catch (e) { toast(e.message); }
   };
   // camera
   $("#cam-start").onclick = async () => {
