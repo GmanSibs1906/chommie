@@ -95,3 +95,9 @@ Status log, newest at the bottom. Each feature: what was done, how it was tested
 - Honest notes: three earlier live runs failed and were fixed in the TEST, not the app: waits that were too short for slow renders (Homework and Mark views, demo load finishing with `go("check")` after my click) and the Homework tab sitting off-screen in the scrolling tab strip at 768 (the test now scrolls it into view and clicks it). Product limit: a person who taps another tab during the few seconds the demo run is loading gets taken to Check when it finishes.
 - Limits: sheets are made-up images drawn by code, not photos of paper; QR read on those images only; real camera, printing on paper and Marker A's reading of a real printed code were not tested; whether Marker A reads the code correctly depends on the model.
 
+
+### 11.8 Regression and final deploy — ✅ passing
+- Tested: `node --test` 50 of 50 pass. On the deployed site (https://chommie-teacher.netlify.app) the demo-with-homework flow (`hw-demo-final`) and the full demo path (`demo-path-final`) were run at 375, 768 and 1024: all `ok: true`, no console errors. The 1024 demo-path run was cut off in the previous session and was re-run in this one: 61 steps, 0 failures. `/api/selftest` returns ok with real model calls. `dist/` contains no `sk-or` string; the key stays a Netlify secret.
+- Observed: Reviewer catch banner, the two disagreement items and the unclear item in Check, Homework round 1 in the "Marks for" list and on the heat map, re-plan and the Thu 26 Nov test and Wed 2 Dec exam still marked.
+- Housekeeping: three empty stray evidence folders removed. Evidence: `.albert/build-checks/hw-demo-final/` and `demo-path-final/`.
+- Limits unchanged from 11.7: made-up sheet images, not paper photos; no real camera or printer; Marker A's reading of a real printed code is model-dependent.

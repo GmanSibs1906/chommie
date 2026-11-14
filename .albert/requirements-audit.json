@@ -39,7 +39,7 @@
   "id": "R7",
   "status": "built",
   "where": "app/views/homework.js, shared/homework.js",
-  "tested": "homework live test at 1024: 7 sheets, edit, approve, print DOM per learner; node tests"
+  "tested": "homework live test at 1024: 7 sheets, edit, approve, print DOM per learner; node tests | Homework marked against each learner own sheet and memo: app/views/mark.js, shared/homework.js. Tested: node --test (50 pass) and live E2E hw-mark-live at 3 viewports"
  },
  {
   "id": "R8",
@@ -51,13 +51,13 @@
   "id": "R9",
   "status": "built",
   "where": "app/views/check.js, app/views/mark.js",
-  "tested": "live marking with real vision models + demo path: both markers' reads, disagreements, unclear flagged with crop"
+  "tested": "live marking with real vision models + demo path: both markers' reads, disagreements, unclear flagged with crop | Personal homework uses same two markers, Reviewer, unclear rule: tested live (hw-mark-live)"
  },
  {
   "id": "R10",
   "status": "built",
   "where": "app/views/heat.js, shared/analyst.js",
-  "tested": "live loop + demo path at 3 viewports; node tests"
+  "tested": "live loop + demo path at 3 viewports; node tests | Homework round results feed heat map and next round: tested hw-demo-final at 3 viewports"
  },
  {
   "id": "R11",

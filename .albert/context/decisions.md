@@ -28,3 +28,4 @@
 - [yellow] Because the teacher may know whose a held page is, I decided a held page can be moved to another learner and marked again; it is checked against the sheet again, so a wrong move is held again.
 - [green] Because slow renders made live checks flaky, I decided the live test polls for the element it needs instead of fixed waits, and clicks tabs by script so off-screen tabs in the scrolling strip are reachable.
 - [yellow] Because Marker A must read the printed code when the QR is torn off, I decided the sheet id in the footer is printed bold and larger.
+- [green] Because the 1024 demo-path run was cut off earlier, I decided to re-run it on the deploy rather than reuse partial evidence.
