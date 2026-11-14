@@ -24,7 +24,17 @@ export async function markLearner(task, code, onStep = () => {}, opts = {}) {
   onStep("Markers A and B are reading");
   const full = (r) => (r.answers || []).length >= task.questions.length;
   const callFull = async (role) => { let r = await call(role); if (!full(r)) r = await call(role); return r; }; // one more try if a marker came back short
-  const [ra, rb] = await Promise.all([callFull("A"), callFull("B")]);
+  let [ra, rb] = await Promise.all([callFull("A"), callFull("B")]);
+  // A marker that comes back with (almost) nothing must not turn the whole book into "unclear" for the teacher
+  // (Gman's real test, 2026-11-14: Marker B returned nothing for Sipho, so 10 of 10 went to the teacher). Ask again;
+  // if it still has nothing, stop and say so. The photos stay queued, so "Mark" simply tries again.
+  const thin = (r) => (r.answers || []).length < Math.ceil(task.questions.length / 2);
+  for (const [who, get, put] of [["A", () => ra, (r) => (ra = r)], ["B", () => rb, (r) => (rb = r)]]) {
+    if (!thin(get())) continue;
+    onStep(`Marker ${who} answered too little, asking again`);
+    try { put(await call(who)); } catch {}
+    if (thin(get())) throw new Error(`Marker ${who} (${who === "A" ? "Anthropic" : "Google"}) did not read this book. Nothing was saved; tap Mark to try again.`);
+  }
   log("Marker A", "Marked " + code, `${ra.answers.length} answers read from ${images.length} page(s)`, ra.meta);
   log("Marker B", "Marked " + code, `${rb.answers.length} answers read from ${images.length} page(s)`, rb.meta);
   const A = by(ra), B = by(rb);

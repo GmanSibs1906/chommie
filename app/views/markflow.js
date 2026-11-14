@@ -33,6 +33,13 @@ function statusOf(code, photos, kind) {
   if (n) return { tone: "info", text: `${n} photo${n > 1 ? "s" : ""} taken`, photo: true };
   return { tone: "na", text: "To do" };
 }
+// Class task: a status line that also notices a retake taken after the last mark.
+function classStatus(code, photos) {
+  const task = getTasks()[0], m = (state.marks[task.id] || {})[code];
+  const newer = photos.some((p) => p.code === code && kindOf(p) === "class" && p.status === "queued" && (p.at || 0) > (m ? Date.parse(m.at) || 0 : 0));
+  if (m && newer) return { tone: "info", text: "Retake waiting", photo: true };
+  return null;
+}
 
 // A learner's homework rounds: which sheets exist and whether each was marked.
 function roundsOf(code) {
@@ -48,11 +55,13 @@ async function draw(root, ctx) {
   const kind = state.markKind === "homework" ? "homework" : "class";
   const photos = await listPhotos();
   const L = state.learners.filter((l) => l.consent);
-  const rows = L.map((l) => ({ l, s: statusOf(l.code, photos, kind) }));
+  const rows = L.map((l) => ({ l, s: (kind === "class" && classStatus(l.code, photos)) || statusOf(l.code, photos, kind) }));
   if (state.markPick) { sel = state.markPick; delete state.markPick; save(); } // came from a learner on the Homework screen
   if (!sel || !L.some((l) => l.code === sel)) sel = (rows.find((r) => r.s.tone === "na") || rows[0] || {}).l?.code || null;
   const cur = L.find((l) => l.code === sel);
-  const queued = [...new Set(photos.filter((p) => kindOf(p) === kind && p.status === "queued").map((p) => p.code))];
+  const markedAt = (code) => { const t = getTasks()[0], m = kind === "class" ? (state.marks[t.id] || {})[code] : null; return m ? Date.parse(m.at) || 0 : 0; };
+  // Waiting = a photo newer than this learner's last mark, so a marked book is not offered again (a retake is).
+  const queued = [...new Set(photos.filter((p) => kindOf(p) === kind && p.status === "queued" && (p.at || 0) > markedAt(p.code)).map((p) => p.code))];
   const doneN = rows.filter((r) => r.s.done).length, photoN = rows.filter((r) => r.s.photo).length;
   const hw = kind === "homework", rounds = cur && hw ? roundsOf(cur.code) : [];
   const noSheet = hw && cur && !rounds.length;
@@ -72,7 +81,8 @@ async function draw(root, ctx) {
         ? `<p class="notice">${esc(first(cur.name))} has no approved homework sheet yet. Write and approve homework first.</p><div class="btn-row"><button class="btn btn--accent btn--big" id="to-write" type="button">Write homework</button></div>`
         : `<ul class="round-list" id="round-list">${rounds.map((r) => `<li><span>Round ${r.round} · ${r.n} questions</span><span class="st ${r.marked ? (r.score.pending ? "st--warn" : "st--ok") : "st--na"}">${r.marked ? `Marked ${r.score.right}/${r.score.total}` : "Not marked"}</span></li>`).join("")}</ul>
            <p class="muted" style="font-size:14px">Photograph the sheet. Chommie reads the code on it and marks it against ${esc(first(cur.name))}'s own answers.</p>`) : ""}
-      ${noSheet ? "" : `<label class="btn btn--accent btn--big btn--block" for="cam-file" style="cursor:pointer" id="take">Take photo</label>
+      ${noSheet ? "" : `<p class="muted" style="font-size:14px;margin:0 0 10px">Keep the learner's name at the very top edge: that strip is blacked out on this phone before anything is sent.</p>
+      <label class="btn btn--accent btn--big btn--block" for="cam-file" style="cursor:pointer" id="take">Take photo</label>
       <input type="file" id="cam-file" accept="image/*" capture="environment" class="sr-only" />
       <label class="btn btn--ghost btn--block" for="pick-file" style="cursor:pointer;margin-top:10px">Choose from gallery</label>
       <input type="file" id="pick-file" accept="image/*" class="sr-only" />`}
@@ -116,6 +126,7 @@ async function draw(root, ctx) {
         : /Reviewer/.test(m) ? `Reviewer (OpenAI): ${m.replace(/^Reviewer\s*/, "")} for ${who}`
         : /printed code/.test(m) ? `Marker A is reading the code on ${who}'s sheet` : null;
       if (line) busy(line);
+      if (m === "done" || /^error|^held/.test(m)) { if (/^error/.test(m)) toast(`${who}: ${m.replace(/^error:\s*/, "")}`); if (root.isConnected) draw(root, ctx); }
     };
     try {
       if (hw) await markHomeworkAll(queued, (c, m) => { progress[c] = m; say(c, m); });

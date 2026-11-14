@@ -5,7 +5,9 @@ import { readQr } from "../qr.js";
 import { fakeFor, SCENARIOS } from "../fakesheet.js";
 
 let stream = null, track = null, capture = null, sel = null, photos = [];
-const MASK = 0.13; // top 13% of every page (the name strip) is blacked out on this phone before anything is stored or sent
+// Top 6% of every page (where the learner writes a name) is blacked out on this phone before anything is stored or sent.
+// Was 13%: on Gman's real test photos (2026-11-14) that hid the first row of answers ("cut off by banner").
+const MASK = 0.06;
 
 export function ensureLearners() { if (!state.learners) { state.learners = structuredClone(DEFAULT_LEARNERS); save(); } return state.learners; }
 export function leave() { stopCamera(); }
