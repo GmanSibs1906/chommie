@@ -223,3 +223,9 @@ body.app { font-size: 17px; }
 .class-row { display: flex; gap: 10px; align-items: stretch; }
 .class-row .tile { flex: 1; }
 .class-del { flex: none; align-self: center; }
+
+/* Check: questions and answers review (optional, before confirming) */
+.qa-review summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.qa-select { font: inherit; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); max-width: 100%; }
+.qa-scroll { overflow-x: auto; margin-top: 10px; }
+.qa-tbl td, .qa-tbl th { white-space: nowrap; }

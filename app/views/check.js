@@ -8,7 +8,7 @@ import { isHomework, questionsFor } from "../../shared/hwmark.js";
 
 const nameOf = (c) => (state.learners || []).find((l) => l.code === c)?.name || "";
 const word = (b) => (b ? "correct" : "wrong");
-let selTask = null;
+let selTask = null, qaOpen = false, qaWho = "";
 const WHY = { disagree: "The two markers disagree", unclear: "Handwriting unclear", teacher: "Still wrong after two fixes" };
 
 export async function render(root, ctx) {
@@ -30,6 +30,7 @@ export async function render(root, ctx) {
     <div class="panel-box"><p id="check-sum"><strong>${open.length}</strong> need${open.length === 1 ? "s" : ""} you. ${agreed} of ${total} answers: both markers agree and the Reviewer's check passed. ${decided.length} decided by you.</p></div>
     <div id="queue">${open.map((p, i) => card(p, i, task)).join("") || '<p class="notice" id="all-clear">Nothing is waiting for you.</p>'}</div>
     ${decided.length ? `<details class="panel-box"><summary style="cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center">Decided by you (${decided.length})</summary>${decided.map((p, i) => card(p, "d" + i, task)).join("")}</details>` : ""}
+    ${qaHtml(task, marks)}
     <div class="panel-box"><h3>Confirm marks</h3>
       ${state.marksConfirmed[task.id] ? '<p class="st st--ok" id="confirmed">Confirmed. Photos deleted from this phone.</p><div class="btn-row"><button class="btn btn--accent" id="to-heat" type="button">See the heat map</button></div>'
         : `<p class="muted">Confirming approves these marks and deletes the book photos from this phone.</p><div class="btn-row"><button class="btn btn--accent" id="confirm" type="button" ${open.length ? "disabled" : ""}>Confirm marks and delete photos</button></div>${open.length ? `<p class="muted" style="font-size:14px">${open.length} item(s) still need you.</p>` : ""}`}</div>`}`;
@@ -42,6 +43,8 @@ export async function render(root, ctx) {
     log("Teacher", `Moved a held homework page to ${to}`, `Was picked as ${p.code}. It will be checked against the sheet again when you mark.`); toast("Moved to " + to + ". Mark it again."); render(root, ctx);
   });
   root.querySelectorAll("[data-drop]").forEach((b) => b.onclick = async () => { await deletePhoto(b.dataset.drop); log("Teacher", "Deleted a held homework page", ""); render(root, ctx); });
+  const qa = $("#qa-review"); if (qa) qa.ontoggle = () => { qaOpen = qa.open; };
+  const qw = $("#qa-who"); if (qw) qw.onchange = () => { qaWho = qw.value; qaOpen = true; render(root, ctx); };
   const ts = $("#to-snap"); if (ts) ts.onclick = () => ctx.go("snap");
   const th = $("#to-heat"); if (th) th.onclick = () => ctx.go("heat");
   root.querySelectorAll("[data-decide]").forEach((b) => b.onclick = () => {
@@ -98,4 +101,33 @@ function heldHtml(held) {
       <div><p><strong class="mono">${p.code}</strong> ${esc(nameOf(p.code))}, page ${p.page}</p><p>${esc(p.holdReason || "")}</p>
       <div class="field"><label for="to-${p.id}">Move this page to</label><select id="to-${p.id}" data-refile-to="${p.id}" style="font:inherit;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);width:100%">${L.map((l) => `<option value="${l.code}" ${l.code === (p.claimed || p.code) ? "selected" : ""}>${l.code} ${esc(l.name)}</option>`).join("")}</select></div>
       <div class="btn-row"><button class="btn btn--accent" data-refile="${p.id}" type="button">Move and mark again</button><button class="btn btn--danger" data-drop="${p.id}" type="button">Delete this page</button></div></div></div></article>`).join("")}</div>`;
+}
+
+// "Review before you approve" (Gman, 2026-11-14): the task's real questions and memo answers, and for one learner
+// what was read on their page and the mark that counts, so the teacher can confirm before approving.
+function qaHtml(task, marks) {
+  const hw = isHomework(task), codes = Object.keys(marks).sort();
+  if (!codes.length) return "";
+  if (!codes.includes(qaWho) && !(qaWho === "" && !hw)) qaWho = hw ? codes[0] : "";
+  const who = qaWho, qs = questionsFor(task, who || codes[0]), items = who ? marks[who]?.items || [] : [];
+  const byN = Object.fromEntries(items.map((i) => [i.n, i]));
+  const readOf = (it) => { if (!it) return "";
+    if (it.decision && it.reviewer?.read) return it.reviewer.read;
+    const a = it.A?.read ?? "", b = it.B?.read ?? "";
+    return a === b || !b ? a : !a ? b : `A: ${a} · B: ${b}`; };
+  const markOf = (it) => { const f = it ? finalCorrect(it) : null;
+    return f === null ? '<span class="st st--warn">Needs you</span>' : `<span class="st ${f ? "st--ok" : "st--bad"}">${f ? "Correct" : "Wrong"}</span>${it.decision ? ' <span class="muted" style="font-size:12px">by you</span>' : ""}`; };
+  const sc = who ? scoreLearner(items) : null;
+  const opts = (hw ? "" : `<option value="" ${who === "" ? "selected" : ""}>Memo only (same for every learner)</option>`) +
+    codes.map((c) => `<option value="${esc(c)}" ${c === who ? "selected" : ""}>${esc(c)} ${esc(nameOf(c))}</option>`).join("");
+  return `<details class="panel-box qa-review" id="qa-review" ${qaOpen ? "open" : ""}>
+    <summary>Check the questions and answers <span class="muted" style="font-weight:400">(optional, before you confirm)</span></summary>
+    <p class="muted" style="margin-top:8px">${hw ? "Homework is personal: each learner has their own sheet. Pick a learner to see their questions, the memo, and what Chommie read." : "Every learner had the same questions. Pick a learner to also see what Chommie read on their page."}</p>
+    <div class="field-inline"><label for="qa-who">Show</label><select id="qa-who" class="qa-select">${opts}</select></div>
+    ${sc ? `<p id="qa-score"><strong>${sc.right} of ${sc.total}</strong> correct${sc.pending ? `, ${sc.pending} still need${sc.pending === 1 ? "s" : ""} you` : ""}.</p>` : ""}
+    <div class="qa-scroll"><table class="tbl qa-tbl" id="qa-tbl"><thead><tr><th>#</th><th>Question</th><th>Memo answer</th>${who ? "<th>Learner wrote</th><th>Mark</th>" : ""}</tr></thead><tbody>
+      ${qs.map((q) => `<tr data-qn="${q.n}"><td>${q.n}</td><td class="mono">${esc(q.q)}</td><td class="mono"><strong>${esc(q.answer)}</strong></td>${who ? `<td class="mono">${esc(readOf(byN[q.n]) || "none")}</td><td>${markOf(byN[q.n])}</td>` : ""}</tr>`).join("")}
+    </tbody></table></div>
+    <p class="muted" style="font-size:13px">Memo answers are worked out by calculation, not by AI.</p>
+  </details>`;
 }
