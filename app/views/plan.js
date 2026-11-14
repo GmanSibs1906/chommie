@@ -1,6 +1,11 @@
 import { state, save, log, toast, esc } from "../state.js";
 import { checkAgainstCaps } from "../../shared/caps.js";
-import { buildPlan, verifyPlan, revisionMinutesLeft, fmt, addDays, mondayOf, TERM4_2026 } from "../../shared/planner.js";
+import { buildPlan, buildPlanByHours, verifyPlan, revisionMinutesLeft, fmt, addDays, mondayOf, TERM4_2026 } from "../../shared/planner.js";
+import { termCalendar } from "../../shared/atp.js";
+import { busy, idle } from "../agents.js";
+
+// The demo class keeps the built-in fractions plan. Every real class is planned from its own ATP, by hours.
+function makePlan(term) { return state.demo ? buildPlan(state.check) : buildPlanByHours(state.check, term || termCalendar(state.atp.term || 4, state.atp)); }
 
 export async function render(root, ctx) {
   if (!state.atp || !state.check) {
@@ -8,7 +13,12 @@ export async function render(root, ctx) {
       <button class="btn btn--accent" id="to-up" type="button">Upload ATP</button>`;
     root.querySelector("#to-up").onclick = () => ctx.go("upload"); return;
   }
-  if (!state.plan) { state.plan = buildPlan(state.check); log("Term Planner", "Planned the term", `${state.plan.days.filter((d) => d.kind === "lesson").length} lesson days placed, test ${fmt(TERM4_2026.test)}, exam ${fmt(TERM4_2026.exam)}`); save(); }
+  if (!state.plan) {
+    state.plan = makePlan(); const t = state.plan.term;
+    if (state.today < t.start || state.today > t.end) state.today = t.start;
+    log("Term Planner", "Planned the term", `${state.plan.days.filter((d) => d.kind === "lesson").length} lesson days placed, test ${fmt(t.test)}, exam ${fmt(t.exam)}`); save();
+    idle(`Term Planner placed ${state.plan.days.filter((d) => d.kind === "lesson").length} lesson days`);
+  }
   draw(root, ctx);
 }
 
@@ -30,6 +40,9 @@ function draw(root, ctx) {
         ${p.warnings.map((w) => `<p class="notice notice--bad" style="margin-top:10px" role="alert">${esc(w)}</p>`).join("")}
       </div>
       <div class="panel-box"><h3>Where are you in the term?</h3>
+        <div class="field-inline"><label for="test-date">Test</label><input type="date" id="test-date" value="${t.test}" min="${t.start}" max="${t.end}" /></div>
+        <div class="field-inline" style="margin-top:8px"><label for="exam-date">Exam</label><input type="date" id="exam-date" value="${t.exam}" min="${t.start}" max="${t.end}" /></div>
+        <p class="muted" style="font-size:14px;margin:8px 0 14px">Change the test or exam date if your school uses other dates. Chommie re-plans.</p>
         <div class="field-inline"><label for="today">Today</label><input type="date" id="today" value="${state.today}" min="${t.start}" max="${t.end}" /></div>
         <p class="muted" style="font-size:14px;margin-top:8px">Re-planning starts from the next school day after this date.</p>
         <div class="btn-row">
@@ -43,6 +56,13 @@ function draw(root, ctx) {
         <span class="d">${fmt(d.date)}</span><span class="t">${esc(d.label || "")}${d.kind === "lesson" ? "" : ""}
         ${d.blocks.filter((b) => b.type === "reteach" || b.type === "catchup").map((b) => `<span class="rt">${esc(b.label)}, ${b.minutes} min</span>`).join("")}</span></div>`).join("")}
     </div></div>`).join("")}</div>`;
+  const redate = () => {
+    const test = root.querySelector("#test-date").value, exam = root.querySelector("#exam-date").value;
+    if (!test || !exam || test >= exam || !p.days.some((d) => d.date === test) || !p.days.some((d) => d.date === exam)) { toast("Pick school days, with the test before the exam"); return draw(root, ctx); }
+    state.plan = makePlan({ ...t, test, exam }); state.planApproved = false; log("Teacher", "Changed test and exam dates", `Test ${fmt(test)}, exam ${fmt(exam)}`); save(); draw(root, ctx);
+  };
+  if (!state.demo) { root.querySelector("#test-date").onchange = redate; root.querySelector("#exam-date").onchange = redate; }
+  else { root.querySelector("#test-date").disabled = true; root.querySelector("#exam-date").disabled = true; }
   root.querySelector("#today").onchange = (e) => { state.today = e.target.value; save(); draw(root, ctx); };
   const ap = root.querySelector("#approve-plan");
   if (ap) ap.onclick = () => { state.planApproved = true; log("Teacher", "Approved term plan", "Teacher approved the term plan"); save(); toast("Plan approved"); draw(root, ctx); };

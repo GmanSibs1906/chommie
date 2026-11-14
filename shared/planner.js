@@ -37,7 +37,15 @@ export function buildPlan(check, term = TERM4_2026) {
         blocks: [{ type: "new", topicId: r.capsId, minutes: term.lessonMin, label: r.capsName }] });
     }
   }
-  // 2. everything else before the test is revision; then test, feedback, exam revision, exam, buffer
+  fillRest(days, term);
+  for (const m of check.missing || []) warnings.push(`Required CAPS topic missing from the ATP, so it is not planned: ${m.name}.`);
+  const plan = { term, days, warnings, reteaches: [] };
+  plan.warnings.push(...revisionWarning(plan));
+  return plan;
+}
+
+// Everything that is not a lesson: revision before the test, the test, feedback, exam revision, the exam. Shared by both planners.
+function fillRest(days, term) {
   for (const x of days) {
     if (x.kind === "lesson") continue;
     if (x.date < term.test) Object.assign(x, { kind: "revision", label: "Revision", atpWeek: 8, blocks: [{ type: "revise", minutes: term.lessonMin, label: "Revision" }] });
@@ -46,7 +54,34 @@ export function buildPlan(check, term = TERM4_2026) {
       blocks: x.date === addDays(term.test, 1) ? [] : [{ type: "revise", minutes: term.lessonMin, label: "Exam revision" }] });
     else if (x.date === term.exam) Object.assign(x, { kind: "exam", label: "Exam", atpWeek: 9 });
   }
-  for (const m of check.missing || []) warnings.push(`Required CAPS topic missing from the ATP, so it is not planned: ${m.name}.`);
+}
+
+// Real ATPs: topics get school days in proportion to their ATP hours (at least one day each), in ATP order, before the test.
+// Same plan shape as buildPlan, so verifyPlan, addReteach, the plan screen and the Coordinator all keep working.
+export function buildPlanByHours(check, term) {
+  const warnings = [];
+  const days = schoolDays(term).map((d) => day(d, "buffer", { label: "Marking, reports, end of term" }));
+  const wk1 = mondayOf(term.start);
+  const pre = days.filter((x) => x.date < term.test);
+  const topics = check.rows.filter((r) => r.status === "matched");
+  const revDays = Math.max(2, Math.round(pre.length * 0.12));
+  let pool = Math.max(topics.length, pre.length - revDays);
+  if (topics.length > pre.length - 1) { warnings.push(`Time is short: ${topics.length} topics but only ${pre.length} school days before the test on ${fmt(term.test)}. Some topics get no revision time.`); pool = pre.length; }
+  const hrs = topics.map((t) => (t.hours > 0 ? t.hours : 0)), known = hrs.filter(Boolean), mean = known.length ? known.reduce((a, b) => a + b, 0) / known.length : 1;
+  const wts = hrs.map((h) => h || mean), sum = wts.reduce((a, b) => a + b, 0) || 1;
+  let alloc = wts.map((w) => Math.max(1, Math.floor((pool * w) / sum)));
+  const rem = (i) => (pool * wts[i]) / sum - alloc[i];
+  while (alloc.reduce((a, b) => a + b, 0) < pool) alloc[wts.map((_, i) => i).sort((x, y) => rem(y) - rem(x))[0]]++;
+  while (alloc.reduce((a, b) => a + b, 0) > pool && alloc.some((n) => n > 1)) alloc[alloc.indexOf(Math.max(...alloc))]--;
+  let di = 0;
+  topics.forEach((r, i) => {
+    for (let k = 0; k < alloc[i] && di < pre.length; k++, di++) {
+      const x = pre[di], w = Math.floor((new Date(x.date + "T00:00:00Z") - new Date(wk1 + "T00:00:00Z")) / (7 * 86400000)) + 1;
+      Object.assign(x, { kind: "lesson", topicId: r.capsId, topic: r.capsName, atpTopic: r.topic, atpWeek: w, label: r.capsName,
+        blocks: [{ type: "new", topicId: r.capsId, minutes: term.lessonMin, label: r.capsName }] });
+    }
+  });
+  fillRest(days, term);
   const plan = { term, days, warnings, reteaches: [] };
   plan.warnings.push(...revisionWarning(plan));
   return plan;

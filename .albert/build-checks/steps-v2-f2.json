@@ -1,0 +1,23 @@
+[
+ {"goto":"/app/"},{"wait":1500},
+ {"type":"#email","value":"teacher@school.test"},{"type":"#password","value":"x"},{"submit":"#login-form"},{"wait":800},
+ {"click":"#new-class"},{"wait":800},{"type":"#c-name","value":"6B"},{"submit":"#class-form"},{"wait":1000},
+ {"click":"[data-v=atp]"},{"wait":1200},
+ {"expect":"Choose your ATP"},{"expect":"From the DBE library"},{"expect":"Upload ATP (PDF or photos)"},{"expect_not":"Up to 3 photos"},
+ {"assert":"document.querySelector('#a-grade').value==='6' && document.querySelector('#a-subject').value==='Mathematics'"},
+ {"assert":"!!document.querySelector('.agent-card')"},
+ {"click":"#load-lib"},{"wait":500},{"wait":8000},
+ {"expect":"Capacity and volume"},{"expect":"Data handling"},{"expect":"Mass"},{"expect":"the official DBE ATP"},{"expect_not":"Equivalent fractions"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"library-term4","full":true},
+ {"click":"#approve-atp"},{"wait":300},{"expect":"ATP approved by you"},
+ {"click":"#go-plan"},{"wait":1500},{"expect":"Your term, on real school days"},{"expect":"Thu 26 Nov"},{"expect":"Passed"},{"expect":"Data handling"},
+ {"assert":"document.documentElement.scrollWidth <= innerWidth + 1"},
+ {"shot":"plan","full":true},
+ {"goto":"/app/#classes"},{"wait":600},
+ {"click":".tile"},{"wait":1000},{"click":"[data-v=atp]"},{"wait":1200},
+ {"assert":"fetch('/demo/atp-gr6-maths-caps.pdf').then(r=>r.blob()).then(b=>{const f=new File([b],'grade-6-maths-atp-caps.pdf',{type:'application/pdf'});const dt=new DataTransfer();dt.items.add(f);const i=document.querySelector('#atp-file');i.files=dt.files;i.dispatchEvent(new Event('change',{bubbles:true}));return true})"},
+ {"wait":8000},
+ {"expect":"your own file"},{"expect":"Capacity and volume"},{"expect":"Data handling"},{"expect_not":"Equivalent fractions"},
+ {"shot":"upload-fixture","full":true}
+]

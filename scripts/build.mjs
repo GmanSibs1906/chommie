@@ -6,4 +6,6 @@ for (const f of readdirSync(".")) {
   if (/\.(html|css|js|jpg|png|webmanifest)$/.test(f) && f !== "package.json") cpSync(f, "dist/" + f);
 }
 for (const d of ["fonts", "app", "shared", "demo"]) cpSync(d, "dist/" + d, { recursive: true });
+mkdirSync("dist/data", { recursive: true });
+cpSync("data/atp-index.json", "dist/data/atp-index.json");
 console.log("dist ready");

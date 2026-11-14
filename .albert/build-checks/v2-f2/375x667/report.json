@@ -1,0 +1,235 @@
+{
+  "url": "https://6af7e6d4aaccfc38af243383--chommie-teacher.netlify.app/app/",
+  "started": "2026-11-14T04:43:57.299Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "type": "#email",
+      "value": "teacher@school.test",
+      "ok": true
+    },
+    {
+      "type": "#password",
+      "value": "x",
+      "ok": true
+    },
+    {
+      "submit": "#login-form",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "click": "#new-class",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "type": "#c-name",
+      "value": "6B",
+      "ok": true
+    },
+    {
+      "submit": "#class-form",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "click": "[data-v=atp]",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "expect": "Choose your ATP",
+      "ok": true
+    },
+    {
+      "expect": "From the DBE library",
+      "ok": true
+    },
+    {
+      "expect": "Upload ATP (PDF or photos)",
+      "ok": true
+    },
+    {
+      "expect_not": "Up to 3 photos",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelector('#a-grade').value==='6' && document.querySelector('#a-subject').value==='Mathematics'",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "!!document.querySelector('.agent-card')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#load-lib",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "wait": 8000,
+      "ok": true
+    },
+    {
+      "expect": "Capacity and volume",
+      "ok": true
+    },
+    {
+      "expect": "Data handling",
+      "ok": true
+    },
+    {
+      "expect": "Mass",
+      "ok": true
+    },
+    {
+      "expect": "the official DBE ATP",
+      "ok": true
+    },
+    {
+      "expect_not": "Equivalent fractions",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "library-term4",
+      "full": true,
+      "ok": true,
+      "detail": "01-library-term4.png"
+    },
+    {
+      "click": "#approve-atp",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "expect": "ATP approved by you",
+      "ok": true
+    },
+    {
+      "click": "#go-plan",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Your term, on real school days",
+      "ok": true
+    },
+    {
+      "expect": "Thu 26 Nov",
+      "ok": true
+    },
+    {
+      "expect": "Passed",
+      "ok": true
+    },
+    {
+      "expect": "Data handling",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "plan",
+      "full": true,
+      "ok": true,
+      "detail": "02-plan.png"
+    },
+    {
+      "goto": "/app/#classes",
+      "ok": true
+    },
+    {
+      "wait": 600,
+      "ok": true
+    },
+    {
+      "click": ".tile",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "click": "[data-v=atp]",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "assert": "fetch('/demo/atp-gr6-maths-caps.pdf').then(r=>r.blob()).then(b=>{const f=new File([b],'grade-6-maths-atp-caps.pdf',{type:'application/pdf'});const dt=new DataTransfer();dt.items.add(f);const i=document.querySelector('#atp-file');i.files=dt.files;i.dispatchEvent(new Event('change',{bubbles:true}));return true})",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 8000,
+      "ok": true
+    },
+    {
+      "expect": "your own file",
+      "ok": true
+    },
+    {
+      "expect": "Capacity and volume",
+      "ok": true
+    },
+    {
+      "expect": "Data handling",
+      "ok": true
+    },
+    {
+      "expect_not": "Equivalent fractions",
+      "ok": true
+    },
+    {
+      "shot": "upload-fixture",
+      "full": true,
+      "ok": true,
+      "detail": "03-upload-fixture.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T04:44:40.362Z",
+  "ok": true
+}

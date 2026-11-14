@@ -159,3 +159,11 @@ body.app { font-size: 17px; }
 .coord .btn { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); min-height: 48px; }
 .tbl-wrap { overflow-x: auto; }
 .stats dd { margin: 0; font-size: 22px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.drop-btn { cursor: pointer; }
+.grid2 > * { min-width: 0; }
+.panel-box { max-width: 100%; }
+.tbl .nw { white-space: nowrap; }
+.tbl td { overflow-wrap: break-word; }
+.grid2 { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
