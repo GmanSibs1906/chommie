@@ -1,0 +1,198 @@
+[
+ {
+  "goto": "/app/"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "type": "#email",
+  "value": "t@school.test"
+ },
+ {
+  "type": "#password",
+  "value": "x"
+ },
+ {
+  "submit": "#login-form"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "click": "#new-class"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "type": "#c-name",
+  "value": "6B"
+ },
+ {
+  "submit": "#class-form"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "click": "[data-v=learners]"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "expect": "No learners yet"
+ },
+ {
+  "assert": "!!document.querySelector('.agent-card')"
+ },
+ {
+  "type": "#l-first",
+  "value": ""
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "expect": "Type a first name and a surname"
+ },
+ {
+  "type": "#l-first",
+  "value": "Thandi"
+ },
+ {
+  "type": "#l-last",
+  "value": "Mokoena"
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "type": "#l-first",
+  "value": "Sipho"
+ },
+ {
+  "type": "#l-last",
+  "value": "Ndlovu"
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "type": "#l-first",
+  "value": "Lerato"
+ },
+ {
+  "type": "#l-last",
+  "value": "Khumalo"
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "type": "#l-first",
+  "value": "Johan"
+ },
+ {
+  "type": "#l-last",
+  "value": "van Wyk"
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "type": "#l-first",
+  "value": "Ayesha"
+ },
+ {
+  "type": "#l-last",
+  "value": "Patel"
+ },
+ {
+  "submit": "#add-form"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "expect": "6B-005"
+ },
+ {
+  "expect": "Ayesha Patel"
+ },
+ {
+  "assert": "document.querySelectorAll('#learner-list li').length===5"
+ },
+ {
+  "shot": "typed"
+ },
+ {
+  "click": "[data-consent='6B-002']"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "expect": "Withdrawn"
+ },
+ {
+  "click": "[data-consent='6B-002']"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "click": "#list-sample"
+ },
+ {
+  "wait": 25000
+ },
+ {
+  "expect": "Check the names"
+ },
+ {
+  "assert": "document.querySelectorAll('.draft-row').length>=5"
+ },
+ {
+  "assert": "[...document.querySelectorAll('.draft-row input')].some(i=>i.value==='Dube')"
+ },
+ {
+  "shot": "read-list",
+  "full": true
+ },
+ {
+  "click": "#confirm-names"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "assert": "document.querySelectorAll('#learner-list li').length>=10"
+ },
+ {
+  "expect": "Nomsa Dube"
+ },
+ {
+  "assert": "document.documentElement.scrollWidth <= innerWidth + 1"
+ },
+ {
+  "shot": "all",
+  "full": true
+ }
+]

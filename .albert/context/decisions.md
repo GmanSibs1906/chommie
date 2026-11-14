@@ -38,3 +38,4 @@
 - [yellow] Because marking tasks and memos are the existing Grade 6 fractions task, I decided marking and homework keep that made-up task for every class; the ATP and plan are real, the marked task is the demo task. Said plainly in the report.
 - [yellow] Because the 2026 term dates are published by the DBE, I decided the planner uses T1 14 Jan-27 Mar, T2 8 Apr-26 Jun, T3 21 Jul-2 Oct, T4 6 Oct-9 Dec, and the teacher can edit test and exam dates.
 - [green] Because no other listed agent reads documents, I decided the class-list photo is read by the Curriculum Reader (vision).
+- [yellow] Because the brief says keep the consent switch per learner and teachers need few taps, I decided new learners start with consent ON (the teacher confirms signed consent for the class) and can switch it off per learner.

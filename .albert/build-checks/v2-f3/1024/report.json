@@ -1,0 +1,274 @@
+{
+  "url": "https://6af7ea30dd4ccc9d36210bef--chommie-teacher.netlify.app",
+  "started": "2026-11-14T05:00:53.224Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "type": "#email",
+      "value": "t@school.test",
+      "ok": true
+    },
+    {
+      "type": "#password",
+      "value": "x",
+      "ok": true
+    },
+    {
+      "submit": "#login-form",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "click": "#new-class",
+      "ok": true
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "type": "#c-name",
+      "value": "6B",
+      "ok": true
+    },
+    {
+      "submit": "#class-form",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "click": "[data-v=learners]",
+      "ok": true
+    },
+    {
+      "wait": 1000,
+      "ok": true
+    },
+    {
+      "expect": "No learners yet",
+      "ok": true
+    },
+    {
+      "assert": "!!document.querySelector('.agent-card')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "type": "#l-first",
+      "value": "",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "expect": "Type a first name and a surname",
+      "ok": true
+    },
+    {
+      "type": "#l-first",
+      "value": "Thandi",
+      "ok": true
+    },
+    {
+      "type": "#l-last",
+      "value": "Mokoena",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "type": "#l-first",
+      "value": "Sipho",
+      "ok": true
+    },
+    {
+      "type": "#l-last",
+      "value": "Ndlovu",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "type": "#l-first",
+      "value": "Lerato",
+      "ok": true
+    },
+    {
+      "type": "#l-last",
+      "value": "Khumalo",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "type": "#l-first",
+      "value": "Johan",
+      "ok": true
+    },
+    {
+      "type": "#l-last",
+      "value": "van Wyk",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "type": "#l-first",
+      "value": "Ayesha",
+      "ok": true
+    },
+    {
+      "type": "#l-last",
+      "value": "Patel",
+      "ok": true
+    },
+    {
+      "submit": "#add-form",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "expect": "6B-005",
+      "ok": true
+    },
+    {
+      "expect": "Ayesha Patel",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#learner-list li').length===5",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "typed",
+      "ok": true,
+      "detail": "01-typed.png"
+    },
+    {
+      "click": "[data-consent='6B-002']",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "expect": "Withdrawn",
+      "ok": true
+    },
+    {
+      "click": "[data-consent='6B-002']",
+      "ok": true
+    },
+    {
+      "wait": 300,
+      "ok": true
+    },
+    {
+      "click": "#list-sample",
+      "ok": true
+    },
+    {
+      "wait": 25000,
+      "ok": true
+    },
+    {
+      "expect": "Check the names",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('.draft-row').length>=5",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('.draft-row input')].some(i=>i.value==='Dube')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "read-list",
+      "full": true,
+      "ok": true,
+      "detail": "02-read-list.png"
+    },
+    {
+      "click": "#confirm-names",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#learner-list li').length>=10",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "expect": "Nomsa Dube",
+      "ok": true
+    },
+    {
+      "assert": "document.documentElement.scrollWidth <= innerWidth + 1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "all",
+      "full": true,
+      "ok": true,
+      "detail": "03-all.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T05:01:48.281Z",
+  "ok": true
+}
