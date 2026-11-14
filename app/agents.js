@@ -12,11 +12,12 @@ export const AGENTS = {
 export const VIEW_AGENT = {
   login: "coordinator", classes: "coordinator", new: "coordinator", overview: "coordinator", more: "coordinator",
   atp: "reader", plan: "planner", teach: "writer", learners: "reader", markflow: "markers", marktable: "markers",
-  snap: "markers", check: "reviewer", heat: "analyst", homework: "writer", hwwrite: "writer", approvals: "coordinator", hod: "coordinator", settings: "analyst",
+  snap: "markers", check: "reviewer", heat: "analyst", homework: "writer", hwwrite: "writer", approvals: "coordinator", hod: "coordinator", settings: "analyst", fixes: "reviewer",
 };
+const JOB = { fixes: "every mistake an agent made that another check caught, and every doubt it refused to guess.", markflow: "two companies each read every book and mark it against the memo. The Reviewer settles any disagreement.", homework: "writes each learner's own homework from what they got wrong, and the markers mark it against that learner's own memo.", learners: "reads a photo of your class list into names. You confirm and edit every name before it is added." };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 export function agentCard(view) {
-  const [name, job] = AGENTS[VIEW_AGENT[view] || "coordinator"];
+  const [name, job0] = AGENTS[VIEW_AGENT[view] || "coordinator"], job = JOB[view] || job0;
   return `<div class="wrap"><aside class="agent-card" data-agent="${esc(view)}" aria-label="Agent on this screen"><p class="agent-name">${esc(name)}</p><p class="agent-job">${esc(job)}</p><p class="agent-live" id="agent-live" role="status" aria-live="polite" hidden></p></aside></div>`;
 }
 // While an agent works, the card says so, e.g. "Marker B (Google) is marking 6B-014".

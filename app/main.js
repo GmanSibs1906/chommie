@@ -2,12 +2,22 @@ import { state, onChange, user, activeClass, useClass, classes, logout } from ".
 import { nextStep } from "../shared/coordinator.js";
 import { listPhotos } from "./db.js";
 import { agentCard } from "./agents.js";
+import { collectFixes, fixCounts } from "../shared/fixes.js";
 
 // Hash router: #login, #classes, #new, #c/<id>, #c/<id>/<view>
 const FILES = { overview: "overview", more: "more", atp: "atp", plan: "plan", teach: "teach", learners: "learners", markflow: "markflow",
-  marktable: "mark", snap: "snap", check: "check", heat: "heat", homework: "hwlearner", hwwrite: "homework", approvals: "approvals", hod: "hod", settings: "settings" };
+  marktable: "mark", snap: "snap", check: "check", heat: "heat", homework: "hwlearner", hwwrite: "homework", approvals: "approvals", hod: "hod", settings: "settings", fixes: "fixes" };
 const ALIAS = { upload: "atp", snap: "markflow", mark: "markflow" };
 const view = document.getElementById("view"), slot = document.getElementById("agent-slot");
+// "Caught & fixed" badge: always in the header while a class is open (self-correction is the heart of the demo).
+const fixBtn = document.createElement("button"); fixBtn.className = "fix-badge"; fixBtn.id = "fix-badge"; fixBtn.type = "button"; fixBtn.hidden = true;
+document.getElementById("class-label").after(fixBtn);
+function paintFixes() {
+  if (!activeClass()) { fixBtn.hidden = true; return; }
+  const n = fixCounts(collectFixes(state, (c) => (state.learners || []).find((l) => l.code === c)?.name || c));
+  fixBtn.textContent = `✓ Caught & fixed: ${n.fixed}` + (n.held ? ` · held ${n.held}` : ""); fixBtn.hidden = false;
+}
+fixBtn.onclick = () => go("fixes");
 const backBtn = document.getElementById("btn-back"), outBtn = document.getElementById("btn-logout"), label = document.getElementById("class-label");
 let active = null, token = 0;
 
@@ -54,9 +64,9 @@ async function route() {
     console.error(e);
     view.innerHTML = `<p class="notice notice--bad" role="alert">This screen is not ready yet.</p>`;
   }
-  if (my === token) { view.focus({ preventScroll: true }); window.scrollTo(0, 0); paintCoord(); }
+  if (my === token) { view.focus({ preventScroll: true }); window.scrollTo(0, 0); paintCoord(); paintFixes(); }
 }
 outBtn.onclick = () => { logout(); location.hash = "#login"; };
-onChange(() => { document.getElementById("demo-banner").hidden = !(activeClass() && state.demo); paintCoord(); });
+onChange(() => { document.getElementById("demo-banner").hidden = !(activeClass() && state.demo); paintCoord(); paintFixes(); });
 window.addEventListener("hashchange", route);
 route();

@@ -18,6 +18,7 @@ export async function render(root, ctx) {
     ["markflow", "Mark", `${marked} of ${L.filter((l) => l.consent).length} books marked`],
     ["homework", "Homework", hwRounds ? "See each learner's rounds" : "Per learner"],
     ["heat", "Heat map", marked ? "Who is struggling" : "Needs marked books"],
+    ["fixes", "Caught & fixed", "Every mistake Chommie caught"],
     ["more", "More", "Lessons, check, settings"],
   ];
   root.innerHTML = `

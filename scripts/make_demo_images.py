@@ -67,3 +67,19 @@ def book(num):
 if __name__=="__main__":
     for n in PROFILE: book(n)
     json.dump({"questions":QS,"right":RIGHT,"topic":TOPIC,"wrong":{f"6B-{n:03d}":sorted(w) for n,(nm,w) in PROFILE.items()},"unclear":{f"6B-{n:03d}":sorted(s) for n,s in UNCLEAR.items()}},open("demo/books/answers.json","w"))
+
+# ---- v2: made-up photo of a class list (demo/class-list-6b.jpg), six made-up names ----
+def make_class_list(path="demo/class-list-6b.jpg"):
+    from PIL import Image, ImageDraw, ImageFont
+    names = ["Nomsa Dube", "Ethan Pillay", "Karabo Mthembu", "Hannah de Beer", "Sizwe Radebe", "Amira Hendricks"]
+    im = Image.new("RGB", (900, 1100), (250, 247, 238)); d = ImageDraw.Draw(im)
+    def f(sz):
+        for p in ["/System/Library/Fonts/Supplemental/Arial.ttf", "/Library/Fonts/Arial.ttf"]:
+            try: return ImageFont.truetype(p, sz)
+            except Exception: pass
+        return ImageFont.load_default()
+    d.text((60, 50), "Class list - Grade 6B (made-up names for demo)", fill=(20, 20, 20), font=f(34)); d.line((60, 110, 840, 110), fill=(60, 60, 60), width=3)
+    y = 150
+    for i, n in enumerate(names, 1):
+        d.text((70, y), f"{i}.", fill=(20, 20, 20), font=f(40)); d.text((140, y), n, fill=(25, 25, 60), font=f(40)); d.line((60, y + 62, 840, y + 62), fill=(190, 190, 190), width=2); y += 100
+    im.rotate(1.2, fillcolor=(250, 247, 238)).save(path, quality=88)
