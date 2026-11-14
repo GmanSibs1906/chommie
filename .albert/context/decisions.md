@@ -18,3 +18,9 @@
 - [red] Because the brief names 'Load demo run' but not its starting point, I decided it starts after marking, at the Check screen, so the Reviewer catch is the first thing shown.
 - [yellow] Because the Mathpix reading step in the brief is only costing guidance and the approved models already read images, I decided not to integrate Mathpix.
 - [green] Because Netlify secrets cannot be read locally, I decided all AI features are verified against the deployed site.
+- [green] Because the contract names branch mission/m_20261114_005519 and the brief names mission/chommie (same commit), I decided to work on the first and push every commit to both remote branches, never main.
+- [yellow] Because snap.js blacks out the top 13% of every page and stamps the picked code there, I decided the printed learner code and QR sit below that strip, the QR is read from the original photo before masking, and homework pages are not stamped with the picked code (so Marker A cannot just read back the stamp).
+- [yellow] Because an approved sheet can be edited later, I decided approving freezes a snapshot with an id that carries a hash of the questions and memo; a snapped page is marked against the snapshot its QR names, not the live draft.
+- [yellow] Because the QR/printed id must match a sheet approved on this phone, I decided a QR for an unknown sheet is held for the teacher rather than marked.
+- [yellow] Because homework results belong to one round, I decided each round is its own task (hw-r1, hw-r2...) with a per-learner question list, appended after the class task so getTasks()[0] stays the class task.
+- [green] Because the model key cannot be read locally, I decided local browser checks use scripts/devserver.mjs (code-made bank, other /api routes 503) and every marking check runs on the deployed site.

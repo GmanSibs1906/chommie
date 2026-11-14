@@ -70,3 +70,8 @@ Status log, newest at the bottom. Each feature: what was done, how it was tested
 - Whether a marker flags a smudged digit instead of guessing depends on the model: in one run neither marker flagged Johan's scribble. The rule is in the prompt and the code, not guaranteed.
 - No competition rules, POPIA section 72 decision, DPA or Mathpix setup were resolved (Mathpix was not integrated; the approved vision models read the pages).
 - AI cost: about $0.01 to $0.02 per learner book with both markers; the whole build and test run used a small fraction of the $10 cap (OpenRouter dashboard has the real figure).
+
+## 11. Mark personal homework (in progress)
+### 11.1 Printed sheet: big code and QR — ✅ passing
+- Done: each approved sheet is frozen as a snapshot with an id (`R1-6B-014-K3F2`, the last 4 characters hash the questions and memo). The printed page has the name strip at the top (covered by the phone's mask when photographed), then the learner code in large print with a 24 mm QR (`CHOMMIE-HW|6B-014|<sheet id>`, no learner name), and the sheet id repeated in the footer.
+- Tested: `node --test` 13 new tests pass (payload has no name, QR rendered to pixels decodes back with jsQR, edited sheet gets a new id). Browser at 375/768/1024 (local test server, code-made bank): demo run, write homework, approve all, print: every sheet has its code, an SVG QR whose payload matches code and footer id, no lowercase (name) text in the payload, sheet names only in the strip, snapshots stored. Evidence `.albert/build-checks/hw-print/`.

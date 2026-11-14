@@ -1,0 +1,102 @@
+{
+  "url": "http://localhost:8899",
+  "started": "2026-11-14T01:02:19.559Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#btn-demo",
+      "ok": true
+    },
+    {
+      "wait": 5000,
+      "ok": true
+    },
+    {
+      "click": "button[data-v='homework']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "click": "#gen",
+      "ok": true
+    },
+    {
+      "wait": 6000,
+      "ok": true
+    },
+    {
+      "expect": "Thandi Mokoena",
+      "ok": true
+    },
+    {
+      "click": "#approve-all",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "(window.__p=null,window.print=()=>{window.__p=[...document.querySelectorAll('.hw-sheet')].map(e=>({code:e.querySelector('.hw-code').textContent.trim(),qr:e.querySelector('.hw-qr').dataset.qr,svg:!!e.querySelector('.hw-qr svg'),foot:e.querySelector('.hw-sheet-foot').textContent,strip:e.querySelector('.hw-strip').textContent}))},true)",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "#print-all",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "window.__p.length>=6",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "window.__p.every(p=>p.svg&&/^CHOMMIE-HW\\|6B-\\d{3}\\|R1-6B-\\d{3}-[0-9A-Z]{4}$/.test(p.qr)&&p.qr.split('|')[1]===p.code&&p.foot.includes(p.qr.split('|')[2]))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "window.__p.every(p=>!/[a-z]{3}/.test(p.qr))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "window.__p.some(p=>p.strip.includes('Thandi Mokoena'))",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "JSON.parse(localStorage.getItem('chommie.v1')).hwSheets&&Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).hwSheets).length>=6",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "homework-screen",
+      "full": true,
+      "ok": true,
+      "detail": "01-homework-screen.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T01:02:44.804Z",
+  "ok": true
+}

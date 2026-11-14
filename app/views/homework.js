@@ -7,9 +7,15 @@ import { pretty } from "../../shared/fractions.js";
 import { TOPICS } from "../../shared/assessment.js";
 import { fmt } from "../../shared/planner.js";
 import { printHtml } from "../print.js";
+import { snapshot, qrSvg, qrPayload } from "../../shared/hwmark.js";
 
 let sel = null, busy = "";
 const topicName = (id) => TOPICS.find((t) => t.id === id)?.name || id;
+// Approving freezes the sheet: this snapshot (own questions and proven memo, with its id) is what a snapped page is marked against.
+function approve(c) {
+  const s = state.homework[c]; s.approved = true; s.round = s.round || state.hwRound;
+  const snap = snapshot(s, s.round); s.sheetId = snap.id; (state.hwSheets ||= {})[snap.id] = snap;
+}
 const nameOf = (c) => (state.learners || []).find((l) => l.code === c)?.name || "";
 
 export async function render(root, ctx) {
@@ -30,7 +36,11 @@ async function generate(root, ctx) {
   state.bank = bank;
   const fresh = buildHomework({ marks: state.marks, tasks, bank, settings: state.settings });
   const old = state.homework || {};
-  for (const [c, s] of Object.entries(fresh)) if (old[c]?.edited) fresh[c] = old[c]; // never overwrite a teacher's edits
+  const rt = (state.tasks || []).find((t) => t.id === "hw-r" + state.hwRound);
+  const bumped = rt && Object.keys(state.marks[rt.id] || {}).length > 0;
+  if (bumped) state.hwRound++; // the last round has been marked: this is the next round
+  for (const [c, s] of Object.entries(fresh)) if (!bumped && old[c]?.edited) fresh[c] = old[c]; // never overwrite a teacher's edits
+  for (const s of Object.values(fresh)) s.round ||= state.hwRound;
   state.homework = fresh;
   log("Lesson Writer", "Wrote personal homework", `${Object.keys(fresh).length} learners. Questions from: ${source}. Every answer proven by calculation.`, meta); save();
   busy = ""; draw(root, ctx);
@@ -52,7 +62,7 @@ function draw(root, ctx) {
   const g = $("#gen"); if (g) g.onclick = () => generate(root, ctx);
   if (!hw) return;
   root.querySelectorAll("[data-pick]").forEach((b) => b.onclick = () => { sel = b.dataset.pick; draw(root, ctx); });
-  $("#approve-all").onclick = () => { codes.forEach((c) => (hw[c].approved = true)); log("Teacher", "Approved all homework", `${codes.length} sheets`); save(); draw(root, ctx); };
+  $("#approve-all").onclick = () => { codes.forEach((c) => approve(c)); log("Teacher", "Approved all homework", `${codes.length} sheets`); save(); draw(root, ctx); };
   $("#print-all").onclick = () => printSheets(root, codes.filter((c) => hw[c].approved));
   wireSheet(root, ctx);
 }
@@ -71,7 +81,7 @@ function sheetHtml(s) {
 
 function wireSheet(root, ctx) {
   const s = state.homework[sel]; if (!s) return; const $ = (x) => root.querySelector(x);
-  const ap = $("#hw-approve"); if (ap) ap.onclick = () => { s.approved = true; log("Teacher", "Approved homework", sel); save(); draw(root, ctx); };
+  const ap = $("#hw-approve"); if (ap) ap.onclick = () => { approve(sel); log("Teacher", "Approved homework", sel); save(); draw(root, ctx); };
   const pr = $("#hw-print"); if (pr) pr.onclick = () => printSheets(root, [sel]);
   $("#hw-edit").onclick = () => {
     const box = $("#hw-items"); box.querySelectorAll("input").forEach((i) => (i.hidden = false)); box.querySelectorAll("li > span").forEach((x) => (x.style.display = "none"));
@@ -91,11 +101,13 @@ function wireSheet(root, ctx) {
 
 // One A4 page per learner, with the learner's real name restored from this phone only at this moment.
 function printSheets(root, codes) {
-  const html = codes.map((c) => { const s = state.homework[c];
-    return `<section class="hw-sheet"><header><p class="hw-sheet-class">Grade 6B Mathematics, Term 4. Fractions homework. Set ${fmt(state.today)}</p>
-      <h2 class="hw-sheet-name">${esc(nameOf(c))}</h2><p class="mono">${c}</p></header>
+  const html = codes.map((c) => { const s = state.homework[c], id = s.sheetId;
+    return `<section class="hw-sheet" data-code="${c}" data-sheet-id="${esc(id)}"><header class="hw-strip"><p class="hw-sheet-class">Grade 6B Mathematics, Term 4. Fractions homework, round ${s.round}. Set ${fmt(state.today)}</p>
+      <h2 class="hw-sheet-name">${esc(nameOf(c))}</h2></header>
+      <div class="hw-idrow"><div><p class="hw-code">${c}</p><p class="muted" style="margin:4px 0 0">Homework round ${s.round}</p></div><div class="hw-qr" data-qr="${esc(qrPayload(c, id))}">${qrSvg(qrPayload(c, id))}</div></div>
       <p>${s.stretch ? "Stretch questions: you are ahead of the class. Show your working." : "Practise these. Show your working."} About ${minutesFor(s)} minutes.</p>
-      <ol>${s.items.map((i) => `<li>${esc(pretty(i.q))}<div class="hw-line"></div></li>`).join("")}</ol></section>`; }).join("");
-  log("Teacher", "Printed homework", `${codes.length} sheet(s), one per learner with the learner's name`);
+      <ol>${s.items.map((i) => `<li>${esc(pretty(i.q))}<div class="hw-line"></div></li>`).join("")}</ol>
+      <footer class="hw-sheet-foot">Sheet ${esc(id)} | ${c}</footer></section>`; }).join("");
+  log("Teacher", "Printed homework", `${codes.length} sheet(s), one per learner with the learner's name, code and QR`);
   printHtml(html);
 }

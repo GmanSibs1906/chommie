@@ -1,6 +1,7 @@
 // Analyst: plain code. Heat map and the 40% rule. Thresholds come from Settings.
 import { finalCorrect } from "./marking.js";
 import { TOPICS } from "./assessment.js";
+import { questionsFor } from "./hwmark.js";
 
 export const GREEN_MIN = 75;
 export function cellState(cell, settings) {
@@ -15,7 +16,7 @@ export function buildHeat(marks, tasks) {
   const out = {};
   for (const t of tasks) for (const [code, m] of Object.entries(marks[t.id] || {})) {
     const row = (out[code] ||= {});
-    for (const q of t.questions) {
+    for (const q of questionsFor(t, code)) {
       const it = m.items.find((i) => i.n === q.n); const c = (row[q.topicId] ||= { right: 0, of: 0, pending: 0 });
       const f = it ? finalCorrect(it) : null;
       if (f === null) c.pending++; else { c.of++; if (f) c.right++; }

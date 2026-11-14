@@ -1,0 +1,14 @@
+{
+  "url": "http://localhost:8899",
+  "started": "2026-11-14T01:02:49.454Z",
+  "finished": "2026-11-14T01:03:15.478Z",
+  "viewports": [
+    {
+      "viewport": "1024x768",
+      "ok": true,
+      "out": "/Users/gmansibs/Albert Projects/chommie/.albert/build-checks/hw-print/1024x768",
+      "failures": []
+    }
+  ],
+  "ok": true
+}

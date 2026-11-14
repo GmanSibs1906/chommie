@@ -5,7 +5,7 @@ const DEFAULTS = () => ({
   atp: null, check: null, atpApproved: false,
   plan: null, lessons: {}, learners: null,
   tasks: null, marks: {}, marksConfirmed: {}, decisions: {}, results: null,
-  homework: null, approvals: [], hod: { signed: false },
+  homework: null, hwSheets: {}, hwRound: 1, markKind: "class", approvals: [], hod: { signed: false },
   log: [], demo: false,
 });
 export let state = (() => { try { return { ...DEFAULTS(), ...JSON.parse(localStorage.getItem(KEY) || "{}") }; } catch { return DEFAULTS(); } })();

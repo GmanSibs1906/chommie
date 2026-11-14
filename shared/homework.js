@@ -2,6 +2,7 @@
 import { proveItem } from "./lesson.js";
 import { finalCorrect } from "./marking.js";
 import { buildHeat, cellState } from "./analyst.js";
+import { questionsFor } from "./hwmark.js";
 
 function rng(seed) { let s = [...String(seed)].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7) || 1; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 const pick = (r, a) => a[Math.floor(r() * a.length)];
@@ -39,7 +40,7 @@ export function buildHomework({ marks, tasks, bank, settings }) {
     const r = rng(code), items = [], topics = [];
     for (const t of tasks) {
       const m = (marks[t.id] || {})[code]; if (!m) continue;
-      for (const q of t.questions) { const it = m.items.find((i) => i.n === q.n); if (it && finalCorrect(it) === false) {
+      for (const q of questionsFor(t, code)) { const it = m.items.find((i) => i.n === q.n); if (it && finalCorrect(it) === false) {
         if (!topics.includes(q.topicId)) topics.push(q.topicId);
         items.push({ ...proveItem(q.raw), topicId: q.topicId, source: "retry", id: `r${q.n}` }); } }
     }
