@@ -204,7 +204,8 @@ body.app { font-size: 17px; }
 .fix-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .fix-item { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 16px; }
 .fix-where { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent-deep); margin: 0 0 6px; }
-.fix-was { text-decoration: line-through; color: var(--red); }
+.fix-was { color: var(--red); }
+#fixed-list .fix-was { text-decoration: line-through; }
 .fix-now { color: var(--accent-deep); font-weight: 700; }
 .fix-by { font-size: 14px; color: var(--muted); margin: 6px 0 0; }
 /* Caught & fixed: the photo on each card, and the tap-to-enlarge view */
