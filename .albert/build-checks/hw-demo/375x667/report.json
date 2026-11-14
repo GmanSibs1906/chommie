@@ -1,0 +1,219 @@
+{
+  "url": "http://localhost:8899",
+  "started": "2026-11-14T01:22:09.042Z",
+  "steps": [
+    {
+      "goto": "/app/",
+      "ok": true
+    },
+    {
+      "wait": 2500,
+      "ok": true
+    },
+    {
+      "click": "#btn-demo",
+      "ok": true
+    },
+    {
+      "wait": 5000,
+      "ok": true
+    },
+    {
+      "assert": "JSON.parse(localStorage.getItem('chommie.v1')).tasks.length===3 && JSON.parse(localStorage.getItem('chommie.v1')).tasks[2].name==='Homework round 1' && Object.keys(JSON.parse(localStorage.getItem('chommie.v1')).hwSheets).length===3",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "button[data-v='mark']",
+      "ok": true
+    },
+    {
+      "wait": 1200,
+      "ok": true
+    },
+    {
+      "click": "[name=markkind][value=homework]",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Homework round 1, sheet R1-6B-001-",
+      "ok": true
+    },
+    {
+      "expect": "Homework round 1, sheet R1-6B-014-",
+      "ok": true
+    },
+    {
+      "expect": "Homework round 1, sheet R1-6B-022-",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#mark-table tbody tr[data-task]').length===3",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1'));return Object.entries(s.tasks[2].perLearner).every(([c,p])=>p.sheetId===s.marks[s.tasks[2].id][c].sheetId&&p.questions.every((q,i)=>s.hwSheets[p.sheetId].questions[i].answer===q.answer))})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),t=s.tasks[2],a=t.perLearner['6B-001'].questions.map(q=>q.answer).join(), b=t.perLearner['6B-014'].questions.map(q=>q.answer).join();return a!==b})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "mark-demo-homework",
+      "full": true,
+      "ok": true,
+      "detail": "01-mark-demo-homework.png"
+    },
+    {
+      "click": "button[data-v='check']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "assert": "!!document.querySelector('#task-pick') && [...document.querySelectorAll('#task-pick option')].some(o=>o.textContent==='Homework round 1')",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const e=document.querySelector('#task-pick');e.value='hw-r1';e.dispatchEvent(new Event('change',{bubbles:true}));return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "wait": 800,
+      "ok": true
+    },
+    {
+      "expect": "0 need you",
+      "ok": true
+    },
+    {
+      "shot": "check-homework-round",
+      "full": true,
+      "ok": true,
+      "detail": "02-check-homework-round.png"
+    },
+    {
+      "click": "button[data-v='heat']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Counted: Fractions check, Mixed numbers task, Homework round 1",
+      "ok": true
+    },
+    {
+      "assert": "document.querySelectorAll('#heat tbody tr').length===32",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "[...document.querySelectorAll('[data-topic]')].filter(r=>r.textContent.includes('Class re-teach')).length===1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "heat-with-homework",
+      "full": true,
+      "ok": true,
+      "detail": "03-heat-with-homework.png"
+    },
+    {
+      "click": "button[data-v='homework']",
+      "ok": true
+    },
+    {
+      "wait": 1500,
+      "ok": true
+    },
+    {
+      "expect": "Homework round 1.",
+      "ok": true
+    },
+    {
+      "expect": "Write round 2 homework from the marked round",
+      "ok": true
+    },
+    {
+      "click": "#gen-next",
+      "ok": true
+    },
+    {
+      "wait": 6000,
+      "ok": true
+    },
+    {
+      "expect": "Homework round 2.",
+      "ok": true
+    },
+    {
+      "assert": "JSON.parse(localStorage.getItem('chommie.v1')).hwRound===2 && JSON.parse(localStorage.getItem('chommie.v1')).homework['6B-001'].round===2 && !JSON.parse(localStorage.getItem('chommie.v1')).homework['6B-001'].approved",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "click": "[data-pick='6B-001']",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "click": "#hw-approve",
+      "ok": true
+    },
+    {
+      "wait": 500,
+      "ok": true
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1'));return /^R2-6B-001-/.test(s.homework['6B-001'].sheetId)&&Object.keys(s.hwSheets).length===4&&Object.values(s.hwSheets).some(x=>/^R1-6B-001-/.test(x.id))})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "(()=>{const s=JSON.parse(localStorage.getItem('chommie.v1')),h=s.homework['6B-001'];return h.items.some(i=>i.source==='retry')})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "assert": "document.documentElement.scrollWidth<=innerWidth+1",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "shot": "homework-round-2",
+      "full": true,
+      "ok": true,
+      "detail": "04-homework-round-2.png"
+    }
+  ],
+  "failures": [],
+  "finished": "2026-11-14T01:22:43.482Z",
+  "ok": true
+}

@@ -90,3 +90,15 @@ test("a wrong homework answer comes back as 'Try again' in the next round", () =
   const retry = next[code].items.filter((i) => i.source === "retry");
   assert.equal(retry.length, 1); assert.equal(retry[0].answer, qs[2].answer);
 });
+test("newest evidence wins: a topic marked again in a homework round replaces the older class retries", () => {
+  const code = "6B-001", t = hwTask(1), qs = sheetOf(code).questions;
+  t.perLearner[code] = { sheetId: "x", questions: qs };
+  const topic = qs[0].topicId, inTopic = qs.filter((q) => q.topicId === topic);
+  const classWrong = task.questions.filter((q) => q.topicId === topic).map((q) => q.n); // wrong on every class question of that topic
+  const m1 = { [code]: { items: task.questions.map((q) => ({ n: q.n, status: "agree", correct: !classWrong.includes(q.n) })) } };
+  const m2 = { [code]: { items: qs.map((q) => ({ n: q.n, status: "agree", correct: q.topicId !== topic || q.n === inTopic[0].n ? q.topicId !== topic || false : true })) } };
+  // homework: only the first question of that topic wrong
+  m2[code].items = qs.map((q) => ({ n: q.n, status: "agree", correct: !(q.n === inTopic[0].n) }));
+  const next = buildHomework({ marks: { [task.id]: m1, [t.id]: m2 }, tasks: [task, t], bank, settings: S });
+  assert.equal(next[code].items.filter((i) => i.source === "retry" && i.topicId === topic).length, 1);
+});

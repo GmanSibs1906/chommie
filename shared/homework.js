@@ -38,12 +38,16 @@ export function buildHomework({ marks, tasks, bank, settings }) {
   let k = 0;
   for (const code of Object.keys(heat).sort()) {
     const r = rng(code), items = [], topics = [];
+    // Newest evidence wins per topic: once a learner has been marked on a topic again (e.g. in a homework round), older wrong answers on that topic are not repeated.
+    const byTopic = {};
     for (const t of tasks) {
       const m = (marks[t.id] || {})[code]; if (!m) continue;
-      for (const q of questionsFor(t, code)) { const it = m.items.find((i) => i.n === q.n); if (it && finalCorrect(it) === false) {
-        if (!topics.includes(q.topicId)) topics.push(q.topicId);
-        items.push({ ...proveItem(q.raw), topicId: q.topicId, source: "retry", id: `r${q.n}` }); } }
+      const seen = {};
+      for (const q of questionsFor(t, code)) { const it = m.items.find((i) => i.n === q.n); if (!it) continue; const f = finalCorrect(it); if (f === null) continue;
+        (seen[q.topicId] ||= []); if (f === false) seen[q.topicId].push({ ...proveItem(q.raw), topicId: q.topicId, source: "retry", id: `${t.id.slice(0, 2)}${q.n}` }); }
+      for (const [tid, list] of Object.entries(seen)) byTopic[tid] = list;
     }
+    for (const [tid, list] of Object.entries(byTopic)) if (list.length) { topics.push(tid); items.push(...list); }
     for (const tid of topics) {
       const pool = (bank[tid]?.practice || []).slice(); const n = items.filter((i) => i.topicId === tid && i.source === "retry").length;
       for (let i = 0; i < Math.min(2, pool.length); i++) { const p = pool.splice(Math.floor(r() * pool.length), 1)[0]; items.push({ ...p, topicId: tid, source: "practice", id: `${tid}-p${i}` }); }

@@ -28,6 +28,7 @@ function draw(root, ctx) {
   root.innerHTML = `
     <h1 class="v-title">The whole class, at a glance.</h1>
     <p class="v-lede">${codes.length} learners, one square for each fractions topic. A learner under <strong>${S.struggle}%</strong> on a topic is struggling. When <strong>${S.reteach}%</strong> or more of the class is struggling, Chommie proposes a short class re-teach.</p>
+    <p class="muted" id="heat-sources">Counted: ${tasks.filter((t) => Object.keys(state.marks[t.id] || {}).length).map((t) => esc(t.name)).join(", ")}.</p>
     ${pend ? `<p class="notice notice--bad" role="status">${pend} answer(s) are waiting for your decision in Check and are not counted yet.</p>` : ""}
     <div class="panel-box" style="overflow-x:auto"><table class="tbl hm2" id="heat" aria-label="Heat map: learners against topics">
       <thead><tr><th>Learner</th>${TOPICS.map((t) => `<th title="${esc(t.name)}">${t.short}</th>`).join("")}</tr></thead><tbody>

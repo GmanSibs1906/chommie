@@ -8,6 +8,8 @@ import { checkAgainstCaps } from "../shared/caps.js";
 import { buildPlan } from "../shared/planner.js";
 import { buildHeat, topicDecisions } from "../shared/analyst.js";
 import { codeLesson } from "../shared/lessonfallback.js";
+import { codeBank, proveBank, buildHomework } from "../shared/homework.js";
+import { snapshot, hwTask } from "../shared/hwmark.js";
 
 const caps = JSON.parse(readFileSync("shared/caps-g6-t4.json")), official = JSON.parse(readFileSync("shared/official-atp-g6-t4.json"));
 const check = checkTask(), formal = formalTask();
@@ -51,6 +53,20 @@ for (; seed < 400; seed++) {
   const rd = d.find((x) => x.topicId === "related"), others = d.filter((x) => x.topicId !== "related");
   if (rd.share >= 42 && rd.share <= 56 && others.every((x) => x.share < 36 && x.share > 0)) break;
 }
+// Personal homework round 1 for three made-up learners, marked against each learner's OWN sheet (no camera needed on stage).
+const bank = proveBank(codeBank("demo-run")), SET = { struggle: 50, reteach: 40 };
+const sheetsAll = buildHomework({ marks, tasks: [check, formal], bank, settings: SET });
+const HW = { "6B-001": 2, "6B-014": 0, "6B-022": 3 }; // learner -> the one question (1-based) written wrongly; 0 = all right
+const hwT = hwTask(1), homework = {}, hwSheets = {};
+for (const [code, wrongN] of Object.entries(HW)) {
+  const sheet = { ...sheetsAll[code], code, approved: true, round: 1 }, sn = snapshot(sheet, 1);
+  sheet.sheetId = sn.id; homework[code] = sheet; hwSheets[sn.id] = sn;
+  hwT.perLearner[code] = { sheetId: sn.id, questions: sn.questions }; hwT.total = Math.max(hwT.total, sn.questions.length);
+  const wrongOf = (a) => (/^\d+\/\d+$/.test(a) ? a.replace(/^(\d+)/, (n) => +n + 1) : String(parseFloat(a) + 1));
+  (marks[hwT.id] ||= {})[code] = { code, pages: 1, at: "2026-11-13T15:00:00.000Z", sheetId: sn.id, items: sn.questions.map((q) => {
+    const wrong = q.n === wrongN, read = wrong ? wrongOf(q.answer) : q.answer;
+    return { n: q.n, A: ans(read, !wrong), B: ans(read, !wrong), attempts: 0, ...resolveItem(q.answer, ans(read, !wrong), ans(read, !wrong)) }; }) };
+}
 const atp = { ...official, source: "demo", notes: "Prepared demo run: the sample ATP photo, already read." };
 const ck = checkAgainstCaps(atp, caps), plan = buildPlan(ck);
 const day = plan.days.find((d) => d.date === "2026-11-16");
@@ -59,16 +75,17 @@ const pend = Object.values(marks[check.id]).reduce((s, m) => s + m.items.filter(
 const run = {
   demo: true, today: "2026-11-13", settings: { struggle: 50, reteach: 40 },
   atp, check: ck, atpApproved: true, plan, planApproved: true, lessons: { [day.date]: { date: day.date, topic: day.topic, topicId: day.topicId, atpWeek: day.atpWeek, lesson, approved: true, prev: null } },
-  learners, tasks: [check, formal], marks, marksConfirmed: { [check.id]: false, [formal.id]: true },
-  homework: null, hod: { signed: false }, approvals: [],
+  learners, tasks: [check, formal, hwT], marks, marksConfirmed: { [check.id]: false, [formal.id]: true, [hwT.id]: true },
+  homework, hwSheets, hwRound: 1, markKind: "class", hod: { signed: false }, approvals: [],
   log: [
     ["Coordinator", "Loaded the prepared demo run", "Grade 6 Maths, Term 4, fractions. Made-up learners and books only."],
     ["Curriculum Reader", "ATP read", "Prepared demo run: the sample ATP photo was read and checked against CAPS. All 6 fractions topics present."],
     ["Term Planner", "Planned the term", "Prepared demo run: every topic on a real school day, test Thu 26 Nov, exam Wed 2 Dec."],
     ["Marker A", "Marked 32 books", "Prepared demo run (Fractions check, informal) and the formal Mixed numbers task."],
     ["Marker B", "Marked 32 books", "Prepared demo run: a second vendor marked the same books."],
+    ["Marker A", "Marked personal homework round 1", "Prepared demo run: 6B-001, 6B-014 and 6B-022, each against their own sheet and memo."],
     ["Reviewer", "Re-checked every mark", `Prepared demo run: ${pend} item(s) need the teacher: two disagreements the Reviewer re-read, one unclear answer.`],
   ].map(([agent, action, detail], i) => ({ at: `2026-11-13T12:0${i}:00.000Z`, agent, action, detail, meta: null })),
 };
 writeFileSync("demo/demo-run.json", JSON.stringify(run));
-console.log("seed", seed, "pending", pend, JSON.stringify(topicDecisions(buildHeat(marks, [check, formal]), run.settings).map((d) => [d.topicId, d.share, d.action])));
+console.log("seed", seed, "pending", pend, JSON.stringify(topicDecisions(buildHeat(marks, run.tasks), run.settings).map((d) => [d.topicId, d.share, d.action])));

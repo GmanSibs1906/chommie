@@ -27,6 +27,7 @@ export async function render(root, ctx) {
   draw(root, ctx);
 }
 
+const roundMarked = () => { const t = (state.tasks || []).find((x) => x.id === "hw-r" + state.hwRound); return !!t && Object.keys(state.marks[t.id] || {}).length > 0; };
 async function generate(root, ctx) {
   const tasks = getTasks(); busy = "Lesson Writer is writing a question bank for each topic"; draw(root, ctx);
   let bank, source = "Lesson Writer", meta = null;
@@ -51,15 +52,16 @@ function draw(root, ctx) {
   if (codes.length && !hw[sel]) sel = codes[0];
   root.innerHTML = `
     <h1 class="v-title">A sheet for each learner, with their name on it.</h1>
-    <p class="v-lede">Each sheet is built from the questions that learner got wrong, plus practice on the same topic. Learners who are ahead get stretch questions. You can change any question before it is printed.</p>
-    ${!hw ? `<div class="btn-row"><button class="btn btn--accent" id="gen" type="button" ${busy ? "disabled" : ""}>Write personal homework</button></div>${busy ? `<p class="loading" role="status">${esc(busy)}</p>` : ""}` : `
+    <p class="v-lede" id="hw-round">Homework round ${state.hwRound}. Each sheet is built from the questions that learner got wrong, plus practice on the same topic. Learners who are ahead get stretch questions. You can change any question before it is printed.</p>
+    ${!hw ? `<div class="btn-row"><button class="btn btn--accent" id="gen" type="button" ${busy ? "disabled" : ""}>${roundMarked() ? "Write round " + (state.hwRound + 1) + " homework from the marked round" : "Write personal homework"}</button></div>${busy ? `<p class="loading" role="status">${esc(busy)}</p>` : ""}` : `
     <div class="grid2"><div class="panel-box"><h3>Learners (${codes.length})</h3>
       <table class="tbl" id="hw-list"><tbody>${codes.map((c) => { const s = hw[c]; return `<tr data-hw="${c}" style="cursor:pointer;${c === sel ? "background:var(--soft)" : ""}"><td><button class="btn btn--ghost" data-pick="${c}" type="button" style="min-height:44px;width:100%;justify-content:flex-start;text-align:left;border:0">${c} ${esc(nameOf(c))}</button></td>
         <td class="muted" style="font-size:13px">${s.stretch ? "stretch" : s.topics.length + " topic" + (s.topics.length === 1 ? "" : "s")}</td><td><span class="st ${s.approved ? "st--ok" : "st--warn"}">${s.approved ? "Approved" : "Draft"}</span></td></tr>`; }).join("")}</tbody></table>
-      <div class="btn-row"><button class="btn btn--ghost" id="approve-all" type="button">Approve all</button><button class="btn btn--accent" id="print-all" type="button" ${codes.some((c) => hw[c].approved) ? "" : "disabled"}>Print approved sheets</button></div></div>
+      <div class="btn-row"><button class="btn btn--ghost" id="approve-all" type="button">Approve all</button>${roundMarked() ? `<button class="btn btn--accent" id="gen-next" type="button" ${busy ? "disabled" : ""}>Write round ${state.hwRound + 1} homework from the marked round</button>` : ""}<button class="btn btn--accent" id="print-all" type="button" ${codes.some((c) => hw[c].approved) ? "" : "disabled"}>Print approved sheets</button></div></div>
     <div id="sheet">${sheetHtml(hw[sel])}</div></div>`}`;
   const $ = (s) => root.querySelector(s);
   const g = $("#gen"); if (g) g.onclick = () => generate(root, ctx);
+  const gn = $("#gen-next"); if (gn) gn.onclick = () => generate(root, ctx);
   if (!hw) return;
   root.querySelectorAll("[data-pick]").forEach((b) => b.onclick = () => { sel = b.dataset.pick; draw(root, ctx); });
   $("#approve-all").onclick = () => { codes.forEach((c) => approve(c)); log("Teacher", "Approved all homework", `${codes.length} sheets`); save(); draw(root, ctx); };
